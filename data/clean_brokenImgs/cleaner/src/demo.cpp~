@@ -1,0 +1,19 @@
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/core/core.hpp>
+#include <opencv/cv.hpp>
+
+using namespace cv;
+
+int main()
+{
+  cv::Mat im0 = cv::imread("/home/tonghe2/f7fe11857d2852532f9f0df3e2d0b3e1f1687484.jpg", CV_LOAD_IMAGE_COLOR);
+  cv::Mat im1 = cv::imread("/home/tonghe2/ffed7c6d6906aa04a8faec4cd6b08ebb804f420f.jpg", CV_LOAD_IMAGE_COLOR);
+  if(im0.data)
+    cv::imshow("broken jpg",im0);
+  else
+    std::cout << "Broken data found!" << std::endl;
+  if(im1.data)
+    cv::imshow("broken jpg",im1);
+  cv::waitKey(0);
+  return 0;
+}

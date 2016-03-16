@@ -1,0 +1,25 @@
+About unzip:
+1. Unzip group1.zip to group23.zip into one root folder to get the image data for 1120 users. Most users have a "sets" and a "items" folder in them. The 203 earlist users also have a "items_append" folder. 
+2. Unzip supplement.zip to ANOTHER root folder. These are item images for 150 users, who only have a "sets" folder after step 1. Copy the "items" folders of these users to their corresponding folders in step 1. 
+
+To get the train/test data similar to those I gave you before:
+1. run get_all_sets.py
+2. run get_tuples_3times.py
+
+note:
+1. Firstly, please rename polyvore_item/judysingley-polyvore_item_prefiltereds.jsonl to polyvore_item/judysingley-polyvore_items.jsonl in your downloaded data.
+2. Change the folder names in get_all_sets.py before running it. 
+	"item_folder" corresponds to the folder for "*_items.jsonl" files. 
+	"sets_file_folder" corresponds to the folder for "*_sets.jsonl" files.
+	"img_folder" corresponds to folder of images.
+3. Directly running get_all_sets.py after changing the folder names will only collect sets data for the 8 users in set "watch_users" (line 8). 
+   You may then run get_tuples_3times.py to see how it generates the train/test data.
+4. To get data for all users:
+   (1) modify get_all_sets.py:
+   first comment line 129 (if user_name in watch_users: ), then comment line 227 (if (user_name in watch_users) and (user_name+'_items.jsonl' in item_files): )    
+   and uncomment line 228
+   (2) modify get_tuples_3times.py: (Take a look at the code to get more ideas. May need more modifications than the following.)
+   a. set min_nr_tuples (line 7) according to your need
+   b. modify line 114 to line 134
+   c. modify line 175 (if i<=9) according to b.
+   

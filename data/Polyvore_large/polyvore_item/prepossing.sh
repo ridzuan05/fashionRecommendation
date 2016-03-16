@@ -1,0 +1,1 @@
+mv /local2/home/tong/fashionRecommendation/data/Polyvore_large/polyvore_item/data/judysingley-polyvore_item_prefiltereds.jsonl /local2/home/tong/fashionRecommendation/data/Polyvore_large/polyvore_item/data/judysingley-polyvore_items.jsonl
