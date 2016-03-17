@@ -1,0 +1,1 @@
+change ranking problem into a metric learning problem, using 3FC layers to measure similarity between two outfits
