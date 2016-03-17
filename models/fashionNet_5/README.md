@@ -1,0 +1,1 @@
+hierarchical 3FCs with softmax loss (optional: rank loss training)
