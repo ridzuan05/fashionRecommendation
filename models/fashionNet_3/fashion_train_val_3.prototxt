@@ -17,7 +17,7 @@ layer{
   }
   data_param{
     source:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/lmdb_data/train_p_top_lmdb"
-    batch_size:16
+    batch_size:30
     backend:LMDB
   }
 }
@@ -35,7 +35,7 @@ layer{
   }
   data_param{
     source:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/lmdb_data/train_p_bot_lmdb"
-    batch_size:16
+    batch_size:30
     backend:LMDB
   }
 }
@@ -53,7 +53,7 @@ layer{
   }
   data_param{
     source:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/lmdb_data/train_p_sho_lmdb"
-    batch_size:16
+    batch_size:30
     backend:LMDB
   }
 }
@@ -73,7 +73,7 @@ layer{
   }
   data_param{
     source:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/lmdb_data/train_n_top_lmdb"
-    batch_size:16
+    batch_size:30
     backend:LMDB
   }
 }
@@ -92,7 +92,7 @@ layer{
   }
   data_param{
     source:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/lmdb_data/train_n_bot_lmdb"
-    batch_size:16
+    batch_size:30
     backend:LMDB
   }
 }
@@ -110,7 +110,7 @@ layer{
   }
   data_param{
     source:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/lmdb_data/train_n_sho_lmdb"
-    batch_size:16
+    batch_size:30
     backend:LMDB
   }
 }
