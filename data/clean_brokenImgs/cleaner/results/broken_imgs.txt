@@ -1,2 +1,0 @@
-/home/tonghe2/c++_test/data/user1/f7fe11857d2852532f9f0df3e2d0b3e1f1687484.jpg
-/home/tonghe2/c++_test/data/user2/f7fe11857d2852532f9f0df3e2d0b3e1f1687484.jpg
