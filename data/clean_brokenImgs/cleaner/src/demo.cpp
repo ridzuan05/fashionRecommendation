@@ -64,63 +64,68 @@ int main()
         }
 
         // const char* temp1 = "";
-        const char* temp1 = "/items/full";
+        const char* temp1 = "/items_append/full";
         temp2.append(temp1);
         const char* PATH_sub = temp2.c_str();
-        DIR *dir_sub = opendir(PATH_sub);
-        const char* temp0 = "/";
-        const char* savePath_temp3 = "/";
-        temp2.append(temp0);
-        savePath_temp2.append(savePath_temp3);
-        PATH_sub = temp2.c_str();
-        const char* savePath_temp4 = savePath_temp2.c_str();
-        std::cout << PATH_sub << std::endl; //each user path
-        struct dirent *entry_sub = readdir(dir_sub);
-        while(entry_sub != NULL)
+
+        //check is this user has items_append/
+        if(DirectoryExists(PATH_sub)==true)
         {
-          std::string invalid_sub(entry_sub->d_name);
-          if(invalid_sub.compare(".")!=0 && invalid_sub.compare("..")!=0)
+          DIR *dir_sub = opendir(PATH_sub);
+          const char* temp0 = "/";
+          const char* savePath_temp3 = "/";
+          temp2.append(temp0);
+          savePath_temp2.append(savePath_temp3);
+          PATH_sub = temp2.c_str();
+          const char* savePath_temp4 = savePath_temp2.c_str();
+          std::cout << PATH_sub << std::endl; //each user path
+          struct dirent *entry_sub = readdir(dir_sub);
+          while(entry_sub != NULL)
           {
-            std::string temp3(PATH_sub);
-            std::string savePath_temp5(savePath_temp4);
-
-            temp3.append(entry_sub->d_name);
-            savePath_temp5.append(entry_sub->d_name);
-            const char* PATH_img = temp3.c_str(); //each item path of this user
-            const char* savePath = savePath_temp5.c_str();
-            cv::Mat im0 = cv::imread(PATH_img,CV_LOAD_IMAGE_COLOR);
-            if(!im0.data)
+            std::string invalid_sub(entry_sub->d_name);
+            if(invalid_sub.compare(".")!=0 && invalid_sub.compare("..")!=0)
             {
-              corrupted_count++;
-              printf("\n%s---%d\n", PATH_img, corrupted_count);
-              myfile << PATH_img << "\n";
-            }
-            else
-            {
-              cv::Mat cv_img = cv::Mat(224,224,CV_8UC3,cv::Scalar(255,255,255));
-              cv::Mat temp;
+              std::string temp3(PATH_sub);
+              std::string savePath_temp5(savePath_temp4);
 
-              //resize accoridng to the longer edge
-              if(im0.cols < im0.rows){
-                //resize
-                cv::resize(im0, temp, cv::Size(floor(im0.cols*224/im0.rows), 224));             
-                //cropping
-                temp.copyTo(cv_img(cv::Rect(floor((224-temp.cols)/2),0,temp.cols,224)));
+              temp3.append(entry_sub->d_name);
+              savePath_temp5.append(entry_sub->d_name);
+              const char* PATH_img = temp3.c_str(); //each item path of this user
+              const char* savePath = savePath_temp5.c_str();
+              cv::Mat im0 = cv::imread(PATH_img,CV_LOAD_IMAGE_COLOR);
+              if(!im0.data)
+              {
+                corrupted_count++;
+                printf("\n%s---%d\n", PATH_img, corrupted_count);
+                myfile << PATH_img << "\n";
               }
-              else{
-                //resize
-                cv::resize(im0, temp, cv::Size(224, floor(im0.rows*224/im0.cols)));
-                //cropping
-                temp.copyTo(cv_img(cv::Rect(0,floor((224-temp.rows)/2),224,temp.rows)));
-              }
+              else
+              {
+                cv::Mat cv_img = cv::Mat(224,224,CV_8UC3,cv::Scalar(255,255,255));
+                cv::Mat temp;
 
-              //save the new img (or replace the old img)
-              cv::imwrite(savePath,cv_img);
+                //resize accoridng to the longer edge
+                if(im0.cols < im0.rows){
+                  //resize
+                  cv::resize(im0, temp, cv::Size(floor(im0.cols*224/im0.rows), 224));             
+                  //cropping
+                  temp.copyTo(cv_img(cv::Rect(floor((224-temp.cols)/2),0,temp.cols,224)));
+                }
+                else{
+                  //resize
+                  cv::resize(im0, temp, cv::Size(224, floor(im0.rows*224/im0.cols)));
+                  //cropping
+                  temp.copyTo(cv_img(cv::Rect(0,floor((224-temp.rows)/2),224,temp.rows)));
+                }
+
+                //save the new img (or replace the old img)
+                cv::imwrite(savePath,cv_img);
+              }
             }
+            entry_sub = readdir(dir_sub);
           }
-          entry_sub = readdir(dir_sub);
+          closedir(dir_sub);
         }
-        closedir(dir_sub);
       }
     }         
     entry = readdir(dir);
