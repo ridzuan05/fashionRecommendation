@@ -93,3 +93,4 @@ net structure: cnn_top/bot/sho share the same parameters.
     时间记录：
 	3月21日, 11:22 pm., 5712 iters (start time); 3月22日, 7:54 am., 19096 iters (inter time)
 	speed: 38m+7h54m=7*60+38+54=420+92=512m, 512/13384=0.0383 min/iter
+
