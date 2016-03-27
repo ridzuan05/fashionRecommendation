@@ -16,11 +16,31 @@ net structure: cnn_top/bot/sho share the same parameters.
 
 ###### training record bellow
 
+1. t3.2 [lr is (0.00001,0.0001)] does not converge on training dataset even:
+	perhaps direct rank training does not work at all;
+
+2. should try fashionNet_2:
+	working on it now;
+
+==========================================================================================
+
 1. training(1) is done, prepare for training(2), need to decrease lr from (0.0001,0.001) to (0.00001,0.0001) because test_acc/loss does not converge though train_acc/test does:
 	done;
 
 2. start training for one epoch;
-	working on it now;
+	training now，先来2个epoch;
+    时间记录：
+	3月26日, 8:23 pm., 0 iters (start time); 3月2*日, 09:30 am., 20801 iters (inter time)
+	speed: 3h37m+9h30m=12*60m+67m=787m, 787/20801=0.0378 min/iter
+
+3.1 fix that bug on Siamese training ipython notebook:
+	done:	
+
+3.2 prepare txt of ImageData for all the other nets:
+	done:
+
+4. learn to write the nips draft with LaTex:
+	has been postponed;
 
 ==========================================================================================
 

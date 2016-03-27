@@ -168,7 +168,7 @@ def get_all_items():
 #    'name': item['name'],
 #    'price': item['price'],
 #    'description': item['description']}      
-    return (fashion_items, unique_images, failed_images, n_all_items, n_fashion_items)    
+    return (fashion_items, unique_images, failed_images, n_all_items, n_fashion_items, user_number)    
 
 #return 0, 1, 2 to indicate image category
 def get_item_category(ctgy):
@@ -319,7 +319,7 @@ for i in range(200,250):
     for j in range(0, len(n_valid_sets)):
         if n_valid_sets[j] >= i:
             k = k + 1
-    print("minimum sets threshold = {}, the percentage is: {}/{} = {}\n".format(i, k, len(n_valid_sets), float(k)/float(len(n_valid_sets)) )
+    print("minimum sets threshold = {}, the percentage is: {}/{} = {}\n".format(i, k, len(n_valid_sets), float(k)/float(len(n_valid_sets)) ))
     i = i + 5
 
 minimum_sets_num = 200
