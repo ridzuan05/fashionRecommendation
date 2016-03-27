@@ -20,9 +20,22 @@ net structure: cnn_top/bot/sho share the same parameters.
 
 ###### training record bellow
 
-1. 选定 train batch size & val batch size；
-	32->
-	50->
+1. 选定 train batch size & val batch size：
+	64->128->96->80；
+	50；
 
-2. determine parameters in training_record/ipython notebook (edit on local->git pull on local->git push on local->git pull on ares):
-	not yet;
+2. 确定solver，training_record.notebook里的各种iter参数：
+	9002 / 50 = 180 (test-iter)
+	734224 / 80 = 9178, 9178*50 = 458900 (max_iter)
+	9178 / 150 = 184 (save .caffemodel [1.1G]), total size: 1.1*300 = 330 G/epoch 
+	9178 / 150 = 184 (test_interval & save test accu/loss)
+	9178 / 2000 = 5 (display)
+
+3. 开始训练：
+	先来2个epoch；
+    时间记录：
+	3月27日, 3:23 pm., 0 iters (start time); 3月2*日, **:** a/pm., *** iters (inter time)
+	speed: *h*m + *h*m = *h*m = *m, */***= 0.**** min/iter
+
+
+

@@ -3,7 +3,7 @@ name: "fashionNet_2_1"
 ########## training data
 layer{
   name: "top"
-  type: "Data"
+  type: "ImageData"
   top:  "top"
   top:  "label_top" # 1(posi)/0(neg)
   include{
@@ -11,17 +11,17 @@ layer{
   }
   transform_param{
     mirror:true
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/top_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/top_mean.binaryproto"
   }
-  data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/train_top_lmdb"
-    batch_size:16
-    backend:LMDB
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/train_top.txt"
+    batch_size:80
+    #backend:LMDB
   }
 }
 layer{
   name: "bot"
-  type: "Data"
+  type: "ImageData"
   top:  "bot"
   top:  "label_bot" # 1(posi)/0(neg)
   include{
@@ -29,17 +29,17 @@ layer{
   }
   transform_param{
     mirror:true
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/bot_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/bot_mean.binaryproto"
   }
-  data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/train_bot_lmdb"
-    batch_size:16
-    backend:LMDB
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/train_bot.txt"
+    batch_size:80
+    #backend:LMDB
   }
 }
 layer{
   name: "sho"
-  type: "Data"
+  type: "ImageData"
   top:  "sho"
   top:  "label_sho" # 1(posi)/0(neg)
   include{
@@ -47,64 +47,64 @@ layer{
   }
   transform_param{
     mirror:true
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/sho_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/sho_mean.binaryproto"
   }
-  data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/train_sho_lmdb"
-    batch_size:16
-    backend:LMDB
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/train_sho.txt"
+    batch_size:80
+    #backend:LMDB
   }
 }
 ########## validation data
 layer{
   name: "top"
-  type: "Data"
+  type: "ImageData"
   top:  "top"
   top:  "label_top" # 1(posi)/0(neg)
   include{
     phase: TEST
   }
   transform_param{
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/top_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/top_mean.binaryproto"
   }
-  data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/val_top_lmdb"
-    batch_size:16
-    backend:LMDB
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/val_top.txt"
+    batch_size:50
+    #backend:LMDB
   }
 }
 layer{
   name: "bot"
-  type: "Data"
+  type: "ImageData"
   top:  "bot"
   top:  "label_bot" # 1(posi)/0(neg)
   include{
     phase: TEST
   }
   transform_param{
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/bot_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/bot_mean.binaryproto"
   }
-  data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/val_bot_lmdb"
-    batch_size:16
-    backend:LMDB
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/val_bot.txt"
+    batch_size:50
+    #backend:LMDB
   }
 }
 layer{
   name: "sho"
-  type: "Data"
+  type: "ImageData"
   top:  "sho"
   top:  "label_sho" # 1(posi)/0(neg)
   include{
     phase: TEST
   }
   transform_param{
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/sho_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/sho_mean.binaryproto"
   }
-  data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/val_sho_lmdb"
-    batch_size:16
-    backend:LMDB
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/val_sho.txt"
+    batch_size:50
+    #backend:LMDB
   }
 }
 ############################ left side net
