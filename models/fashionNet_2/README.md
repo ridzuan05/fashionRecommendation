@@ -22,19 +22,18 @@ net structure: cnn_top/bot/sho share the same parameters.
 
 1. 准备再来3个epoch，先查看前3个epoch的结果：
 	"i" is finished at 18355, the next "i" to start should be 18356;
-	发生了overfitting，调整lr(0.0001, 0.001)->lr(0.00001,0.0001)，从val loss最低处 (t2.1(finished i = 7728)) 开始训练，先来3个epoch [commit on local (done); pull on local (done); commit on local (done); pull on ares (ing...); start t2.2(0)]；
+	发生了overfitting，调整lr(0.0001, 0.001)->lr(0.00001,0.0001)，从val loss最低处 (t2.1(finished i = 7727)) 开始训练，先来3个epoch [commit on local (done); pull on local (done); commit on local (done); pull on ares (ing...); start t2.2(0)]；
     时间记录：
-	3月28日, **:** pm., 0 iters (start time); 3月2*日, **:** a/pm., *** iters (inter time)
+	3月28日, 8:35 pm., 0 iters (start time); 3月2*日, **:** a/pm., *** iters (inter time)
 	speed: *h*m + *m = *m, */*= 0.0*** min/iter;
 
 2. prepare for t2.2(0)：
-	a) 找到 val loss的最低点（loss=0.653,i=7728）；
+	a) 找到 val loss的最低点（loss=0.653,i=7727）；
 	b) 删除 train／test中的部分纪录 (done)；
 	c) 准备好training_record.ipython notebook(done)；
 	d)  mv train/test/png to t1/ folder (done);
-	e) mv 1/7728.caffemodel to t1/s_.caffemodel (...ing);
-	f) start t2.2 (not yet);
-
+	e) mv 1/7728.caffemodel to t1/s_.caffemodel (done);
+	f) start t2.2(0) (...ing);
 
 ==========================================================================================
 
