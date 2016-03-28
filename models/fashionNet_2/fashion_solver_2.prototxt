@@ -4,13 +4,13 @@
  net: "/local2/home/tong/fashionRecommendation/models/fashionNet_2/fashion_train_val_2_1.prototxt" #
 #net: "/local2/home/tong/fashionRecommendation/models/fashionNet_2/fashion_train_val_2_2.prototxt" #
 ####################################################################################################
-#test batch size 16
-###############
-test_iter: 1  #
-###############
-#1 epoch for test
+#test batch size 50
+#################
+test_iter: 180  #
+#################
+#1/150 epoch for test
 ####################
-test_interval: 3   #
+test_interval: 184 #
 ####################
 # lr for fine-tuning should be lower than when starting from scratch
 ###################
@@ -20,16 +20,16 @@ gamma: 0.1        #
 ###################
 # stepsize should also be lower, as we're closer to being done
 ##################
-stepsize: 100000 #
+stepsize: 458901 #
 ##################
-#50
+#1/2000 epoch
 #############
-display: 1  #
+display: 5  #
 #############
-#train batch size 16
+#train batch size 80
 #50 epoches total training
 ######################
-max_iter: 500000     #
+max_iter: 458900     #
 momentum: 0.9        #
 weight_decay: 0.0005 #
 ######################
