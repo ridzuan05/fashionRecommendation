@@ -20,11 +20,24 @@ net structure: cnn_top/bot/sho share the same parameters.
 
 ###### training record bellow
 
+1.验证test.forward的batch数量：
+	和prototxt一样；
+2.测试test.forward整体循环的速度：
+	都差不多是1min45s；
+3.验证train所记录的数据：
+	记录的batch loss／accu数据，打算同时纪录一下avg数据；
+4. 更改所有的training_record/ipython.notbook的代码：
+	just finished Net_2...ing;
+5. 研究一下python写入‘／r/n’的问题：
+	not yet;
+
+==========================================================================================
+
 1. 准备再来3个epoch，先查看前3个epoch的结果：
 	"i" is finished at 18355, the next "i" to start should be 18356;
 	发生了overfitting，调整lr(0.0001, 0.001)->lr(0.00001,0.0001)，从val loss最低处 (t2.1(finished i = 7727)) 开始训练，先来3个epoch [commit on local (done); pull on local (done); commit on local (done); pull on ares (ing...); start t2.2(0)]；
     时间记录：
-	3月28日, 8:35 pm., 0 iters (start time); 3月2*日, **:** a/pm., *** iters (inter time)
+	3月28日, 8:58 pm., 0 iters (start time); 3月2*日, **:** a/pm., *** iters (inter time)
 	speed: *h*m + *m = *m, */*= 0.0*** min/iter;
 
 2. prepare for t2.2(0)：
