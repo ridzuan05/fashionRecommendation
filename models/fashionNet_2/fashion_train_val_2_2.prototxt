@@ -13,11 +13,11 @@ layer{
   }
   transform_param{
     mirror:true
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/top_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/top_mean.binaryproto"
   }
   data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/train_p_top_lmdb"
-    batch_size:16
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/train_p_top.txt"
+    batch_size:30
     backend:LMDB
   }
 }
@@ -31,11 +31,11 @@ layer{
   }
   transform_param{
     mirror:true
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/bot_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/bot_mean.binaryproto"
   }
   data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/train_p_bot_lmdb"
-    batch_size:16
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/train_p_bot.txt"
+    batch_size:30
     backend:LMDB
   }
 }
@@ -49,11 +49,11 @@ layer{
   }
   transform_param{
     mirror:true
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/sho_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/sho_mean.binaryproto"
   }
   data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/train_p_sho_lmdb"
-    batch_size:16
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/train_p_sho.txt"
+    batch_size:30
     backend:LMDB
   }
 }
@@ -69,11 +69,11 @@ layer{
   transform_param{
     mirror:true
     #crop_size:224
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/top_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/top_mean.binaryproto"
   }
   data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/train_n_top_lmdb"
-    batch_size:16
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/train_n_top.txt"
+    batch_size:30
     backend:LMDB
   }
 }
@@ -88,11 +88,11 @@ layer{
   transform_param{
     mirror:true
     #crop_size:224
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/bot_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/bot_mean.binaryproto"
   }
   data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/train_n_bot_lmdb"
-    batch_size:16
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/train_n_bot.txt"
+    batch_size:30
     backend:LMDB
   }
 }
@@ -106,11 +106,11 @@ layer{
   }
   transform_param{
     mirror:true
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/sho_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/sho_mean.binaryproto"
   }
   data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/train_n_sho_lmdb"
-    batch_size:16
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/train_n_sho.txt"
+    batch_size:30
     backend:LMDB
   }
 }
@@ -125,11 +125,11 @@ layer{
     phase: TEST
   }
   transform_param{
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/top_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/top_mean.binaryproto"
   }
   data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/val_p_top_lmdb"
-    batch_size:16
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/val_p_top.txt"
+    batch_size:50
     backend:LMDB
   }
 }
@@ -142,11 +142,11 @@ layer{
     phase: TEST
   }
   transform_param{
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/bot_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/bot_mean.binaryproto"
   }
   data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/val_p_bot_lmdb"
-    batch_size:16
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/val_p_bot.txt"
+    batch_size:50
     backend:LMDB
   }
 }
@@ -159,11 +159,11 @@ layer{
     phase: TEST
   }
   transform_param{
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/sho_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/sho_mean.binaryproto"
   }
   data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/val_p_sho_lmdb"
-    batch_size:16
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/val_p_sho.txt"
+    batch_size:50
     backend:LMDB
   }
 }
@@ -177,11 +177,11 @@ layer{
     phase: TEST
   }
   transform_param{
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/top_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/top_mean.binaryproto"
   }
   data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/val_n_top_lmdb"
-    batch_size:16
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/val_n_top.txt"
+    batch_size:50
     backend:LMDB
   }
 }
@@ -194,11 +194,11 @@ layer{
     phase: TEST
   }
   transform_param{
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/bot_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/bot_mean.binaryproto"
   }
   data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/val_n_bot_lmdb"
-    batch_size:16
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/val_n_bot.txt"
+    batch_size:50
     backend:LMDB
   }
 }
@@ -211,11 +211,11 @@ layer{
     phase: TEST
   }
   transform_param{
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/mean_prep/sho_mean.binaryproto"
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/sho_mean.binaryproto"
   }
   data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/lmdb_data/val_n_sho_lmdb"
-    batch_size:16
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/val_n_sho.txt"
+    batch_size:50
     backend:LMDB
   }
 }
