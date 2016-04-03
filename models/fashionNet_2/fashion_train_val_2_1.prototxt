@@ -1160,7 +1160,7 @@ layer{
   name:   "metric_fc1"
   type:   "InnerProduct"
   param {
-    lr_mult: 10
+    lr_mult: 1
     decay_mult: 1
     name: "metric_fc1_w"
   }
@@ -1188,7 +1188,7 @@ layer{
   name:   "metric_fc2"
   type:   "InnerProduct"
   param {
-    lr_mult: 10
+    lr_mult: 1
     decay_mult: 1
     name: "metric_fc2_w"
   }
@@ -1223,7 +1223,7 @@ layer{
   name:   "metric_fc3"
   type:   "InnerProduct"
   param {
-    lr_mult: 10
+    lr_mult: 1
     decay_mult: 1
     name: "metric_fc3_w"
   }
