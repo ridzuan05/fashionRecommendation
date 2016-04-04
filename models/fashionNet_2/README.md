@@ -85,7 +85,7 @@ net structure: cnn_top/bot/sho share the same parameters.
 	Done;
 
 7.利用NDCG指标进行测试：
-    not yet;
+    ...ing;
 
 8.根据1的结果，选择合适的caffemodel，调整lr，进入第三阶段training：
 	not yet;
