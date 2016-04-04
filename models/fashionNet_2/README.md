@@ -16,9 +16,81 @@ train input pair: 734224;
 val input pair: 9002;
 test input pair: 175502;
 
+train batch_size: 80 (softmax);
+test batch_size: 50;
+
 net structure: cnn_top/bot/sho share the same parameters.
 
 ######################################################################## training record bellow
+
+1.打出confusion matrix,分析val_loss的问题出在哪里：
+	...ing;
+	a) HVA@(0.601,36984), LVL@(0.770,32200); [30000,40000]
+		[[2463, 2037],
+         [1549, 2951]] ～ 0.602
+	b) HVA@(0.606,58144), LVL@(0.783,44160); [40000,60000]
+		[[2237, 2263],
+         [1278, 3222]] ～ 0.607
+	c) HVA@(0.612,66240), LVL@(0.815,66240); [60000,80000]
+		[[2360, 2140],
+         [1350, 3150]] ～ 0.612
+	d) HVA@(0.610,91448), LVL@(0.844,87216); [80000,91780]
+		[[2217, 2283],
+         [1223, 3277]] ～ 0.610
+
+2.修改所有的training_record代码自动储存每次validation的confusion matix到txt中：
+	Done;
+
+3.从大概40000次、中间次、中间次、90000次分别取caffemodel，放入rank_loss中测试validation accuracy：
+	...ing;
+	22485 / 50 = 450 (test iters)
+	a) HVA@(0.601,36984), LVL@(0.770,32200); [30000,40000]
+		VA@0.629955559307、VL@0.649533153243，
+		cMat_l: [[    0     0]，[ 7749 14751]]
+		cMat_r:[[12191 10309]，[    0     0]]
+
+	b) HVA@(0.606,58144), LVL@(0.783,44160); [40000,60000]
+		VA@0.63133333789、VL@0.64657627066
+		cMat_l: [[    0     0]，[ 6396 16104]]
+		cMat_r:[[10887 11613]，[    0     0]]
+
+	c) HVA@(0.612,66240), LVL@(0.815,66240); [60000,80000]
+		VA@0.63662222498、VL@0.644074650606
+		cMat_l:[[    0     0]，[ 6754 15746]]
+		cMat_r:[[11436 11064]，[    0     0]]
+
+	d) HVA@(0.610,91448), LVL@(0.844,87216); [80000,91780]
+		VA@0.640622226066、VL@0.642674128479
+		cMat_l:[[    0     0]，[ 6122 16378]]
+		cMat_r:[[10720 11780]，[    0     0]]
+
+4.利用softmax的参数打印rank_accu/loss的曲线：
+	...running now (maybe I need to continue training with GPU[2] at the same time, but this should be based on 4's finishment);
+    时间记录：
+	4月3日, 12:17 pm., 30912 just starts models (inter time); 4月3日, 12:34 pm., 31280 just done models (inter time)
+	speed: 17m, 17/3= 5.667 min/caffemodel = 0.0126 min/iter (剩余时间估计：～ 32h, 3 times as fast as Training Speed)
+
+5.图示化rank_net的conf_matrix的变化过程：
+	waiting for complete data;
+
+6.1.将conf_matrix图示化的代码写入所有的train_record中来：
+	Done;
+
+6.2.还需要给所有的training_record增加6张图：
+	Done;
+	dislike[correct](dislike,like), dislike[wrong](dislike,like), dislike[average](dislike,like)
+	like[wrong](dislike,like), like[correct](dislike,like), like[average](dislike,like)
+
+6.3. Data -> ImageData:
+	Done;
+
+7.利用NDCG指标进行测试：
+    ...ing;
+
+8.根据1的结果，选择合适的caffemodel，调整lr，进入第三阶段training：
+	not yet;
+
+==========================================================================================
 
 1.保持第一阶段 lr_rate，再来1个epoch training, 以确认test_accu/loss是否真正收敛了：
 	时间记录：
@@ -27,8 +99,11 @@ net structure: cnn_top/bot/sho share the same parameters.
 	开始进入下一lr_rate训练阶段。
 
 2.调整lr_rate，进入下一训练阶段：
-	commit on ares, push on ares, pull on local, EDIT, push on local, pull on ares, t2.2(next i=64246) starts; 
-
+	0.0001*(1,100)->#0.0001*(1,10)#->0.0001*(1,1)->0.00001*(1,1)
+	时间记录：
+	3月31日, 06:51 pm., 64246 iters (start time); 4月1日, 12:50 am., 73510 iters (inter time)；4月1日, 10:59 am., 89230 iters (inter time)；
+	speed: 5h9m + 50m = 5h59m = 359m, 359/9264= 0.0388 min/iter
+	speed:10h9m = 609m, 609/15720 = 0.0387 min/iter
 
 ==========================================================================================
 
@@ -106,7 +181,7 @@ net structure: cnn_top/bot/sho share the same parameters.
 3. 开始训练：
 	先来2个epoch；
     时间记录：
-	3月27日, 3:28 pm., 0 iters (start time); 3月28日, 12:20 am., 13984 iters (inter time)
+	3月27日, 3:28 pm., 0 iters (start time); 3月28日, 12:20 am., 13984 iters (inter time)；
 	speed: 8h32m + 20m = 8h52m = 532m, 532/13984= 0.0380 min/iter
 
 
