@@ -1270,4 +1270,26 @@ layer {
   bottom: "label"
   top:    "accuracy"
   type:   "Accuracy"
+  include{
+    phase: TRAIN
+  }
+}
+layer {
+  name: "metric_fc3_softmax"
+  bottom: "metric_fc3"
+  top: "metric_fc3_softmax"
+  type: "Softmax"
+  include{
+    phase: TEST
+  }
+}
+layer {
+  name:   "accuracy"
+  bottom: "metric_fc3_softmax"
+  bottom: "label"
+  top:    "accuracy"
+  type:   "Accuracy"
+  include{
+    phase: TEST
+  }
 }

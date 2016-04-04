@@ -65,15 +65,29 @@ net structure: cnn_top/bot/sho share the same parameters.
 		cMat_r:[[10720 11780]，[    0     0]]
 
 4.利用softmax的参数打印rank_accu/loss的曲线：
-	...ing;
+	...running now (maybe I need to continue training with GPU[2] at the same time, but this should be based on 4's finishment);
+    时间记录：
+	4月3日, 12:17 pm., 30912 just starts models (inter time); 4月3日, 12:34 pm., 31280 just done models (inter time)
+	speed: 17m, 17/3= 5.667 min/caffemodel = 0.0126 min/iter (剩余时间估计：～ 32h, 3 times as fast as Training Speed)
 
 5.图示化rank_net的conf_matrix的变化过程：
-	...ing;
+	waiting for complete data;
 
-6.将conf_matrix图示化的代码写入所有的train_record中来：
-	not yet;
+6.1.将conf_matrix图示化的代码写入所有的train_record中来：
+	Done;
 
-7.根据1的结果，选择合适的caffemodel，调整lr，进入第三阶段training：
+6.2.还需要给所有的training_record增加6张图：
+	Done;
+	dislike[correct](dislike,like), dislike[wrong](dislike,like), dislike[average](dislike,like)
+	like[wrong](dislike,like), like[correct](dislike,like), like[average](dislike,like)
+
+6.3. Data -> ImageData:
+	Done;
+
+7.利用NDCG指标进行测试：
+    not yet;
+
+8.根据1的结果，选择合适的caffemodel，调整lr，进入第三阶段training：
 	not yet;
 
 ==========================================================================================
