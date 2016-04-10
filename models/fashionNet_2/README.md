@@ -1,6 +1,6 @@
 ######################################################################## net record bellow
-
-simple 3FC with softmax loss layer (optional: rank loss training)
+ 
+simple 3FC with softmax loss layer  (optional: rank loss training)
 
 the total user number is 1311, by items.jsonl;
 the total user number is 1211, by sets.jsonl;
