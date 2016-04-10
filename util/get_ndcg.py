@@ -21,12 +21,12 @@ def get_ndcg(scores_pos, scores_neg, nr_tuples_pos, nr_tuples_neg,
 	mean_ndcg = 0
 	s_ind_pos = 0
 	s_ind_neg = 0
-	nr_users = len(nr_tuples_pos)
-	for ui in range(nr_users):
-		count_q = nr_tuples_pos[ui] + nr_tuples_neg[ui]
+	nr_users = len(nr_tuples_pos) # user number
+	for ui in range(nr_users): # for each user
+		count_q = nr_tuples_pos[ui] + nr_tuples_neg[ui] # total outfits (both posi & neutral) number of this user
 		label = np.zeros(nr_tuples_pos[ui]+nr_tuples_neg[ui])
 		label[:nr_tuples_pos[ui]] = 1
-		target = np.empty(nr_tuples_pos[ui]+nr_tuples_neg[ui])
+		target = np.empty(nr_tuples_pos[ui]+nr_tuples_neg[ui]) # scores for all outfits (both posi & neutral)
 		target[:nr_tuples_pos[ui]] = scores_pos[s_ind_pos:s_ind_pos+nr_tuples_pos[ui]]
 		target[nr_tuples_pos[ui]:] = scores_neg[s_ind_neg:s_ind_neg+nr_tuples_neg[ui]]
 		if fn_out != '':

@@ -23,8 +23,76 @@ net structure: cnn_top/bot/sho share the same parameters.
 
 ######################################################################## training record bellow
 
-1.打出confusion matrix,分析val_loss的问题出在哪里：
-	...ing;
+1.1.检查目前 t2.1(next i=137706)[7-0.0001*(1,100)->8-0.0001*(1,10)] to check stop result 在rank_net上的accuracy & loss数值，与最后一次在10th epoch时测的 rank_accu/loss 的变化，决定是否需要继续 user-general training？
+	可以终止了；
+	从ndcg的变化看，false positive的影响增大了，越来越容易排名靠前，甚至超过right positive，有点overfitting了;
+
+1.2.选中2个候选caffemodel，作为user_specific训练的初始化参数：
+	发现mean_ndcg数值大的caffemodel所对应的rank_accu/test都基本数值较好；
+	1) [90000,110000]～H_mean_ndcg@(0.735,103960), C_ndcg_10@(0.937) [备选参数]
+	caffemodel_idx: 103960
+	test_accu: 0.641111113959, test_loss: 0.641836200158
+
+	2) [110000,137706～H_mean_ndcg@(0.735,124200), C_ndcg_10@(1.000) [优先考虑]
+	caffemodel_idx: 124200
+	test_accu: 0.644000006384, test_loss: 0.642684461673
+
+1.3.需要清空的txt&需要重新绘制的png：
+	Done;
+	 时间记录：
+	1m33s/test (剩余估计时间：4h)
+	test_rank_accu.txt
+	test_rank_loss.txt
+	conf_l_matrix.txt
+	conf_r_matrix.txt
+	t2.1_rank/dd_dislike.txt
+	t2.1_rank/dl_dislike.txt
+	t2.1_rank/d_dislike.txt
+	t2.1_rank/ld_like.txt
+	t2.1_rank/ll_like.txt
+	t2.1_rank/l_like.txt
+	t2.1_rank/ndcg.txt
+###
+	rank_record.png
+	cMat.png
+	t2.1_rank/dd_record.png
+	t2.1_rank/dl_record.png
+	t2.1_rank/d_record.png
+	t2.1_rank/ld_record.png
+	t2.1_rank/ll_record.png
+	t2.1_rank/l_record.png
+	t2.1_rank/ndcg.png
+
+1.4.准备fashionNet_2的top-10 user 数据，分别对每个user数据进行训练：
+	Done;
+
+1.5.修改train_val.prototxt准备对user_0进行fine_tuning;
+	...在local上先进行更改，然后把ares与local进行以下sync;
+	1）锁定cnn的参数不改变；
+	2）调整fc层的lr，从0.0001开始改变；
+	3）将2.1收入folder中，准备开始t2.2
+	3）先上它5个epoch；
+	4) 将t2.2.0中的相关files进行git add；
+
+2.1.分析dd,dl,d,ld,ll,l这5张图的曲线，从而判断training的阶段：
+	training 基本收敛了，并略微产生了overfitting；
+	3vs2的failure case的数量越来越多，造成rank accu降低；
+
+2.2.检查rank_accu & loss, 与之前的数值对比：
+	开始产生overfitting了，数值开始恶化，因此我决定停止user_general训练;
+    时间记录：
+	1m33s/test (剩余估计时间：70 mins)
+
+2.3.解决figure打开太多造成的内存占用问题：
+	Done;
+
+3.根据1&2的分析结果，决定继续training，还是准备user specific fine微调？
+	 进行user_specific微调；
+
+==========================================================================================
+
+1.打出softmax net 的confusion matrix,分析val_loss的问题出在哪里：
+	val_loss's gradually increase is because of dislike-like's increase;
 	a) HVA@(0.601,36984), LVL@(0.770,32200); [30000,40000]
 		[[2463, 2037],
          [1549, 2951]] ～ 0.602
@@ -42,7 +110,7 @@ net structure: cnn_top/bot/sho share the same parameters.
 	Done;
 
 3.从大概40000次、中间次、中间次、90000次分别取caffemodel，放入rank_loss中测试validation accuracy：
-	...ing;
+	can be explained by 6.2's figures;
 	22485 / 50 = 450 (test iters)
 	a) HVA@(0.601,36984), LVL@(0.770,32200); [30000,40000]
 		VA@0.629955559307、VL@0.649533153243，
@@ -65,13 +133,13 @@ net structure: cnn_top/bot/sho share the same parameters.
 		cMat_r:[[10720 11780]，[    0     0]]
 
 4.利用softmax的参数打印rank_accu/loss的曲线：
-	...running now (maybe I need to continue training with GPU[2] at the same time, but this should be based on 4's finishment);
+	Done;
     时间记录：
 	4月3日, 12:17 pm., 30912 just starts models (inter time); 4月3日, 12:34 pm., 31280 just done models (inter time)
 	speed: 17m, 17/3= 5.667 min/caffemodel = 0.0126 min/iter (剩余时间估计：～ 32h, 3 times as fast as Training Speed)
 
 5.图示化rank_net的conf_matrix的变化过程：
-	waiting for complete data;
+	Done;
 
 6.1.将conf_matrix图示化的代码写入所有的train_record中来：
 	Done;
@@ -84,12 +152,43 @@ net structure: cnn_top/bot/sho share the same parameters.
 6.3. Data -> ImageData:
 	Done;
 
-7.利用NDCG指标进行测试：
-    ...ing;
+7.1.利用NDCG指标进行测试：
+    must integrate general meanNDCG into my testing code for all training_record;
+
+7.2. before going too deep into customizing a layer, I should first see mean NDCG for all users as a whole:
+	promising result;
+	a) HVA@(0.601,36984), LVL@(0.770,32200); [30000,40000]
+	mean_ndcg: 0.73381
+	ndcg_at: 10个1
+	b) HVA@(0.606,58144), LVL@(0.783,44160); [40000,60000]
+	mean_ndcg: 0.73450
+	ndcg_at: 10个1
+	c) HVA@(0.612,66240), LVL@(0.815,66240); [60000,80000]
+	mean_ndcg: 0.73809
+	ndcg_at: 10个1
+	d) HVA@(0.610,91448), LVL@(0.844,87216); [80000,91780]
+	mean_ndcg: 0.73760
+	ndcg_at: 10个1
 
 8.根据1的结果，选择合适的caffemodel，调整lr，进入第三阶段training：
-	not yet;
-
+	[mv repeated files into ./t2.1_rank/, for backup]:
+	dd_dislike.txt [cp]
+	dl_dislike.txt [cp]
+	d_dislike.txt [cp]
+	ld_like.txt [cp]
+	ll_like.txt [cp]
+	l_like.txt [cp]
+	cMat.png [cp]
+	dd_record.png [cp]
+	dl_record.png [cp]
+	d_record.png [cp]
+	ld_record.png [cp]
+	ll_record.png [cp]
+	l_record.png [cp]
+	[resume training on fashionNet_2 still with 0.0001*(1,10) for 5 more epochs]:
+	Done：
+	4月5日, 4:44 pm., 91816 iters done(start time); 4月5日, 8:17 pm., 97250 iters done (inter/stop time)
+	speed: 16m + 3h17m = 3h*33m = 213m, 213/5434= 0.0392 min/iter
 ==========================================================================================
 
 1.保持第一阶段 lr_rate，再来1个epoch training, 以确认test_accu/loss是否真正收敛了：
