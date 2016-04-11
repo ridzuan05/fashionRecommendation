@@ -82,16 +82,30 @@ net structure: cnn_top/bot/sho share the same parameters.
 
 1.5.2.对user_1进行fine_tuning;
 	...ing;
-	先来10个epoch
+	1) 先来10个epoch；
+	t2.2.1(next i=0)[10_0.001*(0,1)], thresh_fp=0.999
+	2) git add t2.2.1中的files；
 
 1.6. 给所有的training_record的cMat加上recordDir;
 	Done;
 
 1.7.must get rid of false-positive using a threshold_fp = 0.999 for all training_record:
-	not yet;
+	Done;
+	[user_1]
+	training size: 1770
+	val size: 22
+	testing size: 422
+  ｛
+	max_iter：1770 / 80 = 22, 22*10+1 = 221 (max_iter)
+	
+	test_iter：22 / 22 = 1 (test-iter)
+	test_interval：22 / 4 = 5 (test_interval & save test accu/loss & save .caffemodel [1.1G]), total size: 1.1*40 = 44 G/10 epoch
+	visual_interval：22 / 22 = 1 (display)
+	｝
 	1）train_val.prototxt中的data_source_path, train&test_batch_size;
-	2) training_record中的test_iter, test_interval, visual_interval;
+	2) training_record中的recordDir, test_iter, test_interval, visual_interval, training_epochs;
 	3) solver.prototxt中的lr, max_iter;
+	4) mkdir for t2.2.1;
 
 1.8.改变训练的iter参数，适应于user_specific数据集的大小:
 	Done;
