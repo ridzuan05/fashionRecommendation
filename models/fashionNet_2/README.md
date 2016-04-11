@@ -82,8 +82,8 @@ net structure: cnn_top/bot/sho share the same parameters.
 
 1.5.2.对user_1进行fine_tuning;
 	...ing;
-	1) 先来10个epoch；
-	t2.2.1(next i=0)[10_0.001*(0,1)], thresh_fp=0.999
+	1) 先来15个epoch；
+	t2.2.1(next i=0)[15_0.001*(0,1)], thresh_fp=0.999
 	2) git add t2.2.1中的files；
 
 1.6. 给所有的training_record的cMat加上recordDir;
