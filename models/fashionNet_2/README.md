@@ -66,25 +66,32 @@ net structure: cnn_top/bot/sho share the same parameters.
 1.4.准备fashionNet_2的top-10 user 数据，分别对每个user数据进行训练：
 	Done;
 
-1.5.修改train_val.prototxt准备对user_0进行fine_tuning;
+1.5.1.修改train_val.prototxt准备对user_0进行fine_tuning;
 	...在local上先进行更改，然后把ares与local进行以下sync;
 	1）锁定cnn的参数不改变；
 	2）调整fc层的lr，从0.0001开始改变；
 	3）将2.1收入folder中，准备开始t2.2
-	3）先上它50个epoch: t2.2.0(next i=0)[10_0.001*(0,1)->?]；
+	3）先上它5个epoch: t2.2.0(next i=0)[10_0.01*(0,1)]；
 	[110000,137706～H_mean_ndcg@(0.735,124200), C_ndcg_10@(1.000) [优先考虑]
 	caffemodel_idx: 124200
 	test_accu: 0.644000006384, test_loss: 0.642684461673
 	时间记录：
-	4月11日, *:* pm., 0 iters (start time); 4月11日, *:* pm., * iters (inter/stop time)
-	speed: *m + *m = *m, */*= 0.* min/iter (剩余时间估计：*h, 大约在4月11日, *:* am.)
+	4月11日, 3:19 pm., 26 iters (start time); 4月11日, 3:25 pm., 110 iters (inter time)
+	speed: 6m, 6/84= 0.0714 min/iter (总时间估计：～30mins)
 	4) 将t2.2.0中的相关files进行git add；
+
+1.5.2.对user_1进行fine_tuning;
+	...ing;
+	先来10个epoch
 
 1.6. 给所有的training_record的cMat加上recordDir;
 	Done;
 
-1.7.must get rid of false-positive using a threshold_fp = 0.99:
+1.7.must get rid of false-positive using a threshold_fp = 0.999 for all training_record:
 	not yet;
+	1）train_val.prototxt中的data_source_path, train&test_batch_size;
+	2) training_record中的test_iter, test_interval, visual_interval;
+	3) solver.prototxt中的lr, max_iter;
 
 1.8.改变训练的iter参数，适应于user_specific数据集的大小:
 	Done;
