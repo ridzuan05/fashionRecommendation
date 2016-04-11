@@ -1,6 +1,6 @@
 ######################################################################## net record bellow
- 
-simple 3FC with softmax loss layer  (optional: rank loss training)
+
+simple 3FC with softmax loss layer (optional: rank loss training)
 
 the total user number is 1311, by items.jsonl;
 the total user number is 1211, by sets.jsonl;
@@ -71,8 +71,38 @@ net structure: cnn_top/bot/sho share the same parameters.
 	1）锁定cnn的参数不改变；
 	2）调整fc层的lr，从0.0001开始改变；
 	3）将2.1收入folder中，准备开始t2.2
-	3）先上它5个epoch；
+	3）先上它50个epoch: t2.2.0(next i=0)[10_0.001*(0,1)->?]；
+	[110000,137706～H_mean_ndcg@(0.735,124200), C_ndcg_10@(1.000) [优先考虑]
+	caffemodel_idx: 124200
+	test_accu: 0.644000006384, test_loss: 0.642684461673
+	时间记录：
+	4月11日, *:* pm., 0 iters (start time); 4月11日, *:* pm., * iters (inter/stop time)
+	speed: *m + *m = *m, */*= 0.* min/iter (剩余时间估计：*h, 大约在4月11日, *:* am.)
 	4) 将t2.2.0中的相关files进行git add；
+
+1.6. 给所有的training_record的cMat加上recordDir;
+	Done;
+
+1.7.must get rid of false-positive using a threshold_fp = 0.99:
+	not yet;
+
+1.8.改变训练的iter参数，适应于user_specific数据集的大小:
+	Done;
+	[user_0]
+	training size: 1910
+	val size: 24
+	testing size: 454
+  ｛
+	max_iter：1910 / 80 = 24, 24*50+1 = 1201 (max_iter)
+	
+	test_iter：24 / 24 = 1 (test-iter)
+	test_interval：24 / 10 = 2 (test_interval & save test accu/loss & save .caffemodel [1.1G]), total size: 1.1*500 = 550 G/50 epoch
+	visual_interval：24 / 10 = 2 (display)
+	｝
+
+1.9.改变prototxt中的部分参数：
+	Done;
+	1) test_batch_size = 24;
 
 2.1.分析dd,dl,d,ld,ll,l这5张图的曲线，从而判断training的阶段：
 	training 基本收敛了，并略微产生了overfitting；
