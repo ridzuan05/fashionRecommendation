@@ -23,6 +23,66 @@ net structure: cnn_top/bot/sho share the same parameters.
 
 ######################################################################## training record bellow
 
+0. 改变user_2需要改变的一些参数：
+	Done;
+	[user_2]
+	training size: 1674
+	val size: 21
+	testing size: 398
+  ｛
+	max_iter：1674 / 80 = 21, 21*50+1 = 1051 (max_iter)
+	
+	test_iter：21 / 21 = 1 (test-iter)
+	test_interval：21 / 4 = 5 (test_interval & save test accu/loss & save .caffemodel [1.1G]), total size: 1.1*60 = 66 G/15 epoch
+	visual_interval：21 / 21 = 1 (display)
+	｝
+	1) train_val.prototxt中的data_source_path, train&test_batch_size;
+	2) training_record中的recordDir, test_iter, test_interval, visual_interval, training_epochs;
+	3) solver.prototxt中的lr, max_iter;
+	4) mkdir for t2.2.2;
+
+1. fine tuning on user_2, using 15 epochs、thresh_fp=0.999、lr=0.001 & 1.2-2):
+	总是觉得有点怪，ndcg在下降，估计是因为这部分数据比较多，处于正态分布的高端部分;
+	但是在 user_0/1 上ndcg是存在上升趋势的，因此每个 user 会有不同；
+
+2. fine tuning on user_2, using 15 epochs、thresh_fp=0.9、lr=0.001 & 1.2-2):
+	0.9造成的波动太大了，还是0.999能够比较稳定地剔除 false-positive;
+
+3.改变user_3涉及的一些参数：
+	Done;
+	[user_3]
+	training size: 1570
+	val size: 20
+	testing size: 374
+  ｛
+	max_iter：1570 / 80 = 20, 20*50+1 = 1001 (max_iter)
+	
+	test_iter：20 / 20 = 1 (test-iter)
+	test_interval：20 / 4 = 5 (test_interval & save test accu/loss & save .caffemodel [1.1G]), total size: 1.1*60 = 66 G/15 epoch
+	visual_interval：20 / 20 = 1 (display)
+	｝
+	1) train_val.prototxt中的data_source_path, train&test_batch_size;
+	2) training_record中的recordDir, test_iter, test_interval, visual_interval, training_epochs;
+	3) solver.prototxt中的lr, max_iter;
+	4) mkdir for t2.2.3;
+
+4.fine tuning on user_3, using 15 epochs、thresh_fp=0.999、lr=0.001 & 1.2-2):
+	ndcg数值的确在提高，我打算加快lr，使他学习的更快;
+
+5.fine tuning on user_3, using 15 epochs、thresh_fp=0.999、lr=0.01 & 1.2-2):
+	这个lr太大了，会造成波动，建议0.002尝试一下;
+
+6.fine tuning on user_3, using 15 epochs、thresh_fp=0.999、lr=0.002 & 1.2-2):
+	softmax accu在下降，很奇怪，我怀疑是val data的问题，打算用test data看一下训练的效果;
+
+6.1.把6的val data换成test data, 并重新进行fine tuning:
+	...ing;
+	1) prototxt里面val2test&test_batch_size;
+	2) training_record的test_interval&test_iter;
+	3) update README.md;
+
+==========================================================================================
+
 1.1.检查目前 t2.1(next i=137706)[7-0.0001*(1,100)->8-0.0001*(1,10)] to check stop result 在rank_net上的accuracy & loss数值，与最后一次在10th epoch时测的 rank_accu/loss 的变化，决定是否需要继续 user-general training？
 	可以终止了；
 	从ndcg的变化看，false positive的影响增大了，越来越容易排名靠前，甚至超过right positive，有点overfitting了;
@@ -81,9 +141,9 @@ net structure: cnn_top/bot/sho share the same parameters.
 	4) 将t2.2.0中的相关files进行git add；
 
 1.5.2.对user_1进行fine_tuning;
-	...ing;
+	...大致确定为15epoch、thresh_fp=0.99、lr=0.001;
 	1) 先来15个epoch；
-	t2.2.1(next i=0)[15_0.001*(0,1)], thresh_fp=0.999
+	t2.2.1(next i=0)[15_0.001*(0,1)], thresh_fp=0.9
 	2) git add t2.2.1中的files；
 
 1.6. 给所有的training_record的cMat加上recordDir;
