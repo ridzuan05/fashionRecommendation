@@ -95,7 +95,15 @@ net structure: cnn_top/bot/sho share the same parameters.
 	mean_ndcg & ndcg_at ~ 0.95;
 
 6.5.using test data, t2.2.3(next i=0)[15_0.03*(0,1)], thresh_fp=0.999：
+	用时大概10mins，60次test dataset，其实还是蛮快的；
+	根据test softmax accu/loss来看，training_epoch取10就差不多了;
+	mean_ndcg&ndcg_at的数值也表现不错；
+
+6.6.using test data, t2.2.3(next i=0)[5_0.05*(0,1)], thresh_fp=0.999：
 	...ing;
+
+6.7.using test data, t2.2.3(next i=0)[10_0.03*(0,1)], thresh_fp=0.999：
+	not yet;
 
 ==========================================================================================
 
