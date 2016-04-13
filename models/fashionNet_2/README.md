@@ -76,10 +76,17 @@ net structure: cnn_top/bot/sho share the same parameters.
 	softmax accu在下降，很奇怪，我怀疑是val data的问题，打算用test data看一下训练的效果;
 
 6.1.把6的val data换成test data, 并重新进行fine tuning:
-	...ing;
+	softmax accu提高，loss下降，ndcg略微上升，且数值较为接近1.0，打算lr改为0.01试一下;
 	1) prototxt里面val2test&test_batch_size;
 	2) training_record的test_interval&test_iter;
 	3) update README.md;
+
+6.2.using test data, t2.2.3(next i=0)[15_0.01*(0,1)], thresh_fp=0.999
+	softmax accu提高, loss下降;
+	mean_ndcg提高，整体不错，打算进一步延长training_epoch；
+
+6.3.using test data, t2.2.3(next i=0)[60_0.01*(0,1)], thresh_fp=0.999
+	...ing;
 
 ==========================================================================================
 
