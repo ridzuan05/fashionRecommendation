@@ -86,6 +86,15 @@ net structure: cnn_top/bot/sho share the same parameters.
 	mean_ndcg提高，整体不错，打算进一步延长training_epoch；
 
 6.3.using test data, t2.2.3(next i=0)[60_0.01*(0,1)], thresh_fp=0.999
+	30 training epoch左右mean_ndcg收敛, softmax accu/loss大概在55 training epoch左右收敛;
+	我们只需要关注mean_ndcg的收敛情况就可以了，打算提高lr到0.02试一下；
+
+6.4.using test data, t2.2.3(next i=0)[15_0.02*(0,1)], thresh_fp=0.999：
+	这组参数基本完美, lr提高后收敛的确加快了，打算进一步加快到0.03，如果有效果的话下次可能降低training_epoch到10;
+	test softmax accu ~ 0.89, loss ~ 0.3;
+	mean_ndcg & ndcg_at ~ 0.95;
+
+6.5.using test data, t2.2.3(next i=0)[15_0.03*(0,1)], thresh_fp=0.999：
 	...ing;
 
 ==========================================================================================
