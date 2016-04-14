@@ -99,7 +99,7 @@ net structure: cnn_top/bot/sho share the same parameters.
 	b) 选出最后三个user进行测试 user_988, user_987, user_986；
 
 7.改变user_988需要改变的一些参数：
-	..ing;
+	Done;
 	[user_988]
 	training size: 320
 	val size: 4
@@ -116,8 +116,37 @@ net structure: cnn_top/bot/sho share the same parameters.
 	3) solver.prototxt中的lr, max_iter;
 	4) mkdir for t2.2.988;
 
-5.on user_988, t2.2.988(next i=0)[5_0.05*(0,1)], thresh_fp=0.999:
+8.on user_988, t2.2.988(next i=0)[5_0.05*(0,1)], thresh_fp=0.999:
+	test softmax accu～0.5, loss~1.0;
+	mean_ndcg~0.68, ndcg_at~0.7;
+	打算改变training iters为120， 观察结果；
+
+9.on user_988, t2.2.988(next i=0)[30_0.05*(0,1)], thresh_fp=0.999 （120iters）:
+	test softmax accu~0.6, loss~2.2;
+	mean_ndcg~0.78, ndcg_at~0.9;
+	ndcg的数值还算不错，conf_matrix比较奇怪，考虑更换user_987进行训练；
+
+10.改变user_987需要改变的一些参数：
+	Done;
+	[user_987]
+	training size: 322
+	val size: 4
+	testing size: 78
+  ｛
+	max_iter：322 / 80 = 4, 4*50+1 = 201 (max_iter)
+	
+	test_iter：78 / 50 = 2 (test-iter)
+	test_interval：4 / 4 = 1 (test_interval & save test accu/loss & save .caffemodel [1.1G]), total size: 1.1*4*30 = 132 G/30 epoch
+	visual_interval：4 / 4 = 1 (display)
+	｝
+	1) train_val.prototxt中的data_source_path, train&test_batch_size;
+	2) training_record中的recordDir, test_iter, test_interval, visual_interval, training_epochs;
+	3) solver.prototxt中的lr, max_iter;
+	4) mkdir for t2.2.987;
+
+11.on user_987, t2.2.987(next i=0)[30_0.05*(0,1)], thresh_fp=0.999 （120iters）:
 	...ing;
+
 
 ==========================================================================================
 
