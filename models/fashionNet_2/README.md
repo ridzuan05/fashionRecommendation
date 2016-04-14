@@ -48,7 +48,7 @@ net structure: cnn_top/bot/sho share the same parameters.
 	mean_ndcg~0.85, ndcg_at~0.9;
 
 2.改变user_1需要改变的一些参数：
-	...ing;
+	Done;
 	[user_1]
 	training size: 1770
 	val size: 22
@@ -66,7 +66,37 @@ net structure: cnn_top/bot/sho share the same parameters.
 	4) mkdir for t2.2.1;
 
 3. on user_1, t2.2.1(next i=0)[7_0.05*(0,1)], thresh_fp=0.999:
+	还算不错，接下来把user_2测试一下就差不多了, 基本决定了training_epoch设置为5就够了;
+	test softmax accu~0.82, loss~0.48;
+	mean_ndcg~0.91, ndcg~0.9;
+
+4.改变user_2需要改变的一些参数：
+	Done;
+	[user_2]
+	training size: 1674
+	val size: 22
+	testing size: 398
+  ｛
+	max_iter：1674 / 80 = 21, 21*50+1 = 1051 (max_iter)
+	
+	test_iter：398 / 50 = 8 (test-iter)
+	test_interval：21 / 4 = 5 (test_interval & save test accu/loss & save .caffemodel [1.1G]), total size: 1.1*4*5 = 22 G/5 epoch
+	visual_interval：21 / 21 = 1 (display)
+	｝
+	1) train_val.prototxt中的data_source_path, train&test_batch_size;
+	2) training_record中的recordDir, test_iter, test_interval, visual_interval, training_epochs;
+	3) solver.prototxt中的lr, max_iter;
+	4) mkdir for t2.2.2;
+
+5.on user_2, t2.2.2(next i=0)[5_0.05*(0,1)], thresh_fp=0.999:
+	还算不错，那就定 [5_0.05*(0,1)] 了;
+	test softmax accu~0.82, loss~0.50;
+	mean_ndcg~0.92, ndcg~1.0;
+
+6.对排名靠后的user数据进行测试;
 	...ing;
+	a) 生成_user_的imagedata.list；
+	b) 选出最后三个user进行测试；
 
 ==========================================================================================
 

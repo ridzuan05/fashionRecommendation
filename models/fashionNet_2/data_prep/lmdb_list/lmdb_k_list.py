@@ -46,7 +46,7 @@ for i in range(0,len(data_type)):
 	#sort user_idx according to their tuples num
 	user_idx_sorted = sorted(range(len(user_idx)), key=lambda k: user_idx[k],reverse=True)
 	#save imgdata_k_list for Top-10 users
-	user_num = 10 # user_num for fine-tuning & ndcg test
+	user_num = len(user_idx) # user_num for fine-tuning & ndcg test
 	for u in range(0,user_num):
 		p_n_k_top = open(l_root+data_type[i]+'_'+str(u)+'_top.txt','w')
 		p_n_k_bot = open(l_root+data_type[i]+'_'+str(u)+'_bot.txt','w')
