@@ -100,10 +100,17 @@ net structure: cnn_top/bot/sho share the same parameters.
 	mean_ndcg&ndcg_at的数值也表现不错；
 
 6.6.using test data, t2.2.3(next i=0)[5_0.05*(0,1)], thresh_fp=0.999：
-	...ing;
+	耗时大概3mins, 20次test，蛮快的;
+	效果挺好的，可以接受，现在测试取消test dataset的耗时，如果比较快则可以适当降低lr&增加training_epoch;
 
-6.7.using test data, t2.2.3(next i=0)[10_0.03*(0,1)], thresh_fp=0.999：
-	not yet;
+6.7.延续6.6的配置，但是只在training最后实行一次test dataset, 主要是为了测试速度:
+	耗时大概1分20秒, 一共有100iters，平均1.25iters／s or 0.8s/iter;
+	估计下150个user的总耗时：150*80s=3个半小时；
+	test softmax accu~0.88, loss~0.35;
+	mean_ndcg~0.93, ndcg_at~0.9;
+
+6.7.基本确定[7_0.05*(0,1)],最后在user_3身上做一次测试，然后重新测试前三个user：
+	...ing;
 
 ==========================================================================================
 
