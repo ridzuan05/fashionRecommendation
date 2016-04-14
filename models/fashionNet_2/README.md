@@ -25,7 +25,7 @@ net structure: cnn_top/bot/sho share the same parameters.
 
 ==========================================================================================
 0. 改变user_0需要改变的一些参数：
-	...ing;
+	Done;
 	[user_0]
 	training size: 1910
 	val size: 24
@@ -43,6 +43,29 @@ net structure: cnn_top/bot/sho share the same parameters.
 	4) mkdir for t2.2.0;
 
 1. on user_0, t2.2.0(next i=0)[7_0.05*(0,1)], thresh_fp=0.999:
+	总体数值还可以接受，就是曲线的变化趋势不明显，估计是已经收敛了吧，毕竟他的数据最多，对general_training的影响最大;
+	test softmax accu~0.75, loss~0.60;
+	mean_ndcg~0.85, ndcg_at~0.9;
+
+2.改变user_1需要改变的一些参数：
+	...ing;
+	[user_1]
+	training size: 1770
+	val size: 22
+	testing size: 422
+  ｛
+	max_iter：1770 / 80 = 22, 22*50+1 = 1101 (max_iter)
+	
+	test_iter：422 / 50 = 9 (test-iter)
+	test_interval：22 / 4 = 5 (test_interval & save test accu/loss & save .caffemodel [1.1G]), total size: 1.1*4*7 = 30.8 G/7 epoch
+	visual_interval：22 / 22 = 1 (display)
+	｝
+	1) train_val.prototxt中的data_source_path, train&test_batch_size;
+	2) training_record中的recordDir, test_iter, test_interval, visual_interval, training_epochs;
+	3) solver.prototxt中的lr, max_iter;
+	4) mkdir for t2.2.1;
+
+3. on user_1, t2.2.1(next i=0)[7_0.05*(0,1)], thresh_fp=0.999:
 	...ing;
 
 ==========================================================================================
