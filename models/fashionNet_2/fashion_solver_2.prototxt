@@ -10,7 +10,7 @@ test_iter: 0    #
 #################
 #1/184 epoch for test
 #######################
-test_interval: 1051   #
+test_interval: 201   #
 #######################
 # lr for fine-tuning should be lower than when starting from scratch
 # 0.0001*(1,100)->0.0001*(1,10)->0.0001*(1,1)->0.00001*(1,1)
@@ -21,16 +21,16 @@ gamma: 1          #
 ###################
 # stepsize should also be lower, as we're closer to being done
 ##################
-stepsize: 1051   #
+stepsize: 201   #
 ##################
 #1/2000 epoch
 ##################
-display: 1051    #
+display: 201    #
 ##################
 #train batch size 80
 #50 epoches total training
 ######################
-max_iter: 1051       #
+max_iter: 201       #
 momentum: 0.9        #
 weight_decay: 0.0005 #
 ######################

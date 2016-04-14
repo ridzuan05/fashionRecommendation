@@ -14,7 +14,7 @@ layer{
     mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/top_mean.binaryproto"
   }
   image_data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/train_2_top.txt"
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/train_988_top.txt"
     batch_size:80
     #backend:LMDB
   }
@@ -32,7 +32,7 @@ layer{
     mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/bot_mean.binaryproto"
   }
   image_data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/train_2_bot.txt"
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/train_988_bot.txt"
     batch_size:80
     #backend:LMDB
   }
@@ -50,7 +50,7 @@ layer{
     mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/sho_mean.binaryproto"
   }
   image_data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/train_2_sho.txt"
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/train_988_sho.txt"
     batch_size:80
     #backend:LMDB
   }
@@ -68,7 +68,7 @@ layer{
     mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/top_mean.binaryproto"
   }
   image_data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/test_2_top.txt"
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/test_988_top.txt"
     batch_size:50
     #backend:LMDB
   }
@@ -85,7 +85,7 @@ layer{
     mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/bot_mean.binaryproto"
   }
   image_data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/test_2_bot.txt"
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/test_988_bot.txt"
     batch_size:50
     #backend:LMDB
   }
@@ -102,7 +102,7 @@ layer{
     mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/sho_mean.binaryproto"
   }
   image_data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/test_2_sho.txt"
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/test_988_sho.txt"
     batch_size:50
     #backend:LMDB
   }

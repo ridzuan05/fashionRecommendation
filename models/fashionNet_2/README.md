@@ -94,9 +94,30 @@ net structure: cnn_top/bot/sho share the same parameters.
 	mean_ndcg~0.92, ndcg~1.0;
 
 6.对排名靠后的user数据进行测试;
+	Done;
+	a) 生成_user_的imagedata.list [user_0 -> user_988]；
+	b) 选出最后三个user进行测试 user_988, user_987, user_986；
+
+7.改变user_988需要改变的一些参数：
+	..ing;
+	[user_988]
+	training size: 320
+	val size: 4
+	testing size: 78
+  ｛
+	max_iter：320 / 80 = 4, 4*50+1 = 201 (max_iter)
+	
+	test_iter：78 / 50 = 2 (test-iter)
+	test_interval：4 / 4 = 1 (test_interval & save test accu/loss & save .caffemodel [1.1G]), total size: 1.1*4*5 = 22 G/5 epoch
+	visual_interval：4 / 4 = 1 (display)
+	｝
+	1) train_val.prototxt中的data_source_path, train&test_batch_size;
+	2) training_record中的recordDir, test_iter, test_interval, visual_interval, training_epochs;
+	3) solver.prototxt中的lr, max_iter;
+	4) mkdir for t2.2.988;
+
+5.on user_988, t2.2.988(next i=0)[5_0.05*(0,1)], thresh_fp=0.999:
 	...ing;
-	a) 生成_user_的imagedata.list；
-	b) 选出最后三个user进行测试；
 
 ==========================================================================================
 
