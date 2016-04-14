@@ -23,6 +23,30 @@ net structure: cnn_top/bot/sho share the same parameters.
 
 ######################################################################## training record bellow
 
+==========================================================================================
+0. 改变user_0需要改变的一些参数：
+	...ing;
+	[user_0]
+	training size: 1910
+	val size: 24
+	testing size: 454
+  ｛
+	max_iter：1910 / 80 = 24, 24*50+1 = 1201 (max_iter)
+	
+	test_iter：454 / 50 = 9 (test-iter)
+	test_interval：24 / 4 = 6 (test_interval & save test accu/loss & save .caffemodel [1.1G]), total size: 1.1*4*7 = 30.8 G/7 epoch
+	visual_interval：24 / 24 = 1 (display)
+	｝
+	1) train_val.prototxt中的data_source_path, train&test_batch_size;
+	2) training_record中的recordDir, test_iter, test_interval, visual_interval, training_epochs;
+	3) solver.prototxt中的lr, max_iter;
+	4) mkdir for t2.2.0;
+
+1. on user_0, t2.2.0(next i=0)[7_0.05*(0,1)], thresh_fp=0.999:
+	...ing;
+
+==========================================================================================
+
 0. 改变user_2需要改变的一些参数：
 	Done;
 	[user_2]
@@ -110,7 +134,10 @@ net structure: cnn_top/bot/sho share the same parameters.
 	mean_ndcg~0.93, ndcg_at~0.9;
 
 6.7.基本确定[7_0.05*(0,1)],最后在user_3身上做一次测试，然后重新测试前三个user：
-	...ing;
+	大概耗时1分30秒，可以接受, 那就暂定 [7_0.05*(0,1)];
+	估计下150个user的总耗时：150*90s=3.75h=将近4个小时；
+	test softmax accu~0.89, loss~0.29;
+	mean_ndcg~0.96, ndcg_at~1.0;
 
 ==========================================================================================
 
