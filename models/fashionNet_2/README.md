@@ -145,8 +145,36 @@ net structure: cnn_top/bot/sho share the same parameters.
 	4) mkdir for t2.2.987;
 
 11.on user_987, t2.2.987(next i=0)[30_0.05*(0,1)], thresh_fp=0.999 （120iters）:
-	...ing;
+	test softmax accu~0.5, loss~1.6;
+	mean_ndcg~0.55, ndcg-at~0.56;
+	感觉有点overfitting的含义, 改变lr为0.01再测试一下；
 
+12.on user_987, t2.2.987(next i=0)[30_0.01*(0,1)], thresh_fp=0.999 （120iters）:
+	效果就是11的前面部分的数据结果，我认为这组数据可能已经overfitting了;
+	以后还是保持training iters～120吧，trian_batch_size～80，继续测试user_986；
+
+13.改变user_986需要改变的一些参数：
+	...ing;
+	[user_986]
+	training size: 322
+	val size: 4
+	testing size: 78
+  ｛
+	max_iter：322 / 80 = 4, 4*50+1 = 201 (max_iter)
+	
+	test_iter：78 / 50 = 2 (test-iter)
+	test_interval：4 / 4 = 1 (test_interval & save test accu/loss & save .caffemodel [1.1G]), total size: 1.1*4*30 = 132 G/30 epoch
+	visual_interval：4 / 4 = 1 (display)
+	｝
+	1) train_val.prototxt中的data_source_path, train&test_batch_size;
+	2) training_record中的recordDir, test_iter, test_interval, visual_interval, training_epochs;
+	3) solver.prototxt中的lr, max_iter;
+	4) mkdir for t2.2.986;
+
+14.on user_986, t2.2.986(next i=0)[30_0.05*(0,1)], thresh_fp=0.999 （120iters）:
+	test softmax accu~0.5, loss~1.6;
+	mean_ndcg~0.55, ndcg-at~0.56;
+	感觉有点overfitting的含义, 改变lr为0.01再测试一下；
 
 ==========================================================================================
 
