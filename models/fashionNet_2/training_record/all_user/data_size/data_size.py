@@ -50,7 +50,7 @@ for i in range(0,len(data_type)):
 	user_idx_sorted = sorted(range(len(user_idx)), key=lambda k: user_idx[k],reverse=True)
 
 	# save all_train/val/test_size.txt
-	all_user_tupleSize = open(size_root+'data_size/all_'+data_type[i]+'_size.txt') # open all_train/val/test_size.txt 
+	all_user_tupleSize = open(size_root+'data_size/all_'+data_type[i]+'_size.txt','w') # open all_train/val/test_size.txt 
 	for n in range(0, len(user_idx)): # check each user
 		tuple_num = str(user_idx_sorted[n])+' '+str(user_idx[user_idx_sorted[n]])+'\r\n' # (user_idx, tuple num) in descending order
 		all_user_tupleSize.write(tuple_num)
