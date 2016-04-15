@@ -154,7 +154,7 @@ net structure: cnn_top/bot/sho share the same parameters.
 	以后还是保持training iters～120吧，trian_batch_size～80，继续测试user_986；
 
 13.改变user_986需要改变的一些参数：
-	...ing;
+	Done;
 	[user_986]
 	training size: 322
 	val size: 4
@@ -172,9 +172,40 @@ net structure: cnn_top/bot/sho share the same parameters.
 	4) mkdir for t2.2.986;
 
 14.on user_986, t2.2.986(next i=0)[30_0.05*(0,1)], thresh_fp=0.999 （120iters）:
-	test softmax accu~0.5, loss~1.6;
-	mean_ndcg~0.55, ndcg-at~0.56;
-	感觉有点overfitting的含义, 改变lr为0.01再测试一下；
+	test softmax accu~0.65, loss~1.0;
+	mean_ndcg~0.9, ndcg-at~0.9;
+	我觉得training_epoch还是5就够了，再试验下user_985；
+
+15.改变user_985需要改变的一些参数：
+	Done;
+	[user_985]
+	training size: 322
+	val size: 4
+	testing size: 78
+  ｛
+	max_iter：322 / 80 = 4, 4*50+1 = 201 (max_iter)
+	
+	test_iter：78 / 50 = 2 (test-iter)
+	test_interval：4 / 4 = 1 (test_interval & save test accu/loss & save .caffemodel [1.1G]), total size: 1.1*4*30 = 132 G/30 epoch
+	visual_interval：4 / 4 = 1 (display)
+	｝
+	1) train_val.prototxt中的data_source_path, train&test_batch_size;
+	2) training_record中的recordDir, test_iter, test_interval, visual_interval, training_epochs;
+	3) solver.prototxt中的lr, max_iter;
+	4) mkdir for t2.2.985;
+
+16.on user_986, t2.2.986(next i=0)[5_0.05*(0,1)], thresh_fp=0.999:
+	并不是非常理想，有可能就是因为该user的data间的consistency不够强，她的服饰爱好比较杂;
+	test softmax accu~0.55, loss~1.0;
+	mean_ndcg~0.7, ndcg-at~0.7;
+  
+17.使用[5_0.05*(0,1)]这个配置来对所有的989个user进行训练，绘制mean_ndcg & ndcg_at@100;
+	...ing;
+	时间估计：85s*989 = 84065s = 1401.1 m = 23.3 hs
+	a) 记录所有user的 mean_ndcg 的均值；
+	b) 记录所有user的 ndcg_at@100  的均值；
+	c) 记录所有user的caffemodel；
+	d) 记录所有user的前100的posi_nega_label, 以及top_bot_sho服饰路径；
 
 ==========================================================================================
 
