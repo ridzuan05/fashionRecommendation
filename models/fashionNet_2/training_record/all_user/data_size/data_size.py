@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from itertools import izip
 import re
 import random
