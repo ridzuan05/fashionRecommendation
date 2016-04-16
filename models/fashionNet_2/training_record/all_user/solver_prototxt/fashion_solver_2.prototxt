@@ -1,0 +1,44 @@
+# train input :pair: ***;
+# val input pair: ***;
+####################################################################################################
+ net: "/local2/home/tong/fashionRecommendation/models/fashionNet_2//training_record/all_user/solver_prototxt/fashion_train_val_2_1_!666!.prototxt" #
+#net: "/local2/home/tong/fashionRecommendation/models/fashionNet_2/fashion_train_val_2_2.prototxt" #
+####################################################################################################
+#test batch size 50
+#################
+test_iter: 0    #
+#################
+#1/184 epoch for test
+#######################
+test_interval: 1201   #
+#######################
+# lr for fine-tuning should be lower than when starting from scratch
+# 0.0001*(1,100)->0.0001*(1,10)->0.0001*(1,1)->0.00001*(1,1)
+###################
+base_lr: 0.05     #
+lr_policy: "step" #
+gamma: 1          #
+###################
+# stepsize should also be lower, as we're closer to being done
+##################
+stepsize: 1201   #
+##################
+#1/2000 epoch
+##################
+display: 1201    #
+##################
+#train batch size 80
+#50 epoches total training
+######################
+max_iter: 1201       #
+momentum: 0.9        #
+weight_decay: 0.0005 #
+######################
+#5 epoches for each snapshot
+#snapshot: 5000
+#snapshot_prefix: "/local2/home/tong/fashionRecommendation/data/netParameters/finetune_fashion_recommendation_"
+# solver mode: CPU or GPU
+##################
+solver_mode: GPU #
+##################
+#device_id: 0
