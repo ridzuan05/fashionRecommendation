@@ -48,7 +48,6 @@ for u in range(0,user_num):
 	end_iter.write(end_iter_temp)
 
 recordDir.close()
-param_root.close()
 test_iter.close()
 test_interval.close()
 visual_interval.close()
