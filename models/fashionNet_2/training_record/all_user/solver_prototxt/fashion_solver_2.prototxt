@@ -1,7 +1,7 @@
 # train input :pair: ***;
 # val input pair: ***;
 ####################################################################################################
- net: "/local2/home/tong/fashionRecommendation/models/fashionNet_2//training_record/all_user/solver_prototxt/fashion_train_val_2_1_!666!.prototxt" #
+ net: "/local2/home/tong/fashionRecommendation/models/fashionNet_2//training_record/all_user/train_val_prototxt/fashion_train_val_2_1_!666!.prototxt" #
 #net: "/local2/home/tong/fashionRecommendation/models/fashionNet_2/fashion_train_val_2_2.prototxt" #
 ####################################################################################################
 #test batch size 50
