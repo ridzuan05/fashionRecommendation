@@ -29,7 +29,7 @@ for u in range(0,user_num):
 	optimal_mean_ndcg += temp_o
 	count_o += 1.0
 	# first mean_ndcg
-	if (len(ndcg)==28)
+	if (len(ndcg)==28):
 		temp_f = float(ndcg[0].strip('\r\n').split(' ')[1])
 		first_mean_ndcg += temp_f
 		count_f += 1.0
