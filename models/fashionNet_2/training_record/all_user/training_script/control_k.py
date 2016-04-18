@@ -195,6 +195,7 @@ test_interval = ^777^ # 1/5 train epoch
 visual_interval = ^999^ # each train iter
 test_iter = ^888^ # 1 test epoch
 test_idx = []
+test_idx.append(0)
 test_num = 6
 for i in range(0,test_num):
     temp = end_iter-i*test_interval
