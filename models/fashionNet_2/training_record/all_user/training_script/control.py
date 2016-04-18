@@ -29,17 +29,19 @@ for u in range(0,user_num):
 	for i in range(0,len(s_fp)):
 	        temp = s_fp[i].split('^')
 	        if(len(temp)==3):
+	        	
 	        	if(temp[1]==str(666)):
 		            temp[1] = str(u)
 	        	elif(temp[1]==str(555)):
-	        		temp[1] = end_iter[u].split('\r\n')
+	        		temp[1] = end_iter[u].strip('\r\n').split(' ')[1]
 	        	elif(temp[1]==str(777)):
-	        		temp[1] = test_interval[u].split('\r\n')
+	        		temp[1] = test_interval[u].strip('\r\n').split(' ')[1]
 	        	elif(temp[1]==str(999)):
-	        		temp[1] = visual_interval[u].split('\r\n')
+	        		temp[1] = visual_interval[u].strip('\r\n').split(' ')[1]
 	        	elif(temp[1]==str(888)):
-	        		temp[1] = test_iter[u].split('\r\n')
-	                temp = temp[0]+temp[1]+temp[2]
+	        		temp[1] = test_iter[u].strip('\r\n').split(' ')[1]
+
+	            temp = temp[0]+temp[1]+temp[2]
 	        else:
 	            temp = temp[0]
 	        k_fp.write(temp)
