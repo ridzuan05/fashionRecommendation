@@ -120,7 +120,7 @@ def get_ndcg(scores_pos, scores_neg, nr_tuples_pos, nr_tuples_neg,\
         target[nr_tuples_pos[ui]:] = scores_neg[s_ind_neg:s_ind_neg+nr_tuples_neg[ui]] # scores for neutral outfits
         path = np.empty(nr_tuples_pos[ui]+nr_tuples_neg[ui])
         path[:nr_tuples_pos[ui]] = img_idx_pos[s_ind_pos:s_ind_pos+nr_tuples_pos[ui]]
-        path[nr_tuples_pos[ui]:] = img_idx_neg[s_ind_pos:s_ind_pos+nr_tuples_pos[ui]]
+        path[nr_tuples_pos[ui]:] = img_idx_neg[s_ind_neg:s_ind_neg+nr_tuples_neg[ui]]
         if fn_out != '':
             tuples = np.hstack((tuples_pos[:,s_ind_pos:s_ind_pos+nr_tuples_pos[ui]],\
                                 tuples_neg[:,s_ind_neg:s_ind_neg+nr_tuples_neg[ui]]))
