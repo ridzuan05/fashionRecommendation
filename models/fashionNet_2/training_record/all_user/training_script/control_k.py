@@ -94,84 +94,82 @@ def test_avg(test_iter, img_idx, test_tuple_num):
             img_idx_pos, img_idx_neg
            
 def get_ndcg(scores_pos, scores_neg, nr_tuples_pos, nr_tuples_neg,\
-			 img_idx_pos, img_idx_neg,\
-			 fn_out='', tuples_pos=None, tuples_neg=None, nr_return=0):
+             img_idx_pos, img_idx_neg,\
+             fn_out='', tuples_pos=None, tuples_neg=None, nr_return=0):
 
-	if fn_out != '':
-            fid_out = open(fn_out, 'w')
+    if fn_out != '':
+        fid_out = open(fn_out, 'w')
 
-	m = 100 # pre-determined ndcg size
-	ndcg_ct = np.zeros(m)
-	ndcg_at = np.zeros(m)
-	mean_ndcg = 0
-	s_ind_pos = 0 # update posi outfit index for each user
-	s_ind_neg = 0 # update neutral outfit index for each user
-	nr_users = len(nr_tuples_pos) # user number
+    m = 100 # pre-determined ndcg size
+    ndcg_ct = np.zeros(m)
+    ndcg_at = np.zeros(m)
+    mean_ndcg = 0
+    s_ind_pos = 0 # update posi outfit index for each user
+    s_ind_neg = 0 # update neutral outfit index for each user
+    nr_users = len(nr_tuples_pos) # user number
+
+    ndcg_label = []
+    ndcg_imgIdx = []
     
-	ndcg_label = []
-	ndcg_imgIdx = []
-    
-	for ui in range(nr_users): # for each user
-		count_q = nr_tuples_pos[ui] + nr_tuples_neg[ui] # total outfits (both posi & neutral) number of this user
-		label = np.zeros(nr_tuples_pos[ui]+nr_tuples_neg[ui]) # labels for all outfits of this user, 1 for posi & 0 for neutral
-		label[:nr_tuples_pos[ui]] = 1
-		target = np.empty(nr_tuples_pos[ui]+nr_tuples_neg[ui]) # scores for all outfits (both posi & neutral)
-		target[:nr_tuples_pos[ui]] = scores_pos[s_ind_pos:s_ind_pos+nr_tuples_pos[ui]] # scores for posi outfits
-		target[nr_tuples_pos[ui]:] = scores_neg[s_ind_neg:s_ind_neg+nr_tuples_neg[ui]] # scores for neutral outfits
+    for ui in range(nr_users): # for each user
+        count_q = nr_tuples_pos[ui] + nr_tuples_neg[ui] # total outfits (both posi & neutral) number of this user
+        label = np.zeros(nr_tuples_pos[ui]+nr_tuples_neg[ui]) # labels for all outfits of this user, 1 for posi & 0 for neutral
+        label[:nr_tuples_pos[ui]] = 1
+        target = np.empty(nr_tuples_pos[ui]+nr_tuples_neg[ui]) # scores for all outfits (both posi & neutral)
+        target[:nr_tuples_pos[ui]] = scores_pos[s_ind_pos:s_ind_pos+nr_tuples_pos[ui]] # scores for posi outfits
+        target[nr_tuples_pos[ui]:] = scores_neg[s_ind_neg:s_ind_neg+nr_tuples_neg[ui]] # scores for neutral outfits
         path = np.empty(nr_tuples_pos[ui]+nr_tuples_neg[ui])
         path[:nr_tuples_pos[ui]] = img_idx_pos[s_ind_pos:s_ind_pos+nr_tuples_pos[ui]]
         path[nr_tuples_pos[ui]:] = img_idx_neg[s_ind_pos:s_ind_pos+nr_tuples_pos[ui]]
-		if fn_out != '':
-			tuples = np.hstack((tuples_pos[:,s_ind_pos:s_ind_pos+nr_tuples_pos[ui]],
-								tuples_neg[:,s_ind_neg:s_ind_neg+nr_tuples_neg[ui]]))
-		s_ind_pos += nr_tuples_pos[ui]
-		s_ind_neg += nr_tuples_neg[ui]
+        if fn_out != '':
+            tuples = np.hstack((tuples_pos[:,s_ind_pos:s_ind_pos+nr_tuples_pos[ui]],\
+                                tuples_neg[:,s_ind_neg:s_ind_neg+nr_tuples_neg[ui]]))
+        s_ind_pos += nr_tuples_pos[ui]
+        s_ind_neg += nr_tuples_neg[ui]
 
-		ndcg_size = min(m, count_q) # actual ndcg size
-		ideal_dcg = np.empty(count_q) # for computing ideal ndcg value
-		dcg = np.empty(count_q) # for computing dcg (without normalization by N_m yet)
-		ndcg = 0
-		order = np.argsort(-label) # sort label in descending order, returns the sequential indices of label 
-		ideal_dcg[0] = pow(2.0, label[order[0]]) - 1 # compute ideal_ndcg@m (m=1)
-		for i in range(1, count_q): # compute ideal_ndcg@m (m=2,...,M), M is total outfits number of this user
-			ideal_dcg[i] = ideal_dcg[i-1]+(pow(2.0, label[order[i]])
-										   - 1)*np.log(2.0)/np.log(i+1.0)
-		order = np.argsort(-target) # sort scores for all outfits in descending order, returns the indices
-		dcg[0] = pow(2.0, label[order[0]]) - 1 # compute dcg@m (m=1)
-		for i in range(1, count_q): # compute dcg@m (m=2,...,M), M is total outfits number of this user
-			dcg[i] = dcg[i-1]+(pow(2.0, label[order[i]])
-							   - 1)*np.log(2.0)/np.log(i+1.0)
+        ndcg_size = min(m, count_q) # actual ndcg size
+        ideal_dcg = np.empty(count_q) # for computing ideal ndcg value
+        dcg = np.empty(count_q) # for computing dcg (without normalization by N_m yet)
+        ndcg = 0
+        order = np.argsort(-label) # sort label in descending order, returns the sequential indices of label 
+        ideal_dcg[0] = pow(2.0, label[order[0]]) - 1 # compute ideal_ndcg@m (m=1)
+        for i in range(1, count_q): # compute ideal_ndcg@m (m=2,...,M), M is total outfits number of this user
+            ideal_dcg[i] = ideal_dcg[i-1]+(pow(2.0, label[order[i]]) - 1)*np.log(2.0)/np.log(i+1.0)
+        order = np.argsort(-target) # sort scores for all outfits in descending order, returns the indices
+        dcg[0] = pow(2.0, label[order[0]]) - 1 # compute dcg@m (m=1)
+        for i in range(1, count_q): # compute dcg@m (m=2,...,M), M is total outfits number of this user
+            dcg[i] = dcg[i-1]+(pow(2.0, label[order[i]]) - 1)*np.log(2.0)/np.log(i+1.0)
         for i in range(0, ndcg_size):
             ndcg_label.append(label[order[i]])
             ndcg_imgIdx.append(path[order[i]])
-		if ideal_dcg[0] > 0: # at least there should be one posi outfit for this user, or else somehting is wrong here
-			for i in range(count_q): # for each @m (m=1,...,M)
-				ndcg += dcg[i] / ideal_dcg[i] # add up all ndcg@m (m=1,..,M) for this user
-			for i in range(ndcg_size): # compute top 10 ndcg for all users
-				ndcg_ct[i] += 1 # record outfits num at each place, among top 10
-				ndcg_at[i] += dcg[i] / ideal_dcg[i] # add up ndcg value at each place, among top 10
-		else: # if we only have no posi outfit for this user
-			ndcg = 0 # ndcg is 0 for this user, because there is not point of ranking anymore for him/here
-		m_ndcg = ndcg / count_q # mean ndcg for this user
-		mean_ndcg += m_ndcg # add up mean ndcg for all users
+        if ideal_dcg[0] > 0: # at least there should be one posi outfit for this user, or else somehting is wrong here
+            for i in range(count_q): # for each @m (m=1,...,M)
+                ndcg += dcg[i] / ideal_dcg[i] # add up all ndcg@m (m=1,..,M) for this user
+            for i in range(ndcg_size): # compute top 10 ndcg for all users
+                ndcg_ct[i] += 1 # record outfits num at each place, among top 10
+                ndcg_at[i] += dcg[i] / ideal_dcg[i] # add up ndcg value at each place, among top 10
+        else: # if we only have no posi outfit for this user
+            ndcg = 0 # ndcg is 0 for this user, because there is not point of ranking anymore for him/here
+        m_ndcg = ndcg / count_q # mean ndcg for this user
+        mean_ndcg += m_ndcg # add up mean ndcg for all users
 
-		if fn_out != '':
-			fid_out.write('%f\n' % m_ndcg)
-			n_out = min(count_q, nr_return)
-			for i in range(n_out):
-				fid_out.write('%d ' % label[order[i]])
-				for jj in range(tuples.shape[0]):
-					fid_out.write('%d ' % tuples[jj, order[i]])
-				fid_out.write('\n')
+        if fn_out != '':
+            fid_out.write('%f\n' % m_ndcg)
+            n_out = min(count_q, nr_return)
+            for i in range(n_out):
+                fid_out.write('%d ' % label[order[i]])
+                    for jj in range(tuples.shape[0]):
+                        fid_out.write('%d ' % tuples[jj, order[i]])
+                    fid_out.write('\n')
 
-	mean_ndcg /= nr_users # mean ndcg for all users as a whole
-	for i in range(ndcg_size): # top 10 mean ndcg for all users as a whole
-		ndcg_at[i] /= ndcg_ct[i]
+    mean_ndcg /= nr_users # mean ndcg for all users as a whole
+    for i in range(ndcg_size): # top 10 mean ndcg for all users as a whole
+        ndcg_at[i] /= ndcg_ct[i]
 
-	if fn_out != '':
-		fid_out.close()
+    if fn_out != '':
+        fid_out.close()
 
-	return (mean_ndcg, ndcg_at, ndcg_label, ndcg_imgIdx)
+    return (mean_ndcg, ndcg_at, ndcg_label, ndcg_imgIdx)
     
 #training solver.net
 recordDir = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user/training_script/results/'

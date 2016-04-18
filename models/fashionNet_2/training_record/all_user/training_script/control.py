@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import os
+
 # source control_k.py for modification
 s_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user/training_script/'
 
@@ -44,3 +46,5 @@ for u in range(0,user_num):
             temp = temp[0]
         k_fp.write(temp)
     k_fp.close()
+
+os.system('chmod +x control_*')
