@@ -228,7 +228,11 @@ test_tuple_num = open('/local2/home/tong/fashionRecommendation/models/fashionNet
 test_tuple_num = len(test_tuple_num)
 
 tr_avg_bat_accu_loss = open(recordDir_data+'train_avg_bat_accu_loss.txt','w')
-tr_bat_accu_loss = open(recordDir_data+'train_bat_accu_loss.txt','w')
+
+# user_number
+userN_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user/'
+all_train_size = open(userN_root+'data_size/all_train_size.txt').readlines()
+user_num = len(all_train_size)
 
 for i in range (start_iter,end_iter+1):
     # save train data (just for reference, not using threshold_fp=0.999)
@@ -240,8 +244,8 @@ for i in range (start_iter,end_iter+1):
     train_avg_loss = train_los/(i+1)
     tr_avg_bat_accu_loss.write(str(i)+' '+str(train_avg_accu)+' '+str(train_avg_loss)+' '+str(train_cur_accu)+' '+str(train_cur_loss)+'\r\n')
     if(i%visual_interval==0):
-        print("\n[U_^666^]Iters done:{}/{}, avg_accu={}, avg_loss={}.\n".format(i,end_iter,train_avg_accu,train_avg_loss))
-        print("                             bat_accu={}, bat_loss={}.\n".format(train_cur_accu,train_cur_loss))
+        print("\n[U_^666^/{}]Iters done:{}/{}, avg_accu={}, avg_loss={}.\n".format(user_num,i,end_iter,train_avg_accu,train_avg_loss))
+        print("                                bat_accu={}, bat_loss={}.\n".format(train_cur_accu,train_cur_loss))
 
     # validation, save caffemodel, and stop criteria
     if i in test_idx:
@@ -252,7 +256,7 @@ for i in range (start_iter,end_iter+1):
         nr_tuples_pos,nr_tuples_neg,\
         img_idx_pos,img_idx_neg \
         = test_avg(test_iter,img_idx,test_tuple_num)
-        print("\n[U_^666^]Iters done:{}/{}, VAL_accu={}, VAL_loss={}.\n".format(i,end_iter,test_accu,test_loss))
+        print("\n[U_^666^/{}]Iters done:{}/{}, VAL_accu={}, VAL_loss={}.\n".format(user_num,i,end_iter,test_accu,test_loss))
         # ndcg computation
         mean_ndcg,ndcg_at,\
         ndcg_label,ndcg_imgIdx\
@@ -269,9 +273,9 @@ for i in range (start_iter,end_iter+1):
         temp0 = str(ndcg_label[0])
         temp1 = str(ndcg_imgIdx[0])
         for n in range(1,len(ndcg_at)):
-            temp = ' '+str(ndcg_at[n])
-            temp0 = ' '+str(ndcg_label[n])
-            temp1 = ' '+str(ndcg_imgIdx[n])
+            temp += ' '+str(ndcg_at[n])
+            temp0 += ' '+str(ndcg_label[n])
+            temp1 += ' '+str(ndcg_imgIdx[n])
         ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp0+'\r\n') # ndcg_label (0 or 1)
         ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp+'\r\n') # ndcg_at
         ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp1+'\r\n') # ndcg_imgIdx
