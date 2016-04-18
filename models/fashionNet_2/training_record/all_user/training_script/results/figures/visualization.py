@@ -38,6 +38,6 @@ last_mean_ndcg /= count_l
 optimal_mean_ndcg /= count_o
 first_mean_ndcg /= count_f
 
-last_optimal_first_mean_ndcg = open(root+'training_script/figures/last_optimal_first_mean_ndcg.txt','w')
+last_optimal_first_mean_ndcg = open(root+'training_script/results/figures/last_optimal_first_mean_ndcg.txt','w')
 last_optimal_first_mean_ndcg.write(str(last_mean_ndcg)+' '+str(optimal_mean_ndcg)+' '+str(first_mean_ndcg))
 last_optimal_first_mean_ndcg.close
