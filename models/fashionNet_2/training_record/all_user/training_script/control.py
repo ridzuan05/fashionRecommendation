@@ -39,7 +39,7 @@ for u in range(0,user_num):
 	        		temp[1] = visual_interval[u].split('\r\n')
 	        	elif(temp[1]==str(888)):
 	        		temp[1] = test_iter[u].split('\r\n')
-	            temp = temp[0]+temp[1]+temp[2]	        
+	                temp = temp[0]+temp[1]+temp[2]	        
 	        else:
 	            temp = temp[0]
 	        k_fp.write(temp)
