@@ -158,9 +158,9 @@ def get_ndcg(scores_pos, scores_neg, nr_tuples_pos, nr_tuples_neg,\
             n_out = min(count_q, nr_return)
             for i in range(n_out):
                 fid_out.write('%d ' % label[order[i]])
-                    for jj in range(tuples.shape[0]):
-                        fid_out.write('%d ' % tuples[jj, order[i]])
-                    fid_out.write('\n')
+                for jj in range(tuples.shape[0]):
+                    fid_out.write('%d ' % tuples[jj, order[i]])
+                fid_out.write('\n')
 
     mean_ndcg /= nr_users # mean ndcg for all users as a whole
     for i in range(ndcg_size): # top 10 mean ndcg for all users as a whole
