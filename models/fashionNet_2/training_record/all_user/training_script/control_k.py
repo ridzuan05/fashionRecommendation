@@ -195,10 +195,15 @@ test_interval = ^777^ # 1/5 train epoch
 visual_interval = ^999^ # each train iter
 test_iter = ^888^ # 1 test epoch
 test_idx = []
-caffemodel_num = 6
-for i in range(0,caffemodel_num):
+test_num = 6
+for i in range(0,test_num):
     temp = end_iter-i*test_interval
     test_idx.append(temp)
+caffemodel_idx = []
+caffemodel_num = 1
+for i in range(0,caffemodel_num):
+    temp = end_iter-i*test_interval
+    caffemodel_idx.append(temp)
 
 params = net.params.keys()
 
@@ -281,12 +286,13 @@ for i in range (start_iter,end_iter+1):
         ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp1+'\r\n') # ndcg_imgIdx
         
         # save caffemodel
-        source_params = {pr: (solver.net.params[pr][0].data,solver.net.params[pr][1].data) for pr in params}
-        target_params = {pr: (net.params[pr][0].data,net.params[pr][1].data) for pr in params}
-        for pr in params:
-            target_params[pr][0][...] = source_params[pr][0] #weights
-            target_params[pr][1][...] = source_params[pr][1] #bias
-        net.save(recordDir_data+'fashion_params_2_'+str(i)+'.caffemodel') 
+        if i in caffemodel_idx:
+            source_params = {pr: (solver.net.params[pr][0].data,solver.net.params[pr][1].data) for pr in params}
+            target_params = {pr: (net.params[pr][0].data,net.params[pr][1].data) for pr in params}
+            for pr in params:
+                target_params[pr][0][...] = source_params[pr][0] #weights
+                target_params[pr][1][...] = source_params[pr][1] #bias
+            net.save(recordDir_data+'fashion_params_2_'+str(i)+'.caffemodel') 
         
         # stop criteria
         if test_accu > 0.93:
