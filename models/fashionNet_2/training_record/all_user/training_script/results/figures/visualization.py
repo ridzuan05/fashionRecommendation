@@ -14,7 +14,7 @@ count_f = 0
 
 for u in range(0,user_num):
 	# read ndcg_mean_label_at_imgIdx.txt
-	ndcg = open(root+'training_script/results/data/t2.2.'+str(u)+'/ndcg_mean_label_at_imgIdx.txt').readlines
+	ndcg = open(root+'training_script/results/data/t2.2.'+str(u)+'/ndcg_mean_label_at_imgIdx.txt').readlines()
 	# last mean_ndcg
 	temp_l = float(ndcg[-4].strip('\r\n').split(' ')[1])
 	last_mean_ndcg += temp_l
