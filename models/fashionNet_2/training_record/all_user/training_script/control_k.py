@@ -299,14 +299,14 @@ for i in range (start_iter,end_iter+1):
         ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp1+'\r\n') # ndcg_imgIdx
         
         # save caffemodel
-        # source_params = {pr: (solver.net.params[pr][0].data,solver.net.params[pr][1].data) for pr in params}
-        # optimal_caffemodel.append(source_params)
+        source_params = {pr: (copy.copy(solver.net.params[pr][0].data),copy.copy(solver.net.params[pr][1].data)) for pr in params}
+        optimal_caffemodel.append(source_params)
 
-        for pr in params:
-            buffer_0 = copy.copy(solver.net.params[pr][0].data)
-            buffer_1 = copy.copy(solver.net.params[pr][1].data)
-            source_params = {pr: (buffer_0,buffer_1)}
-            optimal_caffemodel.append(source_params)
+        # for pr in params:
+        #     buffer_0 = copy.copy(solver.net.params[pr][0].data)
+        #     buffer_1 = copy.copy(solver.net.params[pr][1].data)
+        #     source_params = {pr: (buffer_0,buffer_1)}
+        #     optimal_caffemodel.append(source_params)
 
         # target_params = {pr: (net.params[pr][0].data,net.params[pr][1].data) for pr in params}
         # for pr in params:
