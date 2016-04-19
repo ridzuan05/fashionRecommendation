@@ -34,8 +34,10 @@ for u in range(0,user_num):
 	temp_l = float(ndcg[-4].strip('\r\n').split(' ')[1])
 	last_mean_ndcg += temp_l
 	count_l += 1.0
-	# optimal mean_ndcg
+	# optimal mean_ndcg, including initial caffemodel (namely, the general caffemodel)
 	mean_ndcg_list = []
+	if (len(ndcg)==28):
+		mean_ndcg_list.append(float(ndcg[0].strip('\r\n').split(' ')[1]))
 	for l in range(1,7):
 		mean_ndcg_list.append(float(ndcg[-4*l].strip('\r\n').split(' ')[1]))
 	optimal_idx, temp_o = max(enumerate(mean_ndcg_list), key=operator.itemgetter(1))
@@ -53,7 +55,7 @@ for u in range(0,user_num):
 		last_ndcg_at[n] += float(ndcg[-2].strip('\r\n').split(' ')[n+1])
 		count_last_ndcg_at[n] += 1.0
 	# optimal ndcg_at@(1~100)
-	optimal_idx += 1
+	# optimal_idx += 1
 	optimal_idx *= -4
 	optimal_idx += 2
 	o_ndcg_size = len(ndcg[optimal_idx].strip('\r\n').split(' '))-1
