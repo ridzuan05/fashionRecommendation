@@ -101,8 +101,7 @@ def get_ndcg(scores_pos, scores_neg, nr_tuples_pos, nr_tuples_neg,\
         fid_out = open(fn_out, 'w')
 
     m = 100 # pre-determined ndcg size
-    ndcg_ct = np.zeros(m)
-    ndcg_at = np.zeros(m)
+
     mean_ndcg = 0
     s_ind_pos = 0 # update posi outfit index for each user
     s_ind_neg = 0 # update neutral outfit index for each user
@@ -111,6 +110,10 @@ def get_ndcg(scores_pos, scores_neg, nr_tuples_pos, nr_tuples_neg,\
     ndcg_label = []
     ndcg_imgIdx = []
     
+    single_ndcg_size = min(m, (nr_tuples_pos[0] + nr_tuples_neg[0]))
+    ndcg_ct = np.zeros(single_ndcg_size)
+    ndcg_at = np.zeros(single_ndcg_size)
+
     for ui in range(nr_users): # for each user
         count_q = nr_tuples_pos[ui] + nr_tuples_neg[ui] # total outfits (both posi & neutral) number of this user
         label = np.zeros(nr_tuples_pos[ui]+nr_tuples_neg[ui]) # labels for all outfits of this user, 1 for posi & 0 for neutral
