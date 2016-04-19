@@ -301,19 +301,7 @@ for i in range (start_iter,end_iter+1):
         # save caffemodel
         source_params = {pr: (copy.copy(solver.net.params[pr][0].data),copy.copy(solver.net.params[pr][1].data)) for pr in params}
         optimal_caffemodel.append(source_params)
-
-        # for pr in params:
-        #     buffer_0 = copy.copy(solver.net.params[pr][0].data)
-        #     buffer_1 = copy.copy(solver.net.params[pr][1].data)
-        #     source_params = {pr: (buffer_0,buffer_1)}
-        #     optimal_caffemodel.append(source_params)
-
-        # target_params = {pr: (net.params[pr][0].data,net.params[pr][1].data) for pr in params}
-        # for pr in params:
-        #     target_params[pr][0][...] = source_params[pr][0] #weights
-        #     target_params[pr][1][...] = source_params[pr][1] #bias
-        #     net.save(recordDir_data+'fashion_params_2_'+str(i)+'.caffemodel')          
-
+        
         # # save caffemodel
         # if i in caffemodel_idx:
         #     source_params = {pr: (solver.net.params[pr][0].data,solver.net.params[pr][1].data) for pr in params}

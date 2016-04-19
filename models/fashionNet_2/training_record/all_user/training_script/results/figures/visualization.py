@@ -38,6 +38,8 @@ for u in range(0,user_num):
 	mean_ndcg_list = []
 	if (len(ndcg)==28):
 		mean_ndcg_list.append(float(ndcg[0].strip('\r\n').split(' ')[1]))
+	else:
+		mean_ndcg_list.append(0.0)
 	for l in range(1,7):
 		mean_ndcg_list.append(float(ndcg[-4*l].strip('\r\n').split(' ')[1]))
 	optimal_idx, temp_o = max(enumerate(mean_ndcg_list), key=operator.itemgetter(1))
