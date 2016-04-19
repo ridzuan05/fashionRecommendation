@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 # training_script for all users (0~988)
+
+import operator
+
 #import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('Agg') # Must be before importing matplotlib.pyplot or pylab!
@@ -201,13 +204,13 @@ test_idx = []
 test_idx.append(0)
 test_num = 6
 for i in range(0,test_num):
-    temp = end_iter-i*test_interval
+    temp = end_iter-(test_num-1-i)*test_interval
     test_idx.append(temp)
-caffemodel_idx = []
-caffemodel_num = 1
-for i in range(0,caffemodel_num):
-    temp = end_iter-i*test_interval
-    caffemodel_idx.append(temp)
+# caffemodel_idx = []
+# caffemodel_num = 1
+# for i in range(0,caffemodel_num):
+#     temp = end_iter-i*test_interval
+#     caffemodel_idx.append(temp)
 
 params = net.params.keys()
 
@@ -243,6 +246,10 @@ userN_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/traini
 all_train_size = open(userN_root+'data_size/all_train_size.txt').readlines()
 user_num = len(all_train_size)
 
+# for saving caffemodel for optimal mean_ndcg
+optimal_mean_ndcg = []
+optimal_caffemodel = []
+
 for i in range (start_iter,end_iter+1):
     # save train data (just for reference, not using threshold_fp=0.999)
     train_cur_accu = solver.net.blobs['accuracy'].data
@@ -277,6 +284,7 @@ for i in range (start_iter,end_iter+1):
         # confusion matrix (d2d,d2l,l2d,l2l)
         conf_mat_f.write(str(i)+' '+str(cMat[0][0])+' '+str(cMat[0][1])+' '+str(cMat[1][0])+' '+str(cMat[1][1])+'\r\n')
         # record mean_ndcg & ndcg_label & ndcg_at & ndcg_imgIdx
+        optimal_mean_ndcg.append(mean_ndcg)
         ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+str(mean_ndcg)+'\r\n') # mean_ndcg 
         temp = str(ndcg_at[0])
         temp0 = str(ndcg_label[0])
@@ -290,13 +298,22 @@ for i in range (start_iter,end_iter+1):
         ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp1+'\r\n') # ndcg_imgIdx
         
         # save caffemodel
-        if i in caffemodel_idx:
-            source_params = {pr: (solver.net.params[pr][0].data,solver.net.params[pr][1].data) for pr in params}
-            target_params = {pr: (net.params[pr][0].data,net.params[pr][1].data) for pr in params}
-            for pr in params:
-                target_params[pr][0][...] = source_params[pr][0] #weights
-                target_params[pr][1][...] = source_params[pr][1] #bias
-            net.save(recordDir_data+'fashion_params_2_'+str(i)+'.caffemodel') 
+        source_params = {pr: (solver.net.params[pr][0].data,solver.net.params[pr][1].data) for pr in params}
+        optimal_caffemodel.append(source_params)
+        # target_params = {pr: (net.params[pr][0].data,net.params[pr][1].data) for pr in params}
+        # for pr in params:
+        #     target_params[pr][0][...] = source_params[pr][0] #weights
+        #     target_params[pr][1][...] = source_params[pr][1] #bias
+        #     net.save(recordDir_data+'fashion_params_2_'+str(i)+'.caffemodel')          
+
+        # # save caffemodel
+        # if i in caffemodel_idx:
+        #     source_params = {pr: (solver.net.params[pr][0].data,solver.net.params[pr][1].data) for pr in params}
+        #     target_params = {pr: (net.params[pr][0].data,net.params[pr][1].data) for pr in params}
+        #     for pr in params:
+        #         target_params[pr][0][...] = source_params[pr][0] #weights
+        #         target_params[pr][1][...] = source_params[pr][1] #bias
+        #     net.save(recordDir_data+'fashion_params_2_'+str(i)+'.caffemodel') 
         
         # stop criteria
         if test_accu > 0.93:
@@ -307,6 +324,14 @@ for i in range (start_iter,end_iter+1):
 
     # update parameters
     solver.step(1)
+
+# save caffemodel for optimal mean_ndcg of this user
+optimal_idx, max_mean_ndcg = max(enumerate(optimal_mean_ndcg), key=operator.itemgetter(1))
+target_params = {pr: (net.params[pr][0].data,net.params[pr][1].data) for pr in params}
+for pr in params:
+    target_params[pr][0][...] = optimal_caffemodel[optimal_idx][pr][0] #weights
+    target_params[pr][1][...] = optimal_caffemodel[optimal_idx][pr][1] #bias
+    net.save(recordDir_data+'fashion_params_2_'+str(test_idx[optimal_idx])+'.caffemodel') 
 
 # ndcg_mean_label_at_imgIdx.txt
 ndcg_mean_label_at_imgIdx_f.close()
