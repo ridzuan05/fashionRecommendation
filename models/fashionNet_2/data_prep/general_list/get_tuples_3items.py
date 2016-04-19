@@ -141,7 +141,7 @@ def get_all_tuples(all_sets, unique_images, minimum_sets_num):
         all_tuples.append(tuples) #store final idx of (top_image, bot_image, sho_image) of each valid set wrt all users
         all_setids.append(setids) #store idx of each valid set wrt all users
 
-    train_val_test_devision = list([0.00,0.80,0.81,1.00])
+    train_val_test_devision = list([0.00,0.80,0.90,1.00])
  
 #tuple indexes for training
 #    tpl_inds_train = [np.arange(0, 60), np.arange(30, 90),
