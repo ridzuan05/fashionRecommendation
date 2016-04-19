@@ -298,18 +298,18 @@ for i in range (start_iter,end_iter+1):
         ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp+'\r\n') # ndcg_at
         ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp1+'\r\n') # ndcg_imgIdx
         
-        # save caffemodel
-        source_params = {pr: (copy.copy(solver.net.params[pr][0].data),copy.copy(solver.net.params[pr][1].data)) for pr in params}
-        optimal_caffemodel.append(source_params)
-        
         # # save caffemodel
+        # source_params = {pr: (copy.copy(solver.net.params[pr][0].data),copy.copy(solver.net.params[pr][1].data)) for pr in params}
+        # optimal_caffemodel.append(source_params)
+        
+        # save caffemodel
         # if i in caffemodel_idx:
-        #     source_params = {pr: (solver.net.params[pr][0].data,solver.net.params[pr][1].data) for pr in params}
-        #     target_params = {pr: (net.params[pr][0].data,net.params[pr][1].data) for pr in params}
-        #     for pr in params:
-        #         target_params[pr][0][...] = source_params[pr][0] #weights
-        #         target_params[pr][1][...] = source_params[pr][1] #bias
-        #     net.save(recordDir_data+'fashion_params_2_'+str(i)+'.caffemodel') 
+        source_params = {pr: (solver.net.params[pr][0].data,solver.net.params[pr][1].data) for pr in params}
+        target_params = {pr: (net.params[pr][0].data,net.params[pr][1].data) for pr in params}
+        for pr in params:
+            target_params[pr][0][...] = source_params[pr][0] #weights
+            target_params[pr][1][...] = source_params[pr][1] #bias
+        net.save(recordDir_data+'fashion_params_2_'+str(i)+'.caffemodel') 
         
         # stop criteria
         if test_accu > 0.93:
@@ -323,11 +323,14 @@ for i in range (start_iter,end_iter+1):
 
 # save caffemodel for optimal mean_ndcg of this user
 optimal_idx, max_mean_ndcg = max(enumerate(optimal_mean_ndcg), key=operator.itemgetter(1))
-target_params = {pr: (net.params[pr][0].data,net.params[pr][1].data) for pr in params}
-for pr in params:
-    target_params[pr][0][...] = optimal_caffemodel[optimal_idx][pr][0] #weights
-    target_params[pr][1][...] = optimal_caffemodel[optimal_idx][pr][1] #bias
-    net.save(recordDir_data+'fashion_params_2_'+str(test_idx[optimal_idx])+'.caffemodel') 
+# target_params = {pr: (net.params[pr][0].data,net.params[pr][1].data) for pr in params}
+# for pr in params:
+#     target_params[pr][0][...] = optimal_caffemodel[optimal_idx][pr][0] #weights
+#     target_params[pr][1][...] = optimal_caffemodel[optimal_idx][pr][1] #bias
+#     net.save(recordDir_data+'fashion_params_2_'+str(test_idx[optimal_idx])+'.caffemodel') 
+for i in range(0,len(test_idx)):
+    if (optimal_idx != i):
+        os.system('rm '+recordDir_data+'fashion_params_2_'+str(test_idx[i])+'.caffemodel')
 
 # ndcg_mean_label_at_imgIdx.txt
 ndcg_mean_label_at_imgIdx_f.close()
