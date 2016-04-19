@@ -35,6 +35,7 @@ for u in range(0,user_num):
 	last_mean_ndcg += temp_l
 	count_l += 1.0
 	# optimal mean_ndcg
+	mean_ndcg_list = []
 	for l in range(1,7):
 		mean_ndcg_list.append(float(ndcg[-4*l].strip('\r\n').split(' ')[1]))
 	optimal_idx, temp_o = max(enumerate(mean_ndcg_list), key=operator.itemgetter(1))
@@ -48,22 +49,22 @@ for u in range(0,user_num):
 
 	# last ndcg_at@(1~100)
 	ndcg_size = len(ndcg[-2].strip('\r\n').split(' '))-1
-	for n in range(0+1,ndcg_size+1):
-		last_ndcg_at[n] += float(ndcg[-2].strip('\r\n').split(' ')[n])
+	for n in range(0,ndcg_size):
+		last_ndcg_at[n] += float(ndcg[-2].strip('\r\n').split(' ')[n+1])
 		count_last_ndcg_at[n] += 1.0
 	# optimal ndcg_at@(1~100)
 	optimal_idx += 1
 	optimal_idx *= -4
 	optimal_idx += 2
 	o_ndcg_size = len(ndcg[optimal_idx].strip('\r\n').split(' '))-1
-	for n in range(0+1,o_ndcg_size+1):
-		optimal_ndcg_at += float(ndcg[optimal_idx].strip('\r\n').split(' ')[n])
-		count_optimal_ndcg_at += 1.0
+	for n in range(0,o_ndcg_size):
+		optimal_ndcg_at[n] += float(ndcg[optimal_idx].strip('\r\n').split(' ')[n+1])
+		count_optimal_ndcg_at[n] += 1.0
 	# first ndcg_at@(1~100)
 	if (len(ndcg)==28):
 		f_ndcg_size = len(ndcg[2].strip('\r\n').split(' '))-1
-		for n in range(0+1,f_ndcg_size+1):
-			first_ndcg_at[n] += float(ndcg[2].strip('\r\n').split(' ')[n])
+		for n in range(0,f_ndcg_size):
+			first_ndcg_at[n] += float(ndcg[2].strip('\r\n').split(' ')[n+1])
 			count_first_ndcg_at[n] += 1.0
 
 last_mean_ndcg /= count_l
