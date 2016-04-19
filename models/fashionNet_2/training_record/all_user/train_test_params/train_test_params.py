@@ -36,6 +36,8 @@ for u in range(0,user_num):
 	test_iter.write(test_iter_temp)
 	# set test_interval
 	temp = int(np.floor(np.ceil(float(all_train_size[u].strip('\r\n').split(' ')[1])/float(train_batch_size))/5.0))
+	if (temp==0):
+		temp = 1
 	test_interval_temp = user_idx+str(temp)+'\r\n'
 	test_interval.write(test_interval_temp)
 	# set visual_interval
