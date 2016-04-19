@@ -27,7 +27,7 @@ for i in range(0,989):
 	for k in range(0,len(tuples_val_posi)):
 		if (i==int(tuples_val_posi[k].strip('\r\n').split(' ')[0])):
 			test_val_posi.append(tuples_val_posi[k])
-	half_length = np.floor(float(len(test_val_posi))/2.0)
+	half_length = int(float(len(test_val_posi))/2.0)
 	for m in range(0,half_length):
 		tuples_test_posi_fp.write(test_val_posi[m])
 	for n in range(half_length,len(test_val_posi)):
@@ -40,7 +40,7 @@ for i in range(0,989):
 	for k in range(0,len(tuples_val_neg)):
 		if (i==int(tuples_val_neg[k].strip('\r\n').split(' ')[0])):
 			test_val_neg.append(tuples_val_neg[k])
-	half_length = np.floor(float(len(test_val_neg))/2.0)
+	half_length = int(float(len(test_val_neg))/2.0)
 	for m in range(0,half_length):
 		tuples_test_neg_fp.write(test_val_neg[m])
 	for n in range(half_length,len(test_val_neg)):
