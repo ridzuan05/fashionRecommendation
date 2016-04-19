@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 g_root = "/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/"
 
 data_type = ['train_', 'val_', 'test_']
