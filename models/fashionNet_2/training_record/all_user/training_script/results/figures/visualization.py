@@ -161,7 +161,7 @@ for n in range(max_top_10_pos_num,min_top_10_pos_num-1,-1):
 				top_paths = open(path_root+str(single_max_index)+'_top.txt').readlines()
 				bot_paths = open(path_root+str(single_max_index)+'_bot.txt').readlines()
 				sho_paths = open(path_root+str(single_max_index)+'_sho.txt').readlines()
-				single_ndcg_imgIdx = whole_ndcg_imgIdx[single_max_index].strip('\r\n').split(' ')[1:10]
+				single_ndcg_imgIdx = whole_ndcg_imgIdx[single_max_index].strip('\r\n').split(' ')[1:11]
 				blank_image = Image.new("RGB", (224*10, 224*3))
 				for p in range(0,10):
 					temp_imgIdx = int(float(single_ndcg_imgIdx[p]))
@@ -216,7 +216,7 @@ for n in range(min_top_10_pos_num,max_top_10_pos_num+1):
 				top_paths = open(path_root+str(single_min_index)+'_top.txt').readlines()
 				bot_paths = open(path_root+str(single_min_index)+'_bot.txt').readlines()
 				sho_paths = open(path_root+str(single_min_index)+'_sho.txt').readlines()
-				single_ndcg_imgIdx = whole_ndcg_imgIdx[single_min_index].strip('\r\n').split(' ')[1:10]
+				single_ndcg_imgIdx = whole_ndcg_imgIdx[single_min_index].strip('\r\n').split(' ')[1:11]
 				blank_image = Image.new("RGB", (224*10, 224*3))
 				for p in range(0,10):
 					temp_imgIdx = int(float(single_ndcg_imgIdx[p]))
