@@ -130,7 +130,7 @@ for u in range(0,user_num):
 	# top-10 positive tuple number
 	top_10_pos_num = 0
 	for t in range(0,10):
-		if (1==int(whole_ndcg_label[-1].strip('\r\n').split(' ')[t+1])):
+		if (1==int(float(whole_ndcg_label[-1].strip('\r\n').split(' ')[t+1]))):
 			top_10_pos_num += 1
 
 	# whole_top_10_pos_num
@@ -164,7 +164,7 @@ for n in range(max_top_10_pos_num,min_top_10_pos_num-1,-1):
 				single_ndcg_imgIdx = whole_ndcg_imgIdx[single_max_index].strip('\r\n').split(' ')[1:10]
 				blank_image = Image.new("RGB", (224*10, 224*3))
 				for p in range(0,10):
-					temp_imgIdx = int(single_ndcg_imgIdx[p])
+					temp_imgIdx = int(float(single_ndcg_imgIdx[p]))
 
 					# read & save ./charts/best/U_k(best_u_count)/top_k(p).png
 					top_path = top_paths[temp_imgIdx].strip('\r\n').split(' ')[0]
@@ -219,7 +219,7 @@ for n in range(min_top_10_pos_num,max_top_10_pos_num+1):
 				single_ndcg_imgIdx = whole_ndcg_imgIdx[single_min_index].strip('\r\n').split(' ')[1:10]
 				blank_image = Image.new("RGB", (224*10, 224*3))
 				for p in range(0,10):
-					temp_imgIdx = int(single_ndcg_imgIdx[p])
+					temp_imgIdx = int(float(single_ndcg_imgIdx[p]))
 
 					# read & save ./charts/best/U_k(best_u_count)/top_k(p).png
 					top_path = top_paths[temp_imgIdx].strip('\r\n').split(' ')[0]
