@@ -12,7 +12,7 @@ user_num = 1+int(for_length[-1].strip('\r\n').split(' ')[0])
 for i in range(0,len(data_type)):
 	all_user_tupleSize = open(size_root+'data_size/all_'+data_type[i]+'_size.txt','w') # open all_train/val/test_size.txt
 	for u in range(0,user_num):
-		temp_data = open(l_root+"imgdata_list/"+data_type[i]+str(u)+'_top.txt','w').readlines()
+		temp_data = open(l_root+"imgdata_list/"+data_type[i]+str(u)+'_top.txt').readlines()
 		temp_size = len(temp_data)
 		all_user_tupleSize.write(str(temp_size)+'\r\n')
 	all_user_tupleSize.close()
