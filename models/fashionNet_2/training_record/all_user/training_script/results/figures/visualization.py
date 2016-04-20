@@ -123,9 +123,9 @@ for u in range(0,user_num):
 	optimal_idx += 2
 
 	# whole_ndcg_label
-	whole_ndcg_label.append(ndcg[optimal-1])
+	whole_ndcg_label.append(ndcg[optimal_idx-1])
 	# whole_ndcg_imgIdx
-	whole_ndcg_imgIdx.append(ndcg[optimal+1])
+	whole_ndcg_imgIdx.append(ndcg[optimal_idx+1])
 
 	# top-10 positive tuple number
 	top_10_pos_num = 0
