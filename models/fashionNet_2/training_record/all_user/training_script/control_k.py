@@ -84,6 +84,13 @@ def test_avg(test_iter, img_idx, test_tuple_num):
             # record test_top/bot/sho's img_idx
             img_idx += 1
             img_idx %= test_tuple_num
+            # stop when test_dataset has all been tested
+            if (img_idx==0):
+                if (i != (test_iter-1)):
+                    # ERROR
+                    while(1):
+                        print("ERROR@U_^666^, i != (test_iter-1)!!!, ({},{})".format(i,test_iter))
+                break
 
     avg_accu = float(float(avg_accu) / float(len(y_true)))
     avg_loss = float(float(avg_loss) / float(len(y_true)))

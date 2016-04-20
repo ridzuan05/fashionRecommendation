@@ -19,7 +19,7 @@ all_val_size = open(size_root+'data_size/all_val_size.txt').readlines()
 # train bathc size
 train_batch_size = 80
 # test batch size
-test_batch_size = 1
+test_batch_size = 50
 
 # user number
 user_num = len(all_train_size)
@@ -30,7 +30,7 @@ for u in range(0,user_num):
 	recordDir_temp = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/t2.2.'+str(u)+'/'+'\r\n'
 	recordDir.write(recordDir_temp)
 	# set test_iter
-	temp = int(float(all_val_size[u].strip('\r\n').split(' ')[0])/float(test_batch_size))
+	temp = int(np.ceil(float(all_val_size[u].strip('\r\n').split(' ')[0])/float(test_batch_size)))
 	test_iter_temp = str(temp)+'\r\n'
 	test_iter.write(test_iter_temp)
 	# set test_interval
