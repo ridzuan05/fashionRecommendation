@@ -69,7 +69,7 @@ layer{
   }
   image_data_param{
     source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/val_!666!_top.txt"
-    batch_size:50
+    batch_size:1
     #backend:LMDB
   }
 }
@@ -86,7 +86,7 @@ layer{
   }
   image_data_param{
     source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/val_!666!_bot.txt"
-    batch_size:50
+    batch_size:1
     #backend:LMDB
   }
 }
@@ -103,7 +103,7 @@ layer{
   }
   image_data_param{
     source:"/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/val_!666!_sho.txt"
-    batch_size:50
+    batch_size:1
     #backend:LMDB
   }
 }
