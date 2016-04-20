@@ -151,7 +151,7 @@ for n in range(max_top_10_pos_num,min_top_10_pos_num-1,-1):
 		single_max_index = max_index[j]
 		single_ndcg_label = whole_ndcg_label[single_max_index].strip('\r\n').split(' ')
 		for k in range(0,5):
-			if (0 == int(single_ndcg_label[k+1])):
+			if (0 == int(float(single_ndcg_label[k+1]))):
 				break
 			# top-5 are all positive tuples
 			if (k == 4):
@@ -206,7 +206,7 @@ for n in range(min_top_10_pos_num,max_top_10_pos_num+1):
 		single_min_index = min_index[j]
 		single_ndcg_label = whole_ndcg_label[single_min_index].strip('\r\n').split(' ')
 		for k in range(0,5):
-			if (0 == int(single_ndcg_label[k+1])):
+			if (0 == int(float(single_ndcg_label[k+1]))):
 				break
 			# top-5 are all positive tuples
 			if (k == 4):
@@ -250,4 +250,4 @@ for n in range(min_top_10_pos_num,max_top_10_pos_num+1):
 
 		if (worst_u_count == 4):
 			n = max_top_10_pos_num
-			break
+			break	
