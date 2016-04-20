@@ -145,6 +145,7 @@ path_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_pr
 # retrieve best top_10 outfits for 4 users
 best_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user/training_script/results/figures/charts/best/'
 best_u_count = 0
+flag_n = 0
 for n in range(max_top_10_pos_num,min_top_10_pos_num-1,-1):
 	max_index = [i for i, x in enumerate(whole_top_10_pos_num) if x == n]
 	for j in range(0,len(max_index)):
@@ -194,13 +195,15 @@ for n in range(max_top_10_pos_num,min_top_10_pos_num-1,-1):
 				best_u_count += 1
 
 		if (best_u_count == 4):
-			n = min_top_10_pos_num
-			j = len(max_index)-1
+			flag_n = 1
 			break
+	if (flag_n == 1):
+		break
 
 # retrieve worst top_10 outfits for 4 users
 worst_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user/training_script/results/figures/charts/worst/'
 worst_u_count = 0
+flag_n = 0
 for n in range(min_top_10_pos_num,max_top_10_pos_num+1):
 	min_index = [i for i, x in enumerate(whole_top_10_pos_num) if x == n]
 	for j in range(0,len(min_index)):
@@ -250,6 +253,7 @@ for n in range(min_top_10_pos_num,max_top_10_pos_num+1):
 				worst_u_count += 1
 
 		if (worst_u_count == 4):
-			n = max_top_10_pos_num
-			j = len(min_index)-1
+			flag_n = 1
 			break	
+	if (flag_n == 1):
+		break
