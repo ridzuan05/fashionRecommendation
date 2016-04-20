@@ -195,6 +195,7 @@ for n in range(max_top_10_pos_num,min_top_10_pos_num-1,-1):
 
 		if (best_u_count == 4):
 			n = min_top_10_pos_num
+			j = len(max_index)-1
 			break
 
 # retrieve worst top_10 outfits for 4 users
@@ -250,4 +251,5 @@ for n in range(min_top_10_pos_num,max_top_10_pos_num+1):
 
 		if (worst_u_count == 4):
 			n = max_top_10_pos_num
+			j = len(min_index)-1
 			break	
