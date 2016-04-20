@@ -138,6 +138,7 @@ for u in range(0,user_num):
 
 max_top_10_pos_num = max(whole_top_10_pos_num)
 min_top_10_pos_num = min(whole_top_10_pos_num)
+print("max_top_10_pos_num = {}, min_top_10_pos_num = {}".format(max_top_10_pos_num,min_top_10_pos_num))
 
 path_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/val_'
 # !666!_top.txt
@@ -156,6 +157,7 @@ for n in range(max_top_10_pos_num,min_top_10_pos_num-1,-1):
 				break
 			# top-5 are all positive tuples
 			if (k == 4):
+				print("Best_{}: top_10_pos_num = {}".format(best_u_count, n))
 				U_k = 'U_'+str(single_max_index)
 				if U_k not in os.listdir(best_root):
 				    os.system('mkdir '+best_root+U_k)
@@ -214,6 +216,7 @@ for n in range(min_top_10_pos_num,max_top_10_pos_num+1):
 				break
 			# top-5 are all positive tuples
 			if (k == 4):
+				print("Worst_{}: top_10_pos_num = {}".format(worst_u_count, n))
 				U_k = 'U_'+str(single_min_index)
 				if U_k not in os.listdir(worst_root):
 				    os.system('mkdir '+worst_root+U_k)
@@ -248,7 +251,7 @@ for n in range(min_top_10_pos_num,max_top_10_pos_num+1):
 
 				# write ./charts/best/U_k(best_u_count)/labels_10.txt
 				single_ndcg_label_fp = open(worst_root+U_k+'/labels_10.txt','w')
-				single_ndcg_label_fp.write(whole_ndcg_label[single_max_index])
+				single_ndcg_label_fp.write(whole_ndcg_label[single_min_index])
 				single_ndcg_label_fp.close()
 				worst_u_count += 1
 
