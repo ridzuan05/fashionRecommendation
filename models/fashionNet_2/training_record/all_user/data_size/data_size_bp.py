@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-data_type = ['train_', 'val_', 'test_']
+data_type = ['train', 'val', 'test']
 
 l_root = "/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/"
 g_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/general_list/'
