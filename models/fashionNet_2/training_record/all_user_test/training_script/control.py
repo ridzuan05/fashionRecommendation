@@ -254,7 +254,7 @@ for i in range (0,2):
     		   img_idx_pos,img_idx_neg)
 
     if (i==0):
-        print("\n[U_^666^/{}]Iters done: Initial/{}, VAL_accu={}, VAL_loss={}.\n".format(user_num,end_iter,test_accu,test_loss))
+        print("\n[U_^666^/{}]Iters done: Initial.caffemodel, VAL_accu={}, VAL_loss={}.\n".format(user_num,test_accu,test_loss))
         # softmax test accu/loss
         softmax_test_accu_loss_f.write(str(i)+' '+str(test_accu)+' '+str(test_loss)+'\r\n')
         # confusion matrix (d2d,d2l,l2d,l2l)
@@ -272,7 +272,7 @@ for i in range (0,2):
         ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp+'\r\n') # ndcg_at
         ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp1+'\r\n') # ndcg_imgIdx
     elif (i==0):
-        print("\n[U_^666^/{}]Iters done: Optimal/{}, VAL_accu={}, VAL_loss={}.\n".format(user_num,end_iter,test_accu,test_loss))
+        print("\n[U_^666^/{}]Iters done: Optimal.caffemodel, VAL_accu={}, VAL_loss={}.\n".format(user_num,test_accu,test_loss))
         # softmax test accu/loss
         softmax_test_accu_loss_f.write(optimal_idx+' '+str(test_accu)+' '+str(test_loss)+'\r\n')
         # confusion matrix (d2d,d2l,l2d,l2l)
