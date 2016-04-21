@@ -6,7 +6,7 @@ import os
 s_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user_test/training_script/'
 
 # open source control_k.py
-s_fp = open(s_root+'control_k.py').readlines()
+s_fp = open(s_root+'control.py').readlines()
 
 # user_number
 size_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user_test/'
