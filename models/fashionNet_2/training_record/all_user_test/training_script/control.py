@@ -235,8 +235,8 @@ for i in range (0,2):
         solver.test_nets[0].copy_from('/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/t2.1/fashion_params_2_124200.caffemodel')
     elif (i==1):
         # load finetuned caffemodel
-        solver.net.copy_from('/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user_test/training_script/results/data/t2.2.^666^/fashion_params_2_'+optimal_idx+'.caffemodel')
-        solver.test_nets[0].copy_from('/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user_test/training_script/results/data/t2.2.^666^/fashion_params_2_'+optimal_idx+'.caffemodel')
+        solver.net.copy_from('/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user/training_script/results/data/t2.2.^666^/fashion_params_2_'+optimal_idx+'.caffemodel')
+        solver.test_nets[0].copy_from('/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user/training_script/results/data/t2.2.^666^/fashion_params_2_'+optimal_idx+'.caffemodel')
 
     # validation
     test_accu,test_loss,\
