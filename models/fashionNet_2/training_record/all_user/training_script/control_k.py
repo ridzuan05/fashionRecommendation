@@ -244,7 +244,7 @@ softmax_test_accu_loss_f = open(recordDir_data+'softmax_test_accu_loss.txt','w')
 conf_mat_f = open(recordDir_data+'conf_mat.txt','w')
 
 # test_tuple_num
-test_tuple_num = open('/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/test_^666^_top.txt').readlines()
+test_tuple_num = open('/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/imgdata_list/val_^666^_top.txt').readlines()
 test_tuple_num = len(test_tuple_num)
 
 tr_avg_bat_accu_loss = open(recordDir_data+'train_avg_bat_accu_loss.txt','w')
