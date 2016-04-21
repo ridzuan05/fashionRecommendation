@@ -3,7 +3,7 @@
 import numpy as np
 
 # .txt saved for parametes
-param_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user_rank_ft/train_test_params/'
+param_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user_test/train_test_params/'
 recordDir = open(param_root+'recordDir.txt','w') # recordDir
 test_iter = open(param_root+'test_iter.txt','w') # test_iter
 test_interval = open(param_root+'test_interval.txt','w') # test_interval
@@ -11,7 +11,7 @@ visual_interval = open(param_root+'visual_interval.txt','w') # visual_interval
 end_iter = open(param_root+'end_iter.txt','w') # end_iter
 
 # load outfit num for train/val/test datasets
-size_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user_rank_ft/'
+size_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user_test/'
 all_train_size = open(size_root+'data_size/all_train_size.txt').readlines()
 # all_val_size = open(size_root+'data_size/all_val_size.txt').readlines()
 all_test_size = open(size_root+'data_size/all_test_size.txt').readlines()

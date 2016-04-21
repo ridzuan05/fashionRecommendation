@@ -4,7 +4,7 @@ data_type = ['train_', 'val_', 'test_']
 
 l_root = "/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/"
 g_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/data_prep/general_list/'
-size_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user_rank_ft/'
+size_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user_test/'
 
 for_length = open(g_root+'tuples_test_posi.txt').readlines()
 user_num = 1+int(for_length[-1].strip('\r\n').split(' ')[0])
