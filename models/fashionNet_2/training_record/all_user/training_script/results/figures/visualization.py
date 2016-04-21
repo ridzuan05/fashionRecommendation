@@ -168,7 +168,7 @@ for n in range(max_top_10_pos_num,min_top_10_pos_num-1,-1):
 		for k in range(0,5):
 			if (0 == int(float(single_ndcg_label[0]))):
 				break
-			elif:
+			else:
 				if (0 == int(float(single_ndcg_label[k+1]))):
 					break
 				# top-5 are all positive tuples
@@ -230,7 +230,7 @@ for n in range(min_top_10_pos_num,max_top_10_pos_num+1):
 		for k in range(0,5):
 			if (0 == int(float(single_ndcg_label[0]))):
 				break
-			elif:
+			else:
 				if (0 == int(float(single_ndcg_label[k+1]))):
 					break
 				# top-5 are all positive tuples
