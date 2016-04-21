@@ -19,7 +19,7 @@ from matplotlib import rc
 rc('mathtext', default='regular')
 
 caffe.set_mode_gpu()
-caffe.set_device(0)
+caffe.set_device(2)
 
 # solver
 solver = caffe.SGDSolver('/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user_test/solver_prototxt/fashion_solver_2_^666^.prototxt')
