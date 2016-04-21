@@ -271,7 +271,7 @@ for i in range (0,2):
         ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp0+'\r\n') # ndcg_label (0 or 1)
         ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp+'\r\n') # ndcg_at
         ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp1+'\r\n') # ndcg_imgIdx
-    elif (i==0):
+    elif (i==1):
         print("\n[U_^666^/{}]Iters done: Optimal.caffemodel, VAL_accu={}, VAL_loss={}.\n".format(user_num,test_accu,test_loss))
         # softmax test accu/loss
         softmax_test_accu_loss_f.write(optimal_idx+' '+str(test_accu)+' '+str(test_loss)+'\r\n')
