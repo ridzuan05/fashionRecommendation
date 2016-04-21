@@ -166,48 +166,51 @@ for n in range(max_top_10_pos_num,min_top_10_pos_num-1,-1):
 		single_max_index = max_index[j]
 		single_ndcg_label = whole_ndcg_label[single_max_index].strip('\r\n').split(' ')
 		for k in range(0,5):
-			if (0 == int(float(single_ndcg_label[k+1]))):
+			if (0 == int(float(single_ndcg_label[0]))):
 				break
-			# top-5 are all positive tuples
-			if (k == 4):
-				print("Best_{}: top_10_pos_num = {}".format(best_u_count, n))
-				U_k = 'U_'+str(single_max_index)
-				if U_k not in os.listdir(best_root):
-				    os.system('mkdir '+best_root+U_k)
-				top_paths = open(path_root+str(single_max_index)+'_top.txt').readlines()
-				bot_paths = open(path_root+str(single_max_index)+'_bot.txt').readlines()
-				sho_paths = open(path_root+str(single_max_index)+'_sho.txt').readlines()
-				single_ndcg_imgIdx = whole_ndcg_imgIdx[single_max_index].strip('\r\n').split(' ')[1:11]
-				blank_image = Image.new("RGB", (224*10, 224*3))
-				for p in range(0,10):
-					temp_imgIdx = int(float(single_ndcg_imgIdx[p]))
+			elif:
+				if (0 == int(float(single_ndcg_label[k+1]))):
+					break
+				# top-5 are all positive tuples
+				if (k == 4):
+					print("Best_{}: top_10_pos_num = {}".format(best_u_count, n))
+					U_k = 'U_'+str(single_max_index)
+					if U_k not in os.listdir(best_root):
+					    os.system('mkdir '+best_root+U_k)
+					top_paths = open(path_root+str(single_max_index)+'_top.txt').readlines()
+					bot_paths = open(path_root+str(single_max_index)+'_bot.txt').readlines()
+					sho_paths = open(path_root+str(single_max_index)+'_sho.txt').readlines()
+					single_ndcg_imgIdx = whole_ndcg_imgIdx[single_max_index].strip('\r\n').split(' ')[1:11]
+					blank_image = Image.new("RGB", (224*10, 224*3))
+					for p in range(0,10):
+						temp_imgIdx = int(float(single_ndcg_imgIdx[p]))
 
-					# read & save ./charts/best/U_k(best_u_count)/top_k(p).png
-					top_path = top_paths[temp_imgIdx].strip('\r\n').split(' ')[0]
-					# save_path = best_root+U_k+'/top_'+str(p)+'.png'
-					top_img = Image.open(top_path)
-					blank_image.paste(top_img,(p*224,224*0))
+						# read & save ./charts/best/U_k(best_u_count)/top_k(p).png
+						top_path = top_paths[temp_imgIdx].strip('\r\n').split(' ')[0]
+						# save_path = best_root+U_k+'/top_'+str(p)+'.png'
+						top_img = Image.open(top_path)
+						blank_image.paste(top_img,(p*224,224*0))
+						
+						# read & save ./charts/best/U_k(best_u_count)/bot_k(p).png
+						bot_path = bot_paths[temp_imgIdx].strip('\r\n').split(' ')[0]
+						# save_path = best_root+U_k+'/bot_'+str(p)+'.png'
+						bot_img = Image.open(bot_path)
+						blank_image.paste(bot_img,(p*224,224*1))
+
+						# read & save ./charts/best/U_k(best_u_count)/sho_k(p).png
+						sho_path = sho_paths[temp_imgIdx].strip('\r\n').split(' ')[0]
+						# save_path = best_root+U_k+'/sho_'+str(p)+'.png'
+						sho_img = Image.open(sho_path)
+						blank_image.paste(sho_img,(p*224,224*2))
 					
-					# read & save ./charts/best/U_k(best_u_count)/bot_k(p).png
-					bot_path = bot_paths[temp_imgIdx].strip('\r\n').split(' ')[0]
-					# save_path = best_root+U_k+'/bot_'+str(p)+'.png'
-					bot_img = Image.open(bot_path)
-					blank_image.paste(bot_img,(p*224,224*1))
+					# save ./chars/best/U_k(best_u_count)/outfits_10.png
+					blank_image.save(best_root+U_k+'/outfits_10.png')
 
-					# read & save ./charts/best/U_k(best_u_count)/sho_k(p).png
-					sho_path = sho_paths[temp_imgIdx].strip('\r\n').split(' ')[0]
-					# save_path = best_root+U_k+'/sho_'+str(p)+'.png'
-					sho_img = Image.open(sho_path)
-					blank_image.paste(sho_img,(p*224,224*2))
-				
-				# save ./chars/best/U_k(best_u_count)/outfits_10.png
-				blank_image.save(best_root+U_k+'/outfits_10.png')
-
-				# write ./charts/best/U_k(best_u_count)/labels_10.txt
-				single_ndcg_label_fp = open(best_root+U_k+'/labels_10.txt','w')
-				single_ndcg_label_fp.write(whole_ndcg_label[single_max_index])
-				single_ndcg_label_fp.close()
-				best_u_count += 1
+					# write ./charts/best/U_k(best_u_count)/labels_10.txt
+					single_ndcg_label_fp = open(best_root+U_k+'/labels_10.txt','w')
+					single_ndcg_label_fp.write(whole_ndcg_label[single_max_index])
+					single_ndcg_label_fp.close()
+					best_u_count += 1
 
 		if (best_u_count == 4):
 			flag_n = 1
@@ -225,48 +228,51 @@ for n in range(min_top_10_pos_num,max_top_10_pos_num+1):
 		single_min_index = min_index[j]
 		single_ndcg_label = whole_ndcg_label[single_min_index].strip('\r\n').split(' ')
 		for k in range(0,5):
-			if (0 == int(float(single_ndcg_label[k+1]))):
+			if (0 == int(float(single_ndcg_label[0]))):
 				break
-			# top-5 are all positive tuples
-			if (k == 4):
-				print("Worst_{}: top_10_pos_num = {}".format(worst_u_count, n))
-				U_k = 'U_'+str(single_min_index)
-				if U_k not in os.listdir(worst_root):
-				    os.system('mkdir '+worst_root+U_k)
-				top_paths = open(path_root+str(single_min_index)+'_top.txt').readlines()
-				bot_paths = open(path_root+str(single_min_index)+'_bot.txt').readlines()
-				sho_paths = open(path_root+str(single_min_index)+'_sho.txt').readlines()
-				single_ndcg_imgIdx = whole_ndcg_imgIdx[single_min_index].strip('\r\n').split(' ')[1:11]
-				blank_image = Image.new("RGB", (224*10, 224*3))
-				for p in range(0,10):
-					temp_imgIdx = int(float(single_ndcg_imgIdx[p]))
+			elif:
+				if (0 == int(float(single_ndcg_label[k+1]))):
+					break
+				# top-5 are all positive tuples
+				if (k == 4):
+					print("Worst_{}: top_10_pos_num = {}".format(worst_u_count, n))
+					U_k = 'U_'+str(single_min_index)
+					if U_k not in os.listdir(worst_root):
+					    os.system('mkdir '+worst_root+U_k)
+					top_paths = open(path_root+str(single_min_index)+'_top.txt').readlines()
+					bot_paths = open(path_root+str(single_min_index)+'_bot.txt').readlines()
+					sho_paths = open(path_root+str(single_min_index)+'_sho.txt').readlines()
+					single_ndcg_imgIdx = whole_ndcg_imgIdx[single_min_index].strip('\r\n').split(' ')[1:11]
+					blank_image = Image.new("RGB", (224*10, 224*3))
+					for p in range(0,10):
+						temp_imgIdx = int(float(single_ndcg_imgIdx[p]))
 
-					# read & save ./charts/best/U_k(best_u_count)/top_k(p).png
-					top_path = top_paths[temp_imgIdx].strip('\r\n').split(' ')[0]
-					# save_path = best_root+U_k+'/top_'+str(p)+'.png'
-					top_img = Image.open(top_path)
-					blank_image.paste(top_img,(p*224,224*0))
+						# read & save ./charts/best/U_k(best_u_count)/top_k(p).png
+						top_path = top_paths[temp_imgIdx].strip('\r\n').split(' ')[0]
+						# save_path = best_root+U_k+'/top_'+str(p)+'.png'
+						top_img = Image.open(top_path)
+						blank_image.paste(top_img,(p*224,224*0))
+						
+						# read & save ./charts/best/U_k(best_u_count)/bot_k(p).png
+						bot_path = bot_paths[temp_imgIdx].strip('\r\n').split(' ')[0]
+						# save_path = best_root+U_k+'/bot_'+str(p)+'.png'
+						bot_img = Image.open(bot_path)
+						blank_image.paste(bot_img,(p*224,224*1))
+
+						# read & save ./charts/best/U_k(best_u_count)/sho_k(p).png
+						sho_path = sho_paths[temp_imgIdx].strip('\r\n').split(' ')[0]
+						# save_path = best_root+U_k+'/sho_'+str(p)+'.png'
+						sho_img = Image.open(sho_path)
+						blank_image.paste(sho_img,(p*224,224*2))
 					
-					# read & save ./charts/best/U_k(best_u_count)/bot_k(p).png
-					bot_path = bot_paths[temp_imgIdx].strip('\r\n').split(' ')[0]
-					# save_path = best_root+U_k+'/bot_'+str(p)+'.png'
-					bot_img = Image.open(bot_path)
-					blank_image.paste(bot_img,(p*224,224*1))
+					# save ./chars/best/U_k(best_u_count)/outfits_10.png
+					blank_image.save(worst_root+U_k+'/outfits_10.png')
 
-					# read & save ./charts/best/U_k(best_u_count)/sho_k(p).png
-					sho_path = sho_paths[temp_imgIdx].strip('\r\n').split(' ')[0]
-					# save_path = best_root+U_k+'/sho_'+str(p)+'.png'
-					sho_img = Image.open(sho_path)
-					blank_image.paste(sho_img,(p*224,224*2))
-				
-				# save ./chars/best/U_k(best_u_count)/outfits_10.png
-				blank_image.save(worst_root+U_k+'/outfits_10.png')
-
-				# write ./charts/best/U_k(best_u_count)/labels_10.txt
-				single_ndcg_label_fp = open(worst_root+U_k+'/labels_10.txt','w')
-				single_ndcg_label_fp.write(whole_ndcg_label[single_min_index])
-				single_ndcg_label_fp.close()
-				worst_u_count += 1
+					# write ./charts/best/U_k(best_u_count)/labels_10.txt
+					single_ndcg_label_fp = open(worst_root+U_k+'/labels_10.txt','w')
+					single_ndcg_label_fp.write(whole_ndcg_label[single_min_index])
+					single_ndcg_label_fp.close()
+					worst_u_count += 1
 
 		if (worst_u_count == 4):
 			flag_n = 1
