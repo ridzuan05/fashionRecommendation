@@ -118,6 +118,16 @@ plt.savefig(root+'training_script/results/figures/NDCG_at_temp.png', bbox_inches
 plt.close('all')
 
 #=======================================================
+
+if 'charts' not in os.listdir(root+'training_script/results/figures/'):
+    os.system('mkdir '+root+'training_script/results/figures/charts/')
+
+if 'best' not in os.listdir(root+'training_script/results/figures/charts/'):
+	os.system('mkdir '+root+'training_script/results/figures/charts/best/')
+
+if 'worst' not in os.listdir(root+'training_script/results/figures/charts/'):
+	os.system('mkdir '+root+'training_script/results/figures/charts/worst/')
+
 # drawing retrieval images
 whole_ndcg_label = []
 whole_ndcg_imgIdx = []
@@ -174,7 +184,8 @@ for n in range(max_top_10_pos_num,min_top_10_pos_num-1,-1):
 				# top-5 are all positive tuples
 				if (k == 4):
 					print("Best_{}: top_10_pos_num = {}".format(best_u_count, n))
-					U_k = 'U_'+str(single_max_index)
+					# U_k = 'U_'+str(single_max_index)
+					U_k = 'U_'+str(best_u_count)
 					if U_k not in os.listdir(best_root):
 					    os.system('mkdir '+best_root+U_k)
 					top_paths = open(path_root+str(single_max_index)+'_top.txt').readlines()
@@ -207,8 +218,9 @@ for n in range(max_top_10_pos_num,min_top_10_pos_num-1,-1):
 					blank_image.save(best_root+U_k+'/outfits_10.png')
 
 					# write ./charts/best/U_k(best_u_count)/labels_10.txt
-					single_ndcg_label_fp = open(best_root+U_k+'/labels_10.txt','w')
+					single_ndcg_label_fp = open(best_root+U_k+'/labels_100.txt','w')
 					single_ndcg_label_fp.write(whole_ndcg_label[single_max_index])
+					single_ndcg_label_fp.write('U_'+str(single_max_index)+'\r\n')
 					single_ndcg_label_fp.close()
 					best_u_count += 1
 
@@ -236,7 +248,8 @@ for n in range(min_top_10_pos_num,max_top_10_pos_num+1):
 				# top-5 are all positive tuples
 				if (k == 4):
 					print("Worst_{}: top_10_pos_num = {}".format(worst_u_count, n))
-					U_k = 'U_'+str(single_min_index)
+					# U_k = 'U_'+str(single_min_index)
+					U_k = 'U_'+str(worst_u_count)
 					if U_k not in os.listdir(worst_root):
 					    os.system('mkdir '+worst_root+U_k)
 					top_paths = open(path_root+str(single_min_index)+'_top.txt').readlines()
@@ -269,8 +282,9 @@ for n in range(min_top_10_pos_num,max_top_10_pos_num+1):
 					blank_image.save(worst_root+U_k+'/outfits_10.png')
 
 					# write ./charts/best/U_k(best_u_count)/labels_10.txt
-					single_ndcg_label_fp = open(worst_root+U_k+'/labels_10.txt','w')
+					single_ndcg_label_fp = open(worst_root+U_k+'/labels_100.txt','w')
 					single_ndcg_label_fp.write(whole_ndcg_label[single_min_index])
+					single_ndcg_label_fp.write('U_'+str(single_min_index)+'\r\n')
 					single_ndcg_label_fp.close()
 					worst_u_count += 1
 
