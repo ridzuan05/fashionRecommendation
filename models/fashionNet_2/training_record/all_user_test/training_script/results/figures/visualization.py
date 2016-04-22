@@ -95,19 +95,10 @@ for u in range(0,user_num):
 	# read ndcg_mean_label_at_imgIdx.txt
 	ndcg = open(root+'training_script/results/data/t2.2.'+str(u)+'/ndcg_mean_label_at_imgIdx.txt').readlines()
 
-	# optimal idx
-	mean_ndcg_list = []
-	mean_ndcg_list.append(float(ndcg[0].strip('\r\n').split(' ')[1]))
-	for l in range(1,7):
-		mean_ndcg_list.append(float(ndcg[-4*l].strip('\r\n').split(' ')[1]))
-	optimal_idx, temp_o = max(enumerate(mean_ndcg_list), key=operator.itemgetter(1))
-	optimal_idx *= -4
-	optimal_idx += 2
-
 	# whole_ndcg_label
-	whole_ndcg_label.append(ndcg[optimal_idx-1])
+	whole_ndcg_label.append(ndcg[-3])
 	# whole_ndcg_imgIdx
-	whole_ndcg_imgIdx.append(ndcg[optimal_idx+1])
+	whole_ndcg_imgIdx.append(ndcg[-1])
 
 	# top-10 positive tuple number
 	top_10_pos_num = 0
