@@ -22,6 +22,9 @@ count_l = 0
 count_o = 0
 count_f = 0
 
+optimal_initial_idx = []
+optimal_initial_mean_ndcg = []
+
 # initialization to zero
 last_ndcg_at = [0.0] * 100
 optimal_ndcg_at = [0.0] * 100
@@ -54,6 +57,10 @@ for u in range(0,user_num):
 		temp_f = float(ndcg[0].strip('\r\n').split(' ')[1])
 		first_mean_ndcg += temp_f
 		count_f += 1.0
+
+	# (optimal_mean_ndcg / initial_mean_ndcg)
+	optimal_initial_mean_ndcg.append(float(temp_o/temp_f))
+	optimal_initial_idx.append(u)
 
 	# last ndcg_at@(1~100)
 	ndcg_size = len(ndcg[-2].strip('\r\n').split(' '))-1
@@ -116,6 +123,23 @@ ax_left.set_ylabel("mean_NDCG@")
 ax_left.set_title("mean_NDCG@m of [User_0, User_988]")
 plt.savefig(root+'training_script/results/figures/NDCG_at_temp.png', bbox_inches='tight')
 plt.close('all')
+
+fig = plt.figure()
+ax_left = fig.add_subplot(111)
+ax_left.plot(optimal_initial_idx, optimal_initial_mean_ndcg, '--r')
+lines_left, labels_left = ax_left.get_legend_handles_labels()   
+ax_left.legend(lines_left, labels_left, loc=0)
+ax_left.grid()
+ax_left.set_xlabel("u = (0,1,...,988)")
+ax_left.set_ylabel("Finetuning Increase")
+ax_left.set_title("Optimal/Initial_mean_NDCG of [User_0, User_988]")
+plt.savefig(root+'training_script/results/figures/mean_NDCG_increase.png', bbox_inches='tight')
+plt.close('all')
+os.system('git add '+root+'training_script/results/figures/mean_NDCG_increase.png')
+
+#=======================================================
+
+
 
 #=======================================================
 
