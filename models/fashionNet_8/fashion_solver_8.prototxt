@@ -1,0 +1,30 @@
+
+net: "/local2/home/tong/fashionRecommendation/models/fashionNet_8/fashion_train_val_8.prototxt"
+
+test_iter: 0
+
+test_interval: 1616001
+
+base_lr: 0.0001
+
+lr_policy: "step"
+
+gamma: 0.1       
+
+stepsize: 1616001
+
+display: 1616001
+
+max_iter: 1616001
+
+momentum: 0.9
+
+weight_decay: 0.0005
+
+#snapshot: 5000
+#snapshot_prefix: "/local2/home/tong/fashionRecommendation/data/netParameters/finetune_fashion_recommendation_"
+
+#CPU or GPU
+solver_mode: GPU
+
+#device_id: 0

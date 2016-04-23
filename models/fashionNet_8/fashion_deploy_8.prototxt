@@ -1,0 +1,307 @@
+name: "fashionNet_8"
+
+############################ loading data
+input: "top"
+input_shape {
+  dim: 1
+  dim: 3
+  dim: 224
+  dim: 224
+}
+
+input: "bot"
+input_shape {
+  dim: 1
+  dim: 3
+  dim: 224
+  dim: 224
+}
+
+input: "sho"
+input_shape {
+  dim: 1
+  dim: 3
+  dim: 224
+  dim: 224
+}
+############################ stack_over_channel
+layer {
+  name: "tbs_imgs"
+  bottom: "top"
+  bottom: "bot"
+  bottom: "sho"
+  top: "tbs_imgs"
+  type: "Concat"
+  concat_param {
+    axis: 1
+  }
+}
+############################ left side net
+layer{
+  name:   "conv1" # conv1_top
+  type:   "Convolution"
+  bottom: "tbs_imgs"
+  top:    "conv1"
+  param{
+    name:"conv1_w_"
+  }
+  param{
+    name:"conv1_b_"
+  }
+  convolution_param{
+      num_output: 96
+      kernel_size: 7
+      stride: 2
+  }
+}
+######
+layer{
+  name:   "relu1" # relu1_top
+  type:   "ReLU"
+  bottom: "conv1"
+  top:    "conv1"
+}
+######
+layer {
+  name:   "norm1"
+  type:   "LRN"
+  bottom: "conv1"
+  top:    "norm1"
+  lrn_param {
+    local_size: 5
+    alpha: 0.0005
+    beta: 0.75
+    k: 2
+  }
+}
+######
+layer {
+  name:   "pool1"
+  type:   "Pooling"
+  bottom: "norm1"
+  top:    "pool1"  
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+######
+layer {
+  bottom: "pool1"
+  top:    "conv2"
+  name:   "conv2" # conv2_top
+  type:   "Convolution"
+  param{
+    name:"conv2_w_"
+  }
+  param{
+    name:"conv2_b_"
+  }
+  convolution_param {
+    num_output: 256
+    pad: 1
+    kernel_size: 5
+    stride: 2
+  }
+}
+######
+layer {
+  bottom: "conv2"
+  top:    "conv2"
+  name:   "relu2" # relu2_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "conv2"
+  top:    "norm2"
+  name:   "norm2" # norm2_top
+  type:   "LRN"
+  lrn_param {
+    local_size: 5
+    alpha: 0.0005
+    beta: 0.75
+    k: 2
+  }
+}
+######
+layer {
+  bottom: "norm2"
+  top:    "pool2"
+  name:   "pool2"
+  type:   "Pooling"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+######
+layer {
+  bottom: "pool2"
+  top:    "conv3"
+  name:   "conv3" # conv3_top
+  type:   "Convolution"
+  param{
+    name:"conv3_w_"
+  }
+  param{
+    name:"conv3_b_"
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    kernel_size: 3
+  }
+}
+######
+layer {
+  bottom: "conv3"
+  top:    "conv3"
+  name:   "relu3" # relu3_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "conv3"
+  top:    "conv4"
+  name:   "conv4" # conv4_top
+  type:   "Convolution"
+  param{
+    name:"conv4_w_"
+  }
+  param{
+    name:"conv4_b_"
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    kernel_size: 3
+  }
+}
+######
+layer {
+  bottom: "conv4"
+  top:    "conv4"
+  name:   "relu4" # relu4_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "conv4"
+  top:    "conv5"
+  name:   "conv5" # conv5_top
+  type:   "Convolution"
+  param{
+    name:"conv5_w_"
+  }
+  param{
+    name:"conv5_b_"
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    kernel_size: 3
+  }
+}
+######
+layer {
+  bottom: "conv5"
+  top:    "conv5"
+  name:   "relu5" # relu5_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "conv5"
+  top:    "pool5"
+  name:   "pool5"
+  type:   "Pooling"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+######
+layer {
+  bottom: "pool5"
+  top:    "fc6"
+  name:   "fc6" # fc6_top
+  type:   "InnerProduct"
+  param {
+    name:"fc6_w_"
+  }
+  param {
+    name:"fc6_b_"
+  }
+  inner_product_param {
+    num_output: 4096   
+  }
+}
+######
+layer {
+  bottom: "fc6"
+  top:    "fc6"
+  name:   "relu6" # relu6_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "fc6"
+  top:    "fc7"
+  name:   "fc7" # fc7_top
+  type:   "InnerProduct"
+  param {
+    name:"fc7_w_"
+  }
+  param {
+    name:"fc7_b_"
+  }
+  inner_product_param {
+    num_output: 2048  
+  }
+}
+######
+layer {
+  bottom: "fc7"
+  top:    "fc7"
+  name:   "relu7" # relu7_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "fc7"
+  top:    "fc8_dislike_like"
+  name:   "fc8_dislike_like" # fc8_top
+  type:   "InnerProduct"
+  param {
+    name:"fc8_w_"
+  }
+  param {
+    name:"fc8_b_"
+  }
+  inner_product_param {
+    num_output: 2   
+  }
+}
+######
+layer {
+  bottom: "fc8_dislike_like"
+  top: "fc8_dislike_like_sm"
+  name: "fc8_dislike_like_sm"
+  type: "Softmax"
+}
+######
+layer {
+  bottom: "fc8_dislike_like_sm"
+  top: "dislike"
+  top: "like"
+  name: "like"
+  type: "Slice"
+  slice_param {
+    axis: 1
+    slice_point: 1
+  }
+}
