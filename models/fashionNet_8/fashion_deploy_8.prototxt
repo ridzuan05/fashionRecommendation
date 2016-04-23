@@ -38,7 +38,7 @@ layer {
 }
 ############################ left side net
 layer{
-  name:   "conv1" # conv1_top
+  name:   "conv1_new" # conv1_top
   type:   "Convolution"
   bottom: "tbs_imgs"
   top:    "conv1"
