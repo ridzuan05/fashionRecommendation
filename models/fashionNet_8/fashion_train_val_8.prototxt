@@ -244,17 +244,17 @@ layer {
 }
 ############################ left side net
 layer{
-  name:   "conv1" # conv1_top
+  name:   "conv1_new" # conv1_top
   type:   "Convolution"
   bottom: "tbs_imgs"
   top:    "conv1"
   param{
-    lr_mult:1 
+    lr_mult:100 
     decay_mult:1
     name:"conv1_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:200
     decay_mult:0
     name:"conv1_b_"
   }
@@ -634,12 +634,12 @@ layer{
   bottom: "tbs_imgs_n"
   top:    "conv1_n"
   param{
-    lr_mult:1 
+    lr_mult:100 
     decay_mult:1
     name:"conv1_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:200
     decay_mult:0
     name:"conv1_b_"
   }
