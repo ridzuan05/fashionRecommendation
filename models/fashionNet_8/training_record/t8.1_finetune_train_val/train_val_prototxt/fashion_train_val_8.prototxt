@@ -249,12 +249,12 @@ layer{
   bottom: "tbs_imgs"
   top:    "conv1"
   param{
-    lr_mult:100 
+    lr_mult:0 
     decay_mult:1
     name:"conv1_w_"
   }
   param{
-    lr_mult:200
+    lr_mult:0
     decay_mult:0
     name:"conv1_b_"
   }
@@ -311,12 +311,12 @@ layer {
   name:   "conv2" # conv2_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv2_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv2_b_"
   }
@@ -374,12 +374,12 @@ layer {
   name:   "conv3" # conv3_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv3_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv3_b_"
   }
@@ -411,12 +411,12 @@ layer {
   name:   "conv4" # conv4_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv4_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv4_b_"
   }
@@ -448,12 +448,12 @@ layer {
   name:   "conv5" # conv5_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv5_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv5_b_"
   }
@@ -497,12 +497,12 @@ layer {
   name:   "fc6" # fc6_top
   type:   "InnerProduct"
   param {
-    lr_mult: 1
+    lr_mult: 0
     decay_mult: 1
     name:"fc6_w_"
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
     name:"fc6_b_"
   }
@@ -542,12 +542,12 @@ layer {
   name:   "fc7" # fc7_top
   type:   "InnerProduct"
   param {
-    lr_mult: 1
+    lr_mult: 0
     decay_mult: 1
     name:"fc7_w_"
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
     name:"fc7_b_"
   }
@@ -587,12 +587,12 @@ layer {
   name:   "fc8_dislike_like" # fc8_top
   type:   "InnerProduct"
   param {
-    lr_mult: 100
+    lr_mult: 1
     decay_mult: 1
     name:"fc8_w_"
   }
   param {
-    lr_mult: 200
+    lr_mult: 2
     decay_mult: 0
     name:"fc8_b_"
   }
@@ -634,12 +634,12 @@ layer{
   bottom: "tbs_imgs_n"
   top:    "conv1_n"
   param{
-    lr_mult:100 
+    lr_mult: 0 
     decay_mult:1
     name:"conv1_w_"
   }
   param{
-    lr_mult:200
+    lr_mult: 0
     decay_mult:0
     name:"conv1_b_"
   }
@@ -696,12 +696,12 @@ layer {
   name:   "conv2_n" # conv2_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult: 0
     decay_mult:1
     name:"conv2_w_"
   }
   param{
-    lr_mult:2
+    lr_mult: 0
     decay_mult:0
     name:"conv2_b_"
   }
@@ -759,12 +759,12 @@ layer {
   name:   "conv3_n" # conv3_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult: 0
     decay_mult:1
     name:"conv3_w_"
   }
   param{
-    lr_mult:2
+    lr_mult: 0
     decay_mult:0
     name:"conv3_b_"
   }
@@ -796,12 +796,12 @@ layer {
   name:   "conv4_n" # conv4_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult: 0
     decay_mult:1
     name:"conv4_w_"
   }
   param{
-    lr_mult:2
+    lr_mult: 0
     decay_mult:0
     name:"conv4_b_"
   }
@@ -833,12 +833,12 @@ layer {
   name:   "conv5_n" # conv5_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult: 0
     decay_mult:1
     name:"conv5_w_"
   }
   param{
-    lr_mult:2
+    lr_mult: 0
     decay_mult:0
     name:"conv5_b_"
   }
@@ -882,12 +882,12 @@ layer {
   name:   "fc6_n" # fc6_top
   type:   "InnerProduct"
   param {
-    lr_mult: 1
+    lr_mult: 0
     decay_mult: 1
     name:"fc6_w_"
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
     name:"fc6_b_"
   }
@@ -927,12 +927,12 @@ layer {
   name:   "fc7_n" # fc7_top
   type:   "InnerProduct"
   param {
-    lr_mult: 1
+    lr_mult: 0
     decay_mult: 1
     name:"fc7_w_"
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
     name:"fc7_b_"
   }
@@ -972,12 +972,12 @@ layer {
   name:   "fc8_dislike_like_n" # fc8_top
   type:   "InnerProduct"
   param {
-    lr_mult: 100
+    lr_mult: 1
     decay_mult: 1
     name:"fc8_w_"
   }
   param {
-    lr_mult: 200
+    lr_mult: 2
     decay_mult: 0
     name:"fc8_b_"
   }

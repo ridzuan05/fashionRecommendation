@@ -39,7 +39,7 @@ for i in range(0,len(data_type)):
 	posi_nega = []
 	for line_p, line_n in izip(posi, nega):
 		posi_nega.append(line_p.strip('\r\n')+' '+line_n)
-
+	
 	if (i==0):
 		for k in range(0,3):
 			random.shuffle(posi_nega)
