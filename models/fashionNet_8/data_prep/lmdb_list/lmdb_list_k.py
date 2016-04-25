@@ -3,6 +3,7 @@
 from itertools import izip
 import re
 import random
+import os
 
 g_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/general_list/'
 l_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/lmdb_list/tvt_pn_tbs_k_txt/'
