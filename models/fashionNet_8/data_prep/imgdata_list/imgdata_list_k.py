@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import os
+
 l_root = "/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/"
 
 if 'tvt_pn_tbs_k_txt' not in os.listdir(l_root+'imgdata_list'):
