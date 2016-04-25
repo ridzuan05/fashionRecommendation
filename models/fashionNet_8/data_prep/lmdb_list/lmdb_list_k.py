@@ -21,6 +21,8 @@ pa_sho = open(g_root+'img_list_shoe.txt').readlines()
 
 data_type = ['train', 'val', 'test']
 
+data_size = [1212, 276, 372]
+
 for i in range(0,len(data_type)):
 	#####################################################
 	#load tuples_posi.txt & tuples_neg.txt
@@ -38,8 +40,9 @@ for i in range(0,len(data_type)):
 	for line_p, line_n in izip(posi, nega):
 		posi_nega.append(line_p.strip('\r\n')+' '+line_n)
 
-	for k in range(0,3):
-		random.shuffle(posi_nega)
+	if (i==0):
+		for k in range(0,3):
+			random.shuffle(posi_nega)
 	
 	user_num = 800
 	for u in range(0,user_num):
@@ -49,7 +52,15 @@ for i in range(0,len(data_type)):
 		n_k_top = open(l_root+data_type[i]+'_n_top_'+str(u)+'.txt','w')
 		n_k_bot = open(l_root+data_type[i]+'_n_bot_'+str(u)+'.txt','w')
 		n_k_sho = open(l_root+data_type[i]+'_n_sho_'+str(u)+'.txt','w')
-		for k in range(0,len(posi_nega)):
+
+		if (i==0):
+			start_idx = 0
+			end_idx = len(posi_nega)
+		else:
+			start_idx = u*data_size[i]
+			end_idx = (u+1)*data_size[i]
+
+		for k in range(start_idx,end_idx):
 			#read user idx
 			user_idx_temp = int(posi_nega[k].strip('\r\n').split(' ')[0])
 			if (user_idx_temp == u):
