@@ -9,7 +9,7 @@ s_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_r
 s_fp = open(s_root+'fashion_solver_8.prototxt').readlines()
 
 # user_number
-user_num = 8
+user_num = 800
 
 if 'fashion_solver_8_k' not in os.listdir(s_root):
     os.system('mkdir '+s_root+'fashion_solver_8_k')
