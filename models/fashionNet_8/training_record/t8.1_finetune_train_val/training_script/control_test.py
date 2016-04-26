@@ -17,11 +17,11 @@ rc('mathtext', default='regular')
 from sklearn.metrics import confusion_matrix
 
 # test User_idx
-tUID = '0'
+tUID = '101'
 # caffemodel_idx
 cID = '239168'
-# U_k(next i=0)[15_0.0001*(0,1)] training epoch
-end_iter = 1230 # 30 training epoch
+# U_k(next i=0)[10_0.0001*(0,1)] training epoch
+end_iter = 410 # 10 training epoch
 # set gpu idx
 caffe.set_mode_gpu()
 caffe.set_device(0)
@@ -313,12 +313,12 @@ for i in range (start_iter,end_iter+1):
         for i in range(0, len(train_avg_bat_accu_loss_whole)):
             if i % visual_interval == 0: # 1/10 training epoch
                 train_iter_idx.append(int(train_avg_bat_accu_loss_whole[i].strip('\r\n').split(' ')[0]))
-                train_loss.append(float(train_avg_bat_accu_loss_whole[i].strip('\r\n').split(' ')[1]))
-                train_accuracy.append(float(train_avg_bat_accu_loss_whole[i].strip('\r\n').split(' ')[2]))
+                train_loss.append(float(train_avg_bat_accu_loss_whole[i].strip('\r\n').split(' ')[2]))
+                train_accuracy.append(float(train_avg_bat_accu_loss_whole[i].strip('\r\n').split(' ')[1]))
         for i in range(0, len(val_avg_accu_loss_whole)):
             val_iter_idx.append(int(val_avg_accu_loss_whole[i].strip('\r\n').split(' ')[0]))
-            val_loss.append(float(val_avg_accu_loss_whole[i].strip('\r\n').split(' ')[1]))
-            val_accuracy.append(float(val_avg_accu_loss_whole[i].strip('\r\n').split(' ')[2]))
+            val_loss.append(float(val_avg_accu_loss_whole[i].strip('\r\n').split(' ')[2]))
+            val_accuracy.append(float(val_avg_accu_loss_whole[i].strip('\r\n').split(' ')[1]))
         fig = plt.figure()
         ax_left = fig.add_subplot(111)
         ax_left.plot(train_iter_idx, train_loss, '--rp', label = 'Avg_T_Loss')
@@ -342,8 +342,8 @@ for i in range (start_iter,end_iter+1):
         train_accuracy = []
         for i in range(0, len(train_avg_bat_accu_loss_whole)):
             if i % visual_interval == 0: # 1/10 training epoch
-                train_loss.append(float(train_avg_bat_accu_loss_whole[i].strip('\r\n').split(' ')[3]))
-                train_accuracy.append(float(train_avg_bat_accu_loss_whole[i].strip('\r\n').split(' ')[4]))
+                train_loss.append(float(train_avg_bat_accu_loss_whole[i].strip('\r\n').split(' ')[4]))
+                train_accuracy.append(float(train_avg_bat_accu_loss_whole[i].strip('\r\n').split(' ')[3]))
         fig = plt.figure()
         ax_left = fig.add_subplot(111)
         ax_left.plot(train_iter_idx, train_loss, '--rp', label = 'Bat_T_Loss')
@@ -369,24 +369,25 @@ for i in range (start_iter,end_iter+1):
         last_ndcg_at = []
         lats_ndcg_at_idx = []
         for n in range(0,ndcg_size):
-            lats_ndcg_at_idx.append(n)
+            lats_ndcg_at_idx.append(n+1)
             last_ndcg_at.append(float(ndcg[-2].strip('\r\n').split(' ')[n+1]))
         # optimal ndcg_at@(1~30)
         optimal_idx, max_mean_ndcg = max(enumerate(optimal_mean_ndcg), key=operator.itemgetter(1))
+        optimal_mNDCG_id = optimal_idx*val_interval
         optimal_idx *= 4
         optimal_idx += 2
         o_ndcg_size = len(ndcg[optimal_idx].strip('\r\n').split(' '))-1
         optimal_ndcg_at = []
         optimal_ndcg_at_idx = []
         for n in range(0,o_ndcg_size):
-            optimal_ndcg_at_idx.append(n)
+            optimal_ndcg_at_idx.append(n+1)
             optimal_ndcg_at.append(float(ndcg[optimal_idx].strip('\r\n').split(' ')[n+1]))
         # first ndcg_at@(1~30)
         f_ndcg_size = len(ndcg[2].strip('\r\n').split(' '))-1
         first_ndcg_at = []
         first_ndcg_at_idx = []
         for n in range(0,f_ndcg_size):
-            first_ndcg_at_idx.append(n)
+            first_ndcg_at_idx.append(n+1)
             first_ndcg_at.append(float(ndcg[2].strip('\r\n').split(' ')[n+1]))       
         fig = plt.figure()
         ax_left = fig.add_subplot(111)
@@ -402,19 +403,64 @@ for i in range (start_iter,end_iter+1):
         plt.savefig(recordDir_data+'NDCG_at_temp.png', bbox_inches='tight')
         plt.close('all')
 
-        if (i==end_iter):
-            initial_mNDCG = float(ndcg[0].strip('\r\n').split(' ')[0]) 
-            optimal_mNDCG = max_mean_ndcg
-            last_mNDCG = float(ndcg[-4].strip('\r\n').split(' ')[0])
-            print("meanNDCG: Initial({}), Optimal({}), Last({})" \
-                  .format(initial_mNDCG,optimal_mNDCG,last_mNDCG))
+        # mean_NDCG.png
+        mean_NDCG_all = []
+        mean_NDCG_all_idx = []
+        for m in range(0,len(ndcg)):
+            if (m%4==0):
+                mean_NDCG_all_idx.append(int(ndcg[m].strip('\r\n').split(' ')[0]))
+                mean_NDCG_all.append(float(ndcg[m].strip('\r\n').split(' ')[1]))
+        fig = plt.figure()
+        ax_left = fig.add_subplot(111)
+        ax_left.plot(mean_NDCG_all_idx, mean_NDCG_all, '--r')
+        lines_left, labels_left = ax_left.get_legend_handles_labels()   
+        ax_left.legend(lines_left, labels_left, loc=0)
+        ax_left.grid()
+        ax_left.set_xlabel("Training Iterations Done(n)")
+        ax_left.set_ylabel("mean_NDCG")
+        ax_left.set_title("mean_NDCG during training of User_{}".format(tUID))
+        plt.savefig(recordDir_data+'mean_NDCG.png', bbox_inches='tight')
+        plt.close('all')        
 
-        # stop criteria
-        if val_avg_accu > 0.93:
-            k += 1
-            if (k > 10):
-                print '\n\nTest accuracy: {} > 0.93 counted for 10 times\n\n'.format(val_avg_accu)
-                break
+        # top_10_posi.png
+        top_10_posi = []
+        top_10_posi_idx = []
+        for t in range(0,len(ndcg)):
+            if (t%4==1):
+                top_10_posi_idx.append(int(ndcg[t].strip('\r\n').split(' ')[0]))
+                top_10_posi_count = 0
+                for c in range(0,10):
+                    if (1 == int(float(ndcg[t].strip('\r\n').split(' ')[c+1]))):
+                        top_10_posi_count += 1
+                top_10_posi.append(top_10_posi_count)
+        fig = plt.figure()
+        ax_left = fig.add_subplot(111)
+        ax_left.plot(top_10_posi_idx, top_10_posi, '--r')
+        lines_left, labels_left = ax_left.get_legend_handles_labels()   
+        ax_left.legend(lines_left, labels_left, loc=0)
+        ax_left.grid()
+        ax_left.set_xlabel("Training Iterations Done(n)")
+        ax_left.set_ylabel("Top_10_posi_num")
+        ax_left.set_title("Top_10_posi_num during training of User_{}".format(tUID))
+        plt.savefig(recordDir_data+'top_10_posi.png', bbox_inches='tight')
+        plt.close('all')   
+
+        if (i==end_iter):
+            initial_mNDCG_id = int(ndcg[0].strip('\r\n').split(' ')[0])
+            initial_mNDCG = float(ndcg[0].strip('\r\n').split(' ')[1])
+            optimal_mNDCG_id =  optimal_mNDCG_id
+            optimal_mNDCG = max_mean_ndcg
+            last_mNDCG_id = int(ndcg[-4].strip('\r\n').split(' ')[0])
+            last_mNDCG = float(ndcg[-4].strip('\r\n').split(' ')[1])
+            print("meanNDCG: Initial({},{}), Optimal({},{}), Last({},{})" \
+                  .format(initial_mNDCG_id,initial_mNDCG,optimal_mNDCG_id,optimal_mNDCG,last_mNDCG_id,last_mNDCG))
+
+        # # stop criteria
+        # if val_avg_accu > 0.93:
+        #     k += 1
+        #     if (k > 10):
+        #         print '\n\nTest accuracy: {} > 0.93 counted for 10 times\n\n'.format(val_avg_accu)
+        #         break
 
     # update parameters
     solver.step(1)
