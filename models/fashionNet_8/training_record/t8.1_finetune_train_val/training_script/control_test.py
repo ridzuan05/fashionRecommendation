@@ -8,6 +8,9 @@ tUID = '0'
 cID = '239168'
 # U_k(next i=0)[15_0.0001*(0,1)] training epoch
 end_iter = 1230 # 30 training epoch
+# set gpu idx
+caffe.set_mode_gpu()
+caffe.set_device(0)
 
 import operator
 
@@ -186,10 +189,6 @@ caffemodel_path = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/t
 solver.net.copy_from(caffemodel_path)
 solver.test_nets[0].copy_from(caffemodel_path)
 
-# set gpu idx
-caffe.set_mode_gpu()
-caffe.set_device(1)
-
 # results folder
 recordDir = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/training_script/results/'
 recordDir_data = recordDir+'data/U_test/'
@@ -203,7 +202,7 @@ if 'data' not in os.listdir(recordDir):
 if 'figures' not in os.listdir(recordDir):
     os.system('mkdir '+recordDir+'figures')
 
-if ('U_'+tUID) not in os.listdir(recordDir+'data/'):
+if ('U_test') not in os.listdir(recordDir+'data/'):
     os.system('mkdir '+recordDir_data)
 
 k = 0
@@ -308,8 +307,8 @@ for i in range (start_iter,end_iter+1):
         # avg_bat_record.png
         train_avg_bat_accu_loss_whole = []
         val_avg_accu_loss_whole = []
-        train_avg_bat_accu_loss_whole = open(recordDir+'train_avg_bat_accu_loss.txt').readlines() 
-        val_avg_accu_loss_whole = open(recordDir+'val_avg_accu_loss.txt').readlines()
+        train_avg_bat_accu_loss_whole = open(recordDir_data+'train_avg_bat_accu_loss.txt').readlines() 
+        val_avg_accu_loss_whole = open(recordDir_data+'val_avg_accu_loss.txt').readlines()
         train_iter_idx = []
         train_loss = []
         train_accuracy = []
@@ -340,7 +339,7 @@ for i in range (start_iter,end_iter+1):
         ax_left.set_ylabel("Loss")
         ax_right.set_ylabel("Accuracy")
         ax_right.set_title("HVA@({:.3f},{}), LVL@({:.3f},{})".format(max(val_accuracy),val_iter_idx[val_accuracy.index(max(val_accuracy))],min(val_loss),val_iter_idx[val_loss.index(min(val_loss))]))
-        plt.savefig(recordDir+'avg_bat_record.png', bbox_inches='tight')
+        plt.savefig(recordDir_data+'avg_bat_record.png', bbox_inches='tight')
         plt.close('all')
 
         # bat_bat_record.png
@@ -365,7 +364,7 @@ for i in range (start_iter,end_iter+1):
         ax_left.set_ylabel("Loss")
         ax_right.set_ylabel("Accuracy")
         ax_right.set_title("HVA@({:.3f},{}), LVL@({:.3f},{})".format(max(val_accuracy),val_iter_idx[val_accuracy.index(max(val_accuracy))],min(val_loss),val_iter_idx[val_loss.index(min(val_loss))]))
-        plt.savefig(recordDir+'bat_bat_record.png', bbox_inches='tight')
+        plt.savefig(recordDir_data+'bat_bat_record.png', bbox_inches='tight')
         plt.close('all')
 
         # initial/optimal/last_ndcg_at.png
@@ -399,7 +398,7 @@ for i in range (start_iter,end_iter+1):
         ax_left.set_xlabel("m = (1,2,...,30)")
         ax_left.set_ylabel("mean_NDCG@")
         ax_left.set_title("mean_NDCG@m of User_{}".format(tUID))
-        plt.savefig(root+'training_script/results/figures/NDCG_at_temp.png', bbox_inches='tight')
+        plt.savefig(recordDir_data+'NDCG_at_temp.png', bbox_inches='tight')
         plt.close('all')
 
         if (i==end_iter):
