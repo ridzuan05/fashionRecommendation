@@ -373,7 +373,7 @@ for i in range (start_iter,end_iter+1):
             last_ndcg_at.append(float(ndcg[-2].strip('\r\n').split(' ')[n+1]))
         # optimal ndcg_at@(1~30)
         optimal_idx, max_mean_ndcg = max(enumerate(optimal_mean_ndcg), key=operator.itemgetter(1))
-        optimal_idx *= val_interval
+        optimal_idx *= 4
         optimal_idx += 2
         o_ndcg_size = len(ndcg[optimal_idx].strip('\r\n').split(' '))-1
         optimal_ndcg_at = []
