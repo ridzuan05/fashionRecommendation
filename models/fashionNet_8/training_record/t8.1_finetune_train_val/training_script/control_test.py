@@ -20,7 +20,7 @@ from sklearn.metrics import confusion_matrix
 tUID = '100'
 # caffemodel_idx
 cID = '239168'
-# U_k(next i=0)[10_0.00001*(0,1)] training epoch
+# U_k(next i=0)[10_0.05*(0,1)] training epoch
 end_iter = 410 # 10 training epoch
 # set gpu idx
 caffe.set_mode_gpu()
@@ -42,7 +42,7 @@ def test_avg(val_iter, img_idx, val_tuple_num):
     img_idx_pos = []
     img_idx_neg = []
     
-    false_posi_thresh = 1.0
+    false_posi_thresh = 0.999
 
     for i in range(0,val_iter):
         # one test_batch_size computation
