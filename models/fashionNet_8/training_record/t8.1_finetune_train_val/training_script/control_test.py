@@ -1,6 +1,20 @@
 #!/usr/bin/env python
-
 # training_script for [U_0, U_799]
+
+import operator
+#import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('Agg') # Must be before importing matplotlib.pyplot or pylab!
+import matplotlib.pyplot as plt
+import numpy as np
+import sys
+sys.path.insert(0,'/local2/home/tong/caffe-master/python')
+import caffe
+import os
+from matplotlib import rc
+rc('mathtext', default='regular')
+# valiation & confusion matix
+from sklearn.metrics import confusion_matrix
 
 # test User_idx
 tUID = '0'
@@ -11,25 +25,6 @@ end_iter = 1230 # 30 training epoch
 # set gpu idx
 caffe.set_mode_gpu()
 caffe.set_device(0)
-
-import operator
-
-#import matplotlib.pyplot as plt
-import matplotlib
-matplotlib.use('Agg') # Must be before importing matplotlib.pyplot or pylab!
-import matplotlib.pyplot as plt
-
-import numpy as np
-import sys
-sys.path.insert(0,'/local2/home/tong/caffe-master/python')
-import caffe
-
-import os
-from matplotlib import rc
-rc('mathtext', default='regular')
-
-# valiation & confusion matix
-from sklearn.metrics import confusion_matrix
 
 def test_avg(val_iter, img_idx, val_tuple_num):
         
