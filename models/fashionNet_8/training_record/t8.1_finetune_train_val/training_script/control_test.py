@@ -5,9 +5,9 @@
 # test User_idx
 tUID = '0'
 # caffemodel_idx
-cID = '297344'
+cID = '239168'
 # U_k(next i=0)[15_0.0001*(0,1)] training epoch
-end_iter = 615 # 15 training epoch
+end_iter = 1230 # 30 training epoch
 
 import operator
 
@@ -188,7 +188,7 @@ solver.test_nets[0].copy_from(caffemodel_path)
 
 # set gpu idx
 caffe.set_mode_gpu()
-caffe.set_device(0)
+caffe.set_device(1)
 
 # results folder
 recordDir = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/training_script/results/'
