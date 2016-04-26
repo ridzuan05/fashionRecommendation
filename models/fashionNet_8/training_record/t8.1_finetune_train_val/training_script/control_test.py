@@ -17,10 +17,10 @@ rc('mathtext', default='regular')
 from sklearn.metrics import confusion_matrix
 
 # test User_idx
-tUID = '101'
+tUID = '100'
 # caffemodel_idx
 cID = '239168'
-# U_k(next i=0)[10_0.0001*(0,1)] training epoch
+# U_k(next i=0)[10_0.00001*(0,1)] training epoch
 end_iter = 410 # 10 training epoch
 # set gpu idx
 caffe.set_mode_gpu()

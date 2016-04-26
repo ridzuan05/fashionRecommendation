@@ -5,7 +5,7 @@ test_iter: 0
 
 test_interval: 1616001
 
-base_lr: 0.00001
+base_lr: 0.000001
 
 lr_policy: "step"
 
