@@ -194,6 +194,10 @@ if 'U_^666^' not in os.listdir(recordDir+'data/'):
 ndcg_mean_label_at_imgIdx_f = open(recordDir_data+'ndcg_mean_label_at_imgIdx.txt','w')
 ndcg_mean_label_at_imgIdx_f.close()
 
+# cmp_ndcg_mean_label_at_imgIdx.txt
+ndcg_mean_label_at_imgIdx_f = open(recordDir_data+'cmp_ndcg_mean_label_at_imgIdx.txt','w')
+ndcg_mean_label_at_imgIdx_f.close()
+
 # train_avg_bat_accu_loss.txt
 tr_avg_bat_accu_loss = open(recordDir_data+'train_avg_bat_accu_loss.txt','w')
 tr_avg_bat_accu_loss.close()
