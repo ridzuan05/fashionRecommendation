@@ -174,6 +174,10 @@ def get_ndcg(scores_pos, scores_neg, nr_tuples_pos, nr_tuples_neg, img_idx_pos, 
 
     return (mean_ndcg, ndcg_at, ndcg_label, ndcg_imgIdx)
 
+# results folder
+recordDir = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/training_script/results/'
+recordDir_data = recordDir+'data/U_'+uID+'/'
+
 # ndcg_mean_label_at_imgIdx.txt
 ndcg_mean_label_at_imgIdx_f = open(recordDir_data+'ndcg_mean_label_at_imgIdx.txt','w')
 ndcg_mean_label_at_imgIdx_f.close()
@@ -195,10 +199,6 @@ net = caffe.Net('/local2/home/tong/fashionRecommendation/models/fashionNet_8/fas
 
 # solver
 solver = caffe.SGDSolver('/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/solver_prototxt/fashion_solver_8_k/fashion_solver_8_'+uID+'.prototxt')
-
-# results folder
-recordDir = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/training_script/results/'
-recordDir_data = recordDir+'data/U_'+uID+'/'
 
 if 'results' not in os.listdir('/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/training_script/'):
     os.system('mkdir '+recordDir)
