@@ -222,6 +222,8 @@ val_tuple_num = 276
 # user_number
 user_num = 800
 
+img_idx = 0
+
 params = net.params.keys()
 
 optimal_ndcg_at = []
@@ -256,8 +258,6 @@ for c in range(0,len(cID)):
 
     val_avg_accu = 0
     val_avg_loss = 0
-
-    img_idx = 0
 
     # for saving caffemodel for optimal mean_ndcg
     optimal_mean_ndcg = []
