@@ -30,4 +30,4 @@ for u in range(0,user_num):
         k_fp.write(temp)
     k_fp.close()
 
-os.system('chmod +x control_k/')
+os.system('chmod +x ./control_k/*')
