@@ -17,7 +17,7 @@ if 'control_k' not in os.listdir(s_root):
 # generate control_k.py for each user
 for u in range(0,user_num):
     # open k_fp
-    k_fp = open(s_root+'control_'+str(u)+'.py','w')
+    k_fp = open(s_root+'control_k/control_'+str(u)+'.py','w')
     # write control_k.py
     for i in range(0,len(s_fp)):
         temp = s_fp[i].split('^')
@@ -30,4 +30,4 @@ for u in range(0,user_num):
         k_fp.write(temp)
     k_fp.close()
 
-os.system('chmod +x control_k/*')
+os.system('chmod +x control_k/')
