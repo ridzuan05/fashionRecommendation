@@ -20,8 +20,9 @@ from sklearn.metrics import confusion_matrix
 tUID = '100'
 # caffemodel_idx
 cID = '239168'
-# U_k(next i=0)[10_0.05*(0,1)] training epoch
+# U_k(next i=0)[10_0.0001*(0,1)] training epoch
 end_iter = 410 # 10 training epoch
+val_interval = 8 # 1/5 training epoch
 # set gpu idx
 caffe.set_mode_gpu()
 caffe.set_device(0)
@@ -42,7 +43,7 @@ def test_avg(val_iter, img_idx, val_tuple_num):
     img_idx_pos = []
     img_idx_neg = []
     
-    false_posi_thresh = 0.999
+    false_posi_thresh = 1.0
 
     for i in range(0,val_iter):
         # one test_batch_size computation
@@ -202,7 +203,6 @@ if ('U_test') not in os.listdir(recordDir+'data/'):
 
 k = 0
 start_iter = 0
-val_interval = 8 # 1/5 training epoch
 visual_interval = 4 # 1/10 training epoch
 val_iter = 6 # 1 test epoch
 
@@ -261,7 +261,7 @@ for i in range (start_iter,end_iter+1):
         print("                              train_bat_accu={}, train_bat_loss={}.\n".format(train_bat_accu,train_bat_loss))
 
     # validation, save caffemodel, and stop criteria
-    if ((i%val_interval==0) or (i==end_iter)):
+    if (((i>=320) and (i%val_interval==0)) or (i==end_iter)):
 
         # validation
         val_avg_accu,val_avg_loss,\
@@ -275,7 +275,7 @@ for i in range (start_iter,end_iter+1):
         val_avg_accu_loss_f.write(str(i)+' '+str(val_avg_accu)+' '+str(val_avg_loss)+'\r\n')
         # val_avg_accu_loss_f.txt
         val_avg_accu_loss_f.close()
-        print("\n[U_0/{}]Iters done:{}/{}, val_avg_accu={}, val_avg_loss={}.\n".format(user_num,i,end_iter,val_avg_accu,val_avg_loss))
+        print("\n[U_{}/{}]Iters done:{}/{}, val_avg_accu={}, val_avg_loss={}.\n".format(int(tUID),user_num,i,end_iter,val_avg_accu,val_avg_loss))
         
         # ndcg computation
         mean_ndcg,ndcg_at,\
@@ -373,9 +373,13 @@ for i in range (start_iter,end_iter+1):
             last_ndcg_at.append(float(ndcg[-2].strip('\r\n').split(' ')[n+1]))
         # optimal ndcg_at@(1~30)
         optimal_idx, max_mean_ndcg = max(enumerate(optimal_mean_ndcg), key=operator.itemgetter(1))
-        optimal_mNDCG_id = optimal_idx*val_interval
-        optimal_idx *= 4
-        optimal_idx += 2
+        if (optimal_idx == (len(optimal_mean_ndcg)-1)):
+            optimal_idx = -2
+            optimal_mNDCG_id = i
+        else:
+            optimal_mNDCG_id = optimal_idx*val_interval
+            optimal_idx *= 4
+            optimal_idx += 2
         o_ndcg_size = len(ndcg[optimal_idx].strip('\r\n').split(' '))-1
         optimal_ndcg_at = []
         optimal_ndcg_at_idx = []
@@ -454,6 +458,12 @@ for i in range (start_iter,end_iter+1):
             last_mNDCG = float(ndcg[-4].strip('\r\n').split(' ')[1])
             print("meanNDCG: Initial({},{}), Optimal({},{}), Last({},{})" \
                   .format(initial_mNDCG_id,initial_mNDCG,optimal_mNDCG_id,optimal_mNDCG,last_mNDCG_id,last_mNDCG))
+
+            optimal_mNDCG_id =  optimal_mNDCG_id
+            optimal_mNDCG = max_mean_ndcg
+            optimal_meanNDCG_id_value_f = open(recordDir_data+'optimal_meanNDCG_row_id_value.txt'hah,'w')
+            optimal_meanNDCG_id_value_f.write(str(optimal_idx)+' '+str(optimal_mNDCG_id)+' '+str(optimal_mNDCG)+'\r\n')
+            optimal_meanNDCG_id_value_f.close()
 
         # # stop criteria
         # if val_avg_accu > 0.93:

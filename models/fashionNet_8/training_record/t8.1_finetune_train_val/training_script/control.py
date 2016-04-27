@@ -1,27 +1,33 @@
 #!/usr/bin/env python
-
 # training_script for [U_0, U_799]
 
 import operator
-
 #import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('Agg') # Must be before importing matplotlib.pyplot or pylab!
 import matplotlib.pyplot as plt
-
 import numpy as np
 import sys
 sys.path.insert(0,'/local2/home/tong/caffe-master/python')
 import caffe
-
 import os
 from matplotlib import rc
 rc('mathtext', default='regular')
-
 # valiation & confusion matix
 from sklearn.metrics import confusion_matrix
 
-def test_avg(test_iter, img_idx, val_tuple_num):
+# test User_idx
+uID = '^666^'
+# caffemodel_idx
+cID = ['239168','0']
+# U_k(next i=0)[10_0.0001*(0,1)] training epoch
+end_iter = 410 # 10 training epoch
+val_interval = 8 # 1/5 training epoch
+# set gpu idx
+caffe.set_mode_gpu()
+caffe.set_device(0)
+
+def test_avg(val_iter, img_idx, val_tuple_num):
         
     avg_accu = 0
     avg_loss = 0
@@ -33,13 +39,13 @@ def test_avg(test_iter, img_idx, val_tuple_num):
 
     scores_pos = []
     scores_neg = []
-    	
+        
     img_idx_pos = []
     img_idx_neg = []
     
     false_posi_thresh = 1.0
 
-    for i in range(0,test_iter):
+    for i in range(0,val_iter):
         # one test_batch_size computation
         solver.test_nets[0].forward()
         # for each outfit input
@@ -73,10 +79,10 @@ def test_avg(test_iter, img_idx, val_tuple_num):
 
             # stop when test_dataset has all been tested
             if (img_idx==0):
-                if (i != (test_iter-1)):
+                if (i != (val_iter-1)):
                     # ERROR
                     while(1):
-                        print("ERROR@U_^666^, i != (test_iter-1), ({},{})".format(i,test_iter))
+                        print("ERROR@U_^666^, i != (val_iter-1), ({},{})".format(i,val_iter))
                 break
 
     avg_accu = float(float(avg_accu) / float(val_tuple_num))
@@ -167,25 +173,32 @@ def get_ndcg(scores_pos, scores_neg, nr_tuples_pos, nr_tuples_neg, img_idx_pos, 
         fid_out.close()
 
     return (mean_ndcg, ndcg_at, ndcg_label, ndcg_imgIdx)
-  
+
+# ndcg_mean_label_at_imgIdx.txt
+ndcg_mean_label_at_imgIdx_f = open(recordDir_data+'ndcg_mean_label_at_imgIdx.txt','w')
+ndcg_mean_label_at_imgIdx_f.close()
+
+# train_avg_bat_accu_loss.txt
+tr_avg_bat_accu_loss = open(recordDir_data+'train_avg_bat_accu_loss.txt','w')
+tr_avg_bat_accu_loss.close()
+
+# val_avg_accu_loss.txt
+val_avg_accu_loss_f = open(recordDir_data+'val_avg_accu_loss.txt','w')
+val_avg_accu_loss_f.close()
+
+# optimal_meanNDCG_row_id_value.txts
+optimal_meanNDCG_id_value_f = open(recordDir_data+'optimal_meanNDCG_row_id_value.txt','w')
+optimal_meanNDCG_id_value_f.close()
+
 #for saving caffemodel
 net = caffe.Net('/local2/home/tong/fashionRecommendation/models/fashionNet_8/fashion_deploy_8.prototxt', caffe.TEST)
 
 # solver
-solver = caffe.SGDSolver('/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/solver_prototxt/fashion_solver_8_k/fashion_solver_8_^666^.prototxt')
-
-# caffemodel
-caffemodel_path = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_train_val/fashion_params_8_^333^.caffemodel'
-solver.net.copy_from(caffemodel_path)
-solver.test_nets[0].copy_from(caffemodel_path)
-
-# set gpu idx
-caffe.set_mode_gpu()
-caffe.set_device(0)
+solver = caffe.SGDSolver('/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/solver_prototxt/fashion_solver_8_k/fashion_solver_8_'+uID+'.prototxt')
 
 # results folder
 recordDir = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/training_script/results/'
-recordDir_data = recordDir+'data/U_^666^/'
+recordDir_data = recordDir+'data/U_'+uID+'/'
 
 if 'results' not in os.listdir('/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/training_script/'):
     os.system('mkdir '+recordDir)
@@ -199,126 +212,202 @@ if 'figures' not in os.listdir(recordDir):
 if 'U_^666^' not in os.listdir(recordDir+'data/'):
     os.system('mkdir '+recordDir_data)
 
-k = 0
 start_iter = 0
-# U_^666^(next i=0)[***_****(0,1)] training epoch
-end_iter = ^555^ # training epoch
-test_interval = ^777^ # 1/5 train epoch
-visual_interval = ^999^ # each train iter
-test_iter = ^888^ # 1 test epoch
-test_idx = []
-test_idx.append(0)
-test_num = 6
-for i in range(0,test_num):
-    temp = end_iter-(test_num-1-i)*test_interval
-    test_idx.append(temp)
-
-params = net.params.keys()
-
-solver.net.forward()
-
-train_accu = (start_iter+1)*0
-train_los = (start_iter+1)*0
-
-train_avg_accu = 0
-train_avg_loss = 0
-
-train_cur_accu = 0
-train_cur_loss = 0
-
-val_accu = 0
-val_loss = 0
-
-img_idx = 0
-
-# ndcg_mean_label_at_imgIdx.txt
-ndcg_mean_label_at_imgIdx_f = open(recordDir_data+'ndcg_mean_label_at_imgIdx.txt','w')
-# rankNet_val_accu_loss.txt
-rankNet_val_accu_loss_f = open(recordDir_data+'rankNet_val_accu_loss.txt','w')
+visual_interval = 4 # 1/10 training epoch
+val_iter = 6 # 1 test epoch
 
 # val_tuple_num
 val_tuple_num = 276
 
-tr_avg_bat_accu_loss = open(recordDir_data+'train_avg_bat_accu_loss.txt','w')
-
 # user_number
 user_num = 800
 
-# for saving caffemodel for optimal mean_ndcg
-optimal_mean_ndcg = []
-optimal_caffemodel = []
+params = net.params.keys()
 
-for i in range (start_iter,end_iter+1):
-    # save train data (just for reference, not using threshold_fp=0.999)
-    train_cur_accu = solver.net.blobs['accuracy'].data
-    train_cur_loss = solver.net.blobs['loss'].data
-    train_accu = train_accu + train_cur_accu
-    train_los = train_los + train_cur_loss
-    train_avg_accu = train_accu/(i+1)
-    train_avg_loss = train_los/(i+1)
-    tr_avg_bat_accu_loss.write(str(i)+' '+str(train_avg_accu)+' '+str(train_avg_loss)+' '+str(train_cur_accu)+' '+str(train_cur_loss)+'\r\n')
-    if(i%visual_interval==0):
-        print("\n[U_^666^/{}]Iters done:{}/{}, avg_accu={}, avg_loss={}.\n".format(user_num,i,end_iter,train_avg_accu,train_avg_loss))
-        print("                                bat_accu={}, bat_loss={}.\n".format(train_cur_accu,train_cur_loss))
+optimal_ndcg_at = []
+optimal_ndcg_at_idx = []
 
-    # validation, save caffemodel, and stop criteria
-    if i in test_idx:
-        # validation
-        val_accu,val_loss,\
-        scores_pos,scores_neg,\
-        nr_tuples_pos,nr_tuples_neg,\
-        img_idx_pos,img_idx_neg \
-        = test_avg(test_iter,img_idx,val_tuple_num)
-        print("\n[U_^666^/{}]Iters done:{}/{}, VAL_accu={}, VAL_loss={}.\n".format(user_num,i,end_iter,val_accu,val_loss))
-        # ndcg computation
-        mean_ndcg,ndcg_at,\
-        ndcg_label,ndcg_imgIdx\
-        = get_ndcg(scores_pos,scores_neg,\
-        	  	   nr_tuples_pos,nr_tuples_neg,\
-        		   img_idx_pos,img_idx_neg)
-        # softmax test accu/loss
-        rankNet_val_accu_loss_f.write(str(i)+' '+str(val_accu)+' '+str(val_loss)+'\r\n')
-        # record mean_ndcg & ndcg_label & ndcg_at & ndcg_imgIdx
-        optimal_mean_ndcg.append(mean_ndcg)
-        ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+str(mean_ndcg)+'\r\n') # mean_ndcg 
-        temp = str(ndcg_at[0])
-        temp0 = str(ndcg_label[0])
-        temp1 = str(ndcg_imgIdx[0])
-        for n in range(1,len(ndcg_at)):
-            temp += ' '+str(ndcg_at[n])
-            temp0 += ' '+str(ndcg_label[n])
-            temp1 += ' '+str(ndcg_imgIdx[n])
-        ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp0+'\r\n') # ndcg_label (0 or 1)
-        ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp+'\r\n') # ndcg_at
-        ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp1+'\r\n') # ndcg_imgIdx
-        
-        # save caffemodel
-        source_params = {pr: (solver.net.params[pr][0].data,solver.net.params[pr][1].data) for pr in params}
-        target_params = {pr: (net.params[pr][0].data,net.params[pr][1].data) for pr in params}
-        for pr in params:
-            target_params[pr][0][...] = source_params[pr][0] #weights
-            target_params[pr][1][...] = source_params[pr][1] #bias
-        net.save(recordDir_data+'fashion_params_2_'+str(i)+'.caffemodel') 
-        
-        # stop criteria
-        if val_accu > 0.93:
-            k += 1
-            if (k > 10):
-                print '\n\nTest accuracy: {} > 0.93 counted for 10 times\n\n'.format(val_accu)
-                break
+first_ndcg_at = []
+first_ndcg_at_idx = []
 
-    # update parameters
-    solver.step(1)
+cmp_optimal_ndcg_at = []
+cmp_optimal_ndcg_at_idx = []
 
-# save caffemodel for optimal mean_ndcg of this user
-optimal_idx, max_mean_ndcg = max(enumerate(optimal_mean_ndcg), key=operator.itemgetter(1))
-for i in range(0,len(test_idx)):
-    if (optimal_idx != i):
-        os.system('rm '+recordDir_data+'fashion_params_8_'+str(test_idx[i])+'.caffemodel')
+cmp_first_ndcg_at = []
+cmp_first_ndcg_at_idx = []
 
-# ndcg_mean_label_at_imgIdx.txt
-ndcg_mean_label_at_imgIdx_f.close()
-# rankNet_val_accu_loss_f.txt
-rankNet_val_accu_loss_f.close()
-# tr_avg_bat_accu_loss.txt
-tr_avg_bat_accu_loss.close()
+for c in range(0,len(cID)):
+
+    # caffemodel
+    caffemodel_path = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_train_val/fashion_params_8_'+cID[c]+'.caffemodel'
+    solver.net.copy_from(caffemodel_path)
+    solver.test_nets[0].copy_from(caffemodel_path)
+
+    solver.net.forward()
+
+    train_sum_accu = (start_iter+1)*0
+    train_sum_loss = (start_iter+1)*0
+
+    train_avg_accu = 0
+    train_avg_loss = 0
+
+    train_bat_accu = 0
+    train_bat_loss = 0
+
+    val_avg_accu = 0
+    val_avg_loss = 0
+
+    img_idx = 0
+
+    # for saving caffemodel for optimal mean_ndcg
+    optimal_mean_ndcg = []
+
+    optimal_mNDCG_id = 0
+
+    for i in range (start_iter,end_iter+1):
+        # save train data (just for reference, not using threshold_fp=0.999)
+        train_bat_accu = solver.net.blobs['accuracy'].data
+        train_bat_loss = solver.net.blobs['rank_loss'].data
+        train_sum_accu = train_sum_accu + train_bat_accu
+        train_sum_loss = train_sum_loss + train_bat_loss
+        train_avg_accu = train_sum_accu/(i+1)
+        train_avg_loss = train_sum_loss/(i+1)
+        tr_avg_bat_accu_loss = open(recordDir_data+'train_avg_bat_accu_loss.txt','a')
+        tr_avg_bat_accu_loss.write(str(i)+' '+str(train_avg_accu)+' '+str(train_avg_loss)+' '+str(train_bat_accu)+' '+str(train_bat_loss)+'\r\n')
+        tr_avg_bat_accu_loss.close()
+        if(i%visual_interval==0):
+            print("\n{}~[U_{}/{}]Iters done:{}/{}, train_avg_accu={}, train_avg_loss={}.\n".format(c,int(tUID),user_num,i,end_iter,train_avg_accu,train_avg_loss))
+            print("                                  train_bat_accu={}, train_bat_loss={}.\n".format(train_bat_accu,train_bat_loss))
+
+        # validation, save caffemodel, and stop criteria
+        if (((i>=320) and (i%val_interval==0)) or (i==end_iter)):
+
+            # validation
+            val_avg_accu,val_avg_loss,\
+            scores_pos,scores_neg,\
+            nr_tuples_pos,nr_tuples_neg,\
+            img_idx_pos,img_idx_neg \
+            = test_avg(val_iter,img_idx,val_tuple_num)
+            # val_avg_accu_loss.txt
+            val_avg_accu_loss_f = open(recordDir_data+'val_avg_accu_loss.txt','a')
+            # softmax test accu/loss
+            val_avg_accu_loss_f.write(str(i)+' '+str(val_avg_accu)+' '+str(val_avg_loss)+'\r\n')
+            # val_avg_accu_loss_f.txt
+            val_avg_accu_loss_f.close()
+            print("\n{}~[U_{}/{}]Iters done:{}/{}, val_avg_accu={}, val_avg_loss={}.\n".format(c,int(tUID),user_num,i,end_iter,val_avg_accu,val_avg_loss))
+
+            # ndcg computation
+            mean_ndcg,ndcg_at,\
+            ndcg_label,ndcg_imgIdx\
+            = get_ndcg(scores_pos,scores_neg,\
+                       nr_tuples_pos,nr_tuples_neg,\
+                       img_idx_pos,img_idx_neg)
+
+            # record mean_ndcg & ndcg_label & ndcg_at & ndcg_imgIdx
+            optimal_mean_ndcg.append(mean_ndcg)
+            if (c==0):
+                ndcg_mean_label_at_imgIdx_f = open(recordDir_data+'ndcg_mean_label_at_imgIdx.txt','a')
+            else:
+                ndcg_mean_label_at_imgIdx_f = open(recordDir_data+'cmp_ndcg_mean_label_at_imgIdx.txt','a')
+            ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+str(mean_ndcg)+'\r\n') # mean_ndcg 
+            temp = str(ndcg_at[0])
+            temp0 = str(ndcg_label[0])
+            temp1 = str(ndcg_imgIdx[0])
+            for n in range(1,len(ndcg_at)):
+                temp += ' '+str(ndcg_at[n])
+                temp0 += ' '+str(ndcg_label[n])
+                temp1 += ' '+str(ndcg_imgIdx[n])
+            ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp0+'\r\n') # ndcg_label (0 or 1)
+            ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp+'\r\n') # ndcg_at
+            ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp1+'\r\n') # ndcg_imgIdx
+            ndcg_mean_label_at_imgIdx_f.close()
+            
+            if (c==0):
+                # save caffemodel
+                source_params = {pr: (solver.net.params[pr][0].data,solver.net.params[pr][1].data) for pr in params}
+                target_params = {pr: (net.params[pr][0].data,net.params[pr][1].data) for pr in params}
+                for pr in params:
+                    target_params[pr][0][...] = source_params[pr][0] #weights
+                    target_params[pr][1][...] = source_params[pr][1] #bias
+                net.save(recordDir_data+'fashion_params_8_'+str(i)+'.caffemodel') 
+
+                if (i==end_iter):
+                    # NDCG_at.png
+                    ndcg = open(recordDir_data+'ndcg_mean_label_at_imgIdx.txt').readlines()
+                    # optimal ndcg_at@(1~30)
+                    optimal_idx, max_mean_ndcg = max(enumerate(optimal_mean_ndcg), key=operator.itemgetter(1))
+                    if (optimal_idx == (len(optimal_mean_ndcg)-1)):
+                        optimal_idx = -2
+                        optimal_mNDCG_id = i
+                    else:
+                        optimal_mNDCG_id = optimal_idx*val_interval
+                        optimal_idx *= 4
+                        optimal_idx += 2
+                    o_ndcg_size = len(ndcg[optimal_idx].strip('\r\n').split(' '))-1
+                    for n in range(0,o_ndcg_size):
+                        optimal_ndcg_at_idx.append(n+1)
+                        optimal_ndcg_at.append(float(ndcg[optimal_idx].strip('\r\n').split(' ')[n+1]))
+                    # first ndcg_at@(1~30)
+                    f_ndcg_size = len(ndcg[2].strip('\r\n').split(' '))-1
+                    for n in range(0,f_ndcg_size):
+                        first_ndcg_at_idx.append(n+1)
+                        first_ndcg_at.append(float(ndcg[2].strip('\r\n').split(' ')[n+1]))       
+
+                    optimal_mNDCG_id = optimal_mNDCG_id
+                    optimal_mNDCG = max_mean_ndcg
+                    optimal_meanNDCG_id_value_f = open(recordDir_data+'optimal_meanNDCG_row_id_value.txt','a')
+                    optimal_meanNDCG_id_value_f.write(str(optimal_idx)+' '+str(optimal_mNDCG_id)+' '+str(optimal_mNDCG)+'\r\n')
+                    optimal_meanNDCG_id_value_f.close()
+            else:
+                if (i==end_iter):
+                    # NDCG_at.png
+                    ndcg = open(recordDir_data+'cmp_ndcg_mean_label_at_imgIdx.txt').readlines()
+                    # optimal ndcg_at@(1~30)
+                    optimal_idx, max_mean_ndcg = max(enumerate(optimal_mean_ndcg), key=operator.itemgetter(1))
+                    if (optimal_idx == (len(optimal_mean_ndcg)-1)):
+                        optimal_idx = -2
+                        optimal_mNDCG_id = i
+                    else:
+                        optimal_mNDCG_id = optimal_idx*val_interval
+                        optimal_idx *= 4
+                        optimal_idx += 2
+                    o_ndcg_size = len(ndcg[optimal_idx].strip('\r\n').split(' '))-1
+                    for n in range(0,o_ndcg_size):
+                        cmp_optimal_ndcg_at_idx.append(n+1)
+                        cmp_optimal_ndcg_at.append(float(ndcg[optimal_idx].strip('\r\n').split(' ')[n+1]))
+                    # first ndcg_at@(1~30)
+                    f_ndcg_size = len(ndcg[2].strip('\r\n').split(' '))-1
+                    for n in range(0,f_ndcg_size):
+                        cmp_first_ndcg_at_idx.append(n+1)
+                        cmp_first_ndcg_at.append(float(ndcg[2].strip('\r\n').split(' ')[n+1]))
+
+                    optimal_mNDCG_id = optimal_mNDCG_id
+                    optimal_mNDCG = max_mean_ndcg
+                    optimal_meanNDCG_id_value_f = open(recordDir_data+'optimal_meanNDCG_row_id_value.txt','a')
+                    optimal_meanNDCG_id_value_f.write(str(optimal_idx)+' '+str(optimal_mNDCG_id)+' '+str(optimal_mNDCG)+'\r\n')
+                    optimal_meanNDCG_id_value_f.close()
+
+                    fig = plt.figure()
+                    ax_left = fig.add_subplot(111)
+                    ax_left.plot(optimal_ndcg_at_idx, optimal_ndcg_at, '--g', label = 'Optimal_NDCG@')
+                    ax_left.plot(first_ndcg_at_idx, first_ndcg_at, '--b', label = 'Initial_NDCG@')
+                    ax_left.plot(cmp_optimal_ndcg_at_idx, cmp_optimal_ndcg_at, '-.g', label = 'Cmp_Optimal_NDCG@')
+                    ax_left.plot(cmp_first_ndcg_at_idx, cmp_first_ndcg_at, '-.b', label = 'Cmp_Initial_NDCG@')
+                    lines_left, labels_left = ax_left.get_legend_handles_labels()   
+                    ax_left.legend(lines_left, labels_left, loc=0)
+                    ax_left.grid()
+                    ax_left.set_xlabel("m = (1,2,...,30)")
+                    ax_left.set_ylabel("mean_NDCG@")
+                    ax_left.set_title("mean_NDCG@m of User_{}".format(tUID))
+                    plt.savefig(recordDir_data+'NDCG_at.png', bbox_inches='tight')
+                    plt.close('all')
+
+        # update parameters
+        solver.step(1)
+
+    if (c==0):
+        # save caffemodel for optimal mean_ndcg of this user
+        for i in range (320,end_iter+1):
+            if ((i%val_interval==0) or (i==end_iter)):
+                if (optimal_mNDCG_id != i):
+                    os.system('rm '+recordDir_data+'fashion_params_8_'+str(i)+'.caffemodel')

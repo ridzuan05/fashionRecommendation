@@ -3,27 +3,16 @@
 import os
 
 # source control_k.py for modification
-s_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user/training_script/'
+s_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/training_script/'
 
-# open source control_k.py
-s_fp = open(s_root+'control_k.py').readlines()
+# open source control.py
+s_fp = open(s_root+'control.py').readlines()
 
 # user_number
-size_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_2/training_record/all_user/'
-all_train_size = open(size_root+'data_size/all_train_size.txt').readlines()
-user_num = len(all_train_size)
+user_num = 800
 
-# ^666^ to user_seq_idx[0~988]
-# ^555^ to end_iter
-end_iter = open(size_root+'train_test_params/end_iter.txt').readlines()
-# ^777^ to test_interval
-test_interval = open(size_root+'train_test_params/test_interval.txt').readlines()
-# ^999^ to visual_interval
-visual_interval = open(size_root+'train_test_params/visual_interval.txt').readlines()
-# ^888^ to test_iter
-test_iter = open(size_root+'train_test_params/test_iter.txt').readlines()
-# ^333^ general caffemodel_idx
-***
+if 'control_k' not in os.listdir(s_root):
+    os.system('mkdir '+s_root+'control_k')
 
 # generate control_k.py for each user
 for u in range(0,user_num):
@@ -35,18 +24,10 @@ for u in range(0,user_num):
         if(len(temp)==3):	        	
             if(temp[1]==str(666)):
 	        temp[1] = str(u)
-            elif(temp[1]==str(555)):
-       		temp[1] = end_iter[u].strip('\r\n').split(' ')[1]
-            elif(temp[1]==str(777)):
-       		temp[1] = test_interval[u].strip('\r\n').split(' ')[1]
-            elif(temp[1]==str(999)):
-        	temp[1] = visual_interval[u].strip('\r\n').split(' ')[1]
-            elif(temp[1]==str(888)):
-        	temp[1] = test_iter[u].strip('\r\n').split(' ')[1]
             temp = temp[0]+temp[1]+temp[2]
         else:
             temp = temp[0]
         k_fp.write(temp)
     k_fp.close()
 
-os.system('chmod +x control_*')
+os.system('chmod +x control_k/*')
