@@ -19,9 +19,10 @@ from sklearn.metrics import confusion_matrix
 # test User_idx
 tUID = '100'
 # caffemodel_idx
-cID = '239168'
+# cID = '239168'
+cID = '0'
 # U_k(next i=0)[10_0.0001*(0,1)] training epoch
-end_iter = 410 # 10 training epoch
+end_iter = 2050 # 50 training epoch
 val_interval = 8 # 1/5 training epoch
 # set gpu idx
 caffe.set_mode_gpu()
@@ -261,7 +262,7 @@ for i in range (start_iter,end_iter+1):
         print("                              train_bat_accu={}, train_bat_loss={}.\n".format(train_bat_accu,train_bat_loss))
 
     # validation, save caffemodel, and stop criteria
-    if (((i>=320) and (i%val_interval==0)) or (i==end_iter)):
+    if (((i>=0) and (i%val_interval==0)) or (i==end_iter)):
 
         # validation
         val_avg_accu,val_avg_loss,\
@@ -461,7 +462,7 @@ for i in range (start_iter,end_iter+1):
 
             optimal_mNDCG_id =  optimal_mNDCG_id
             optimal_mNDCG = max_mean_ndcg
-            optimal_meanNDCG_id_value_f = open(recordDir_data+'optimal_meanNDCG_row_id_value.txt'hah,'w')
+            optimal_meanNDCG_id_value_f = open(recordDir_data+'optimal_meanNDCG_row_id_value.txt','w')
             optimal_meanNDCG_id_value_f.write(str(optimal_idx)+' '+str(optimal_mNDCG_id)+' '+str(optimal_mNDCG)+'\r\n')
             optimal_meanNDCG_id_value_f.close()
 

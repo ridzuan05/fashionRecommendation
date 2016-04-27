@@ -363,6 +363,14 @@ for c in range(0,len(cID)):
                     optimal_meanNDCG_id_value_f.write(str(optimal_idx)+' '+str(optimal_mNDCG_id)+' '+str(optimal_mNDCG)+'\r\n')
                     optimal_meanNDCG_id_value_f.close()
             else:
+                # save caffemodel
+                source_params = {pr: (solver.net.params[pr][0].data,solver.net.params[pr][1].data) for pr in params}
+                target_params = {pr: (net.params[pr][0].data,net.params[pr][1].data) for pr in params}
+                for pr in params:
+                    target_params[pr][0][...] = source_params[pr][0] #weights
+                    target_params[pr][1][...] = source_params[pr][1] #bias
+                net.save(recordDir_data+'cmp_fashion_params_8_'+str(i)+'.caffemodel')
+
                 if (i==end_iter):
                     # NDCG_at.png
                     ndcg = open(recordDir_data+'cmp_ndcg_mean_label_at_imgIdx.txt').readlines()
@@ -409,9 +417,12 @@ for c in range(0,len(cID)):
         # update parameters
         solver.step(1)
 
-    if (c==0):
-        # save caffemodel for optimal mean_ndcg of this user
-        for i in range (320,end_iter+1):
-            if ((i%val_interval==0) or (i==end_iter)):
-                if (optimal_mNDCG_id != i):
+    # save caffemodel for optimal mean_ndcg of this user
+    for i in range (320,end_iter+1):
+        if ((i%val_interval==0) or (i==end_iter)):
+            if (optimal_mNDCG_id != i):
+                if (c==0):
                     os.system('rm '+recordDir_data+'fashion_params_8_'+str(i)+'.caffemodel')
+                else:
+                    os.system('rm '+recordDir_data+'cmp_fashion_params_8_'+str(i)+'.caffemodel')
+
