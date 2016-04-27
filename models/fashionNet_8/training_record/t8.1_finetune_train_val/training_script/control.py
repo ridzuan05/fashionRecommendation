@@ -276,7 +276,7 @@ for c in range(0,len(cID)):
         tr_avg_bat_accu_loss.write(str(i)+' '+str(train_avg_accu)+' '+str(train_avg_loss)+' '+str(train_bat_accu)+' '+str(train_bat_loss)+'\r\n')
         tr_avg_bat_accu_loss.close()
         if(i%visual_interval==0):
-            print("\n{}~[U_{}/{}]Iters done:{}/{}, train_avg_accu={}, train_avg_loss={}.\n".format(c,int(tUID),user_num,i,end_iter,train_avg_accu,train_avg_loss))
+            print("\n{}~[U_{}/{}]Iters done:{}/{}, train_avg_accu={}, train_avg_loss={}.\n".format(c,int(uID),user_num,i,end_iter,train_avg_accu,train_avg_loss))
             print("                                  train_bat_accu={}, train_bat_loss={}.\n".format(train_bat_accu,train_bat_loss))
 
         # validation, save caffemodel, and stop criteria
@@ -294,7 +294,7 @@ for c in range(0,len(cID)):
             val_avg_accu_loss_f.write(str(i)+' '+str(val_avg_accu)+' '+str(val_avg_loss)+'\r\n')
             # val_avg_accu_loss_f.txt
             val_avg_accu_loss_f.close()
-            print("\n{}~[U_{}/{}]Iters done:{}/{}, val_avg_accu={}, val_avg_loss={}.\n".format(c,int(tUID),user_num,i,end_iter,val_avg_accu,val_avg_loss))
+            print("\n{}~[U_{}/{}]Iters done:{}/{}, val_avg_accu={}, val_avg_loss={}.\n".format(c,int(uID),user_num,i,end_iter,val_avg_accu,val_avg_loss))
 
             # ndcg computation
             mean_ndcg,ndcg_at,\
@@ -398,7 +398,7 @@ for c in range(0,len(cID)):
                     ax_left.grid()
                     ax_left.set_xlabel("m = (1,2,...,30)")
                     ax_left.set_ylabel("mean_NDCG@")
-                    ax_left.set_title("mean_NDCG@m of User_{}".format(tUID))
+                    ax_left.set_title("mean_NDCG@m of User_{}".format(uID))
                     plt.savefig(recordDir_data+'NDCG_at.png', bbox_inches='tight')
                     plt.close('all')
 
