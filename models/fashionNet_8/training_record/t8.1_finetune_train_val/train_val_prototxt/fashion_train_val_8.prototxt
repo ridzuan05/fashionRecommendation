@@ -311,12 +311,12 @@ layer {
   name:   "conv2" # conv2_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult: 1
     decay_mult:1
     name:"conv2_w_"
   }
   param{
-    lr_mult:2
+    lr_mult: 2
     decay_mult:0
     name:"conv2_b_"
   }
@@ -374,12 +374,12 @@ layer {
   name:   "conv3" # conv3_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult: 1
     decay_mult:1
     name:"conv3_w_"
   }
   param{
-    lr_mult:2
+    lr_mult: 2
     decay_mult:0
     name:"conv3_b_"
   }
@@ -411,12 +411,12 @@ layer {
   name:   "conv4" # conv4_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult: 1
     decay_mult:1
     name:"conv4_w_"
   }
   param{
-    lr_mult:2
+    lr_mult: 2
     decay_mult:0
     name:"conv4_b_"
   }
@@ -448,12 +448,12 @@ layer {
   name:   "conv5" # conv5_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult: 1
     decay_mult:1
     name:"conv5_w_"
   }
   param{
-    lr_mult:2
+    lr_mult: 2
     decay_mult:0
     name:"conv5_b_"
   }
@@ -634,7 +634,7 @@ layer{
   bottom: "tbs_imgs_n"
   top:    "conv1_n"
   param{
-    lr_mult: 100 
+    lr_mult: 100
     decay_mult:1
     name:"conv1_w_"
   }

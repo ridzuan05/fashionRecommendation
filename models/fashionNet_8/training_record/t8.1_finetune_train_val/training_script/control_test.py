@@ -21,8 +21,8 @@ tUID = '100'
 # caffemodel_idx
 # cID = '239168'
 cID = '0'
-# U_k(next i=0)[10_0.0001*(0,1)] training epoch
-end_iter = 2050 # 50 training epoch
+# U_k(next i=0)[100_0.0001*(1,100)] training epoch
+end_iter = 4100 # 100 training epoch
 val_interval = 8 # 1/5 training epoch
 # set gpu idx
 caffe.set_mode_gpu()
