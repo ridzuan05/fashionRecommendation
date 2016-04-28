@@ -26,7 +26,7 @@ end_iter = [410, 738]
 val_interval = 8 # 1/5 training epoch
 # set gpu idx
 caffe.set_mode_gpu()
-caffe.set_device(0)
+caffe.set_device(2)
 
 def test_avg(val_iter, img_idx, val_tuple_num):
         
@@ -269,7 +269,7 @@ for c in range(0,len(cID)):
 
     optimal_mNDCG_id = 0
 
-    start_val_idx = end_iter[c]-88
+    start_val_idx = end_iter[c]-88+6
 
     for i in range (start_iter,end_iter[c]+1):
         # save train data (just for reference, not using threshold_fp=0.999)
