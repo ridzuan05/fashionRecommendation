@@ -16,7 +16,7 @@ rc('mathtext', default='regular')
 # valiation & confusion matix
 from sklearn.metrics import confusion_matrix
 
-# test folder
+# test folder 'U_test' or 'U_test2'
 test_fd = 'U_test'
 # test User_idx
 tUID = '1'
