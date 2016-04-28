@@ -63,7 +63,7 @@ def test_avg(val_iter, img_idx, val_tuple_num):
             avg_loss += np.log(1+1.0/np.exp(diff))
 
             # for scores_pos & nr_tuples_pos[count_posi] & img_idx_pos
-            if  ((j%6==0) and (posi_pref_score<=false_posi_thresh)):
+            if  ((img_idx%6==0) and (posi_pref_score<=false_posi_thresh)):
                 scores_pos.append(posi_pref_score)
                 count_posi += 1
                 img_idx_pos.append(img_idx)
