@@ -4,27 +4,27 @@ name: "fashionNet_1"
 ########## training data
 ###### posi outfit
 layer{
-  name:"top"
+  name: "top"
   type: "ImageData"
-  top:"top"
-  top:"label_top" # always 1
-  include{
+  top: "top"
+  top: "label_top" # always 1
+  include {
     phase: TRAIN
   }
-  transform_param{
-    mirror:true
-    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/top_mean.binaryproto"
+  transform_param {
+    mirror: true
+    mean_file: "/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/top_mean.binaryproto"
   }
-  image_data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_1/data_prep/imgdata_list/train_p_top.txt"
-    batch_size:30
-    #backend:LMDB
+  image_data_param {
+    source: "/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/train_p_top.txt"
+    batch_size: 30
+    #backend: LMDB
   }
 }
 layer{
-  name:"bot"
+  name: "bot"
   type: "ImageData"
-  top:"bot"
+  top: "bot"
   top:"label_bot" # always 1
   include{
     phase: TRAIN
@@ -34,16 +34,16 @@ layer{
     mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/bot_mean.binaryproto"
   }
   image_data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_1/data_prep/imgdata_list/train_p_bot.txt"
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/train_p_bot.txt"
     batch_size:30
     #backend:LMDB
   }
 }
 layer{
-  name:"sho"
+  name: "sho"
   type: "ImageData"
-  top:"sho"
-  top:"label_sho" # always 1
+  top: "sho"
+  top: "label_sho" # always 1
   include{
     phase: TRAIN
   }
@@ -52,17 +52,17 @@ layer{
     mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/sho_mean.binaryproto"
   }
   image_data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_1/data_prep/imgdata_list/train_p_sho.txt"
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/train_p_sho.txt"
     batch_size:30
     #backend:LMDB
   }
 }
 ###### nega outfit
 layer {
-  name:"top_n"
+  name: "top_n"
   type: "ImageData"
-  top:"top_n"
-  top:"label_top_n" # always 0
+  top: "top_n"
+  top: "label_top_n" # always 0
   include {
     phase: TRAIN
   }
@@ -71,16 +71,16 @@ layer {
     mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/top_mean.binaryproto"
   }
   image_data_param {
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_1/data_prep/imgdata_list/train_n_top.txt"
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/train_n_top.txt"
     batch_size:30
     #backend:LMDB
   }
 }
 layer{
-  name:"bot_n"
+  name: "bot_n"
   type: "ImageData"
-  top:"bot_n"
-  top:"label_bot_n" # always 0
+  top: "bot_n"
+  top: "label_bot_n" # always 0
   include{
     phase: TRAIN
   }
@@ -89,144 +89,138 @@ layer{
     mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/bot_mean.binaryproto"
   }
   image_data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_1/data_prep/imgdata_list/train_n_bot.txt"
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/train_n_bot.txt"
     batch_size:30
     #backend:LMDB
   }
 }
-layer{
-  name:"sho_n"
+layer {
+  name: "sho_n"
   type: "ImageData"
-  top:"sho_n"
-  top:"label_sho_n" #always 0
-  include{
+  top: "sho_n"
+  top: "label_sho_n" #always 0
+  include {
     phase: TRAIN
   }
-  transform_param{
+  transform_param {
     mirror:true
     mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/sho_mean.binaryproto"
   }
-  image_data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_1/data_prep/imgdata_list/train_n_sho.txt"
+  image_data_param {
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/train_n_sho.txt"
     batch_size:30
     #backend:LMDB
   }
 }
 ########## validation data
 ###### posi outfit
-layer{
-  name:"top"
+layer {
+  name: "top"
   type: "ImageData"
-  top:"top"
-  top:"label_top" # always 1
+  top: "top"
+  top: "label_top" # always 1
   include{
     phase: TEST
   }
   transform_param {
     mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/top_mean.binaryproto"
   }
-  image_data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_1/data_prep/imgdata_list/val_p_top.txt"
+  image_data_param {
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/val_p_top.txt"
     batch_size:50
-    #backend:LMDB
   }
 }
-layer{
-  name:"bot"
+layer {
+  name: "bot"
   type: "ImageData"
-  top:"bot"
-  top:"label_bot" # always 1
-  include{
+  top: "bot"
+  top: "label_bot" # always 1
+  include {
     phase: TEST
   }
-  transform_param{
+  transform_param {
     mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/bot_mean.binaryproto"
   }
-  image_data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_1/data_prep/imgdata_list/val_p_bot.txt"
+  image_data_param {
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/val_p_bot.txt"
     batch_size:50
-    #backend:LMDB
   }
 }
-layer{
-  name:"sho"
+layer {
+  name: "sho"
   type: "ImageData"
-  top:"sho"
-  top:"label_sho" # always 1
-  include{
+  top: "sho"
+  top: "label_sho" # always 1
+  include {
     phase: TEST
   }
-  transform_param{
+  transform_param {
     mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/sho_mean.binaryproto"
   }
-  image_data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_1/data_prep/imgdata_list/val_p_sho.txt"
+  image_data_param {
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/val_p_sho.txt"
     batch_size:50
-    #backend:LMDB
   }
 }
 ###### nega outfit
-layer{
-  name:"top_n"
+layer {
+  name: "top_n"
   type: "ImageData"
-  top:"top_n"
-  top:"label_top_n" # always 0
-  include{
+  top: "top_n"
+  top: "label_top_n" # always 0
+  include {
     phase: TEST
   }
-  transform_param{
+  transform_param {
     mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/top_mean.binaryproto"
   }
-  image_data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_1/data_prep/imgdata_list/val_n_top.txt"
+  image_data_param {
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/val_n_top.txt"
     batch_size:50
-    #backend:LMDB
   }
 }
-layer{
-  name:"bot_n"
+layer {
+  name: "bot_n"
   type: "ImageData"
-  top:"bot_n"
-  top:"label_bot_n" # always 0
-  include{
+  top: "bot_n"
+  top: "label_bot_n" # always 0
+  include {
     phase: TEST
   }
-  transform_param{
+  transform_param {
     mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/bot_mean.binaryproto"
   }
-  image_data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_1/data_prep/imgdata_list/val_n_bot.txt"
+  image_data_param {
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/val_n_bot.txt"
     batch_size:50
-    #backend:LMDB
   }
 }
-layer{
-  name:"sho_n"
+layer {
+  name: "sho_n"
   type: "ImageData"
-  top:"sho_n"
-  top:"label_sho_n" # always 0
-  include{
+  top: "sho_n"
+  top: "label_sho_n" # always 0
+  include {
     phase: TEST
   }
-  transform_param{
+  transform_param {
     mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/sho_mean.binaryproto"
   }
-  image_data_param{
-    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_1/data_prep/imgdata_list/val_n_sho.txt"
+  image_data_param {
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/val_n_sho.txt"
     batch_size:50
-    #backend:LMDB
   }
 }
 ############################ left side (positive) net
-layer{
+layer {
   name: "conv1" # conv1_top
   type: "Convolution"
   bottom: "top"
-  top:"conv1_top"
+  top: "conv1_top"
   param{
-    lr_mult:1 
-    decay_mult:1
-    name:"conv1_w_"
+    lr_mult: 1 
+    decay_mult: 1
+    name:"conv1_w_" 
   }
   param{
     lr_mult:2
@@ -2925,7 +2919,7 @@ layer{
   type:"RankLoss"
   bottom:"like"
   bottom:"like_n"
-  top:"rank_Loss"
+  top:"rank_loss"
 }
 ########################### better visualization & show accuracy
 layer {
