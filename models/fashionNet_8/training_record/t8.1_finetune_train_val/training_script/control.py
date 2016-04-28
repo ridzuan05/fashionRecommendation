@@ -348,6 +348,7 @@ for c in range(0,len(cID)):
                         optimal_mNDCG_id = i
                     else:
                         optimal_mNDCG_id = optimal_idx*val_interval
+                        optimal_mNDCG_id += start_val_idx
                         optimal_idx *= 4
                         optimal_idx += 2
                     o_ndcg_size = len(ndcg[optimal_idx].strip('\r\n').split(' '))-1
@@ -384,6 +385,7 @@ for c in range(0,len(cID)):
                         optimal_mNDCG_id = i
                     else:
                         optimal_mNDCG_id = optimal_idx*val_interval
+                        optimal_mNDCG_id += start_val_idx
                         optimal_idx *= 4
                         optimal_idx += 2
                     o_ndcg_size = len(ndcg[optimal_idx].strip('\r\n').split(' '))-1
