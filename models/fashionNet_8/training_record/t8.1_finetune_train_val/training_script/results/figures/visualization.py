@@ -65,27 +65,30 @@ for u in range(0,user_num):
 	
 	# optimal mean_ndcg, including initial caffemodel (namely, the general caffemodel)
 	optimal_meanNDCG_row_id_value = open(root+'training_script/results/data/U_'+str(u)+'/optimal_meanNDCG_row_id_value.txt').readlines()
+
 	optimal_idx = int(optimal_meanNDCG_row_id_value[0].strip('\r\n').split(' ')[0])
-	temp_o = int(optimal_meanNDCG_row_id_value[0].strip('\r\n').split(' ')[2])
-	
-	cmp_optimal_meanNDCG_row_id_value = open(root+'training_script/results/data/U_'+str(u)+'/cmp_optimal_meanNDCG_row_id_value.txt').readlines()
-	cmp_optimal_idx =  int(cmp_optimal_meanNDCG_row_id_value[0].strip('\r\n').split(' ')[0])
-	cmp_temp_o = int(cmp_optimal_meanNDCG_row_id_value[0].strip('\r\n').split(' ')[2])
+	temp_o = float(optimal_meanNDCG_row_id_value[0].strip('\r\n').split(' ')[2])
+
+	cmp_optimal_idx =  int(optimal_meanNDCG_row_id_value[1].strip('\r\n').split(' ')[0])
+	cmp_temp_o = float(optimal_meanNDCG_row_id_value[1].strip('\r\n').split(' ')[2])
 	
 	optimal_mean_ndcg += temp_o
 	count_o += 1.0
 	cmp_optimal_mean_ndcg += cmp_temp_o
 	cmp_count_o += 1.0
 
+	optimal_top10_posi_num_temp = 0.0
+
 	for i in range(0,posi_num_length):
 		if (1==int(float(ndcg[optimal_idx-1].strip('\r\n').split(' ')[i+1]))):
-			optimal_top10_posi_num += 1.0
+			optimal_top10_posi_num_temp += 1.0
 		if (1==int(float(ndcg[2].strip('\r\n').split(' ')[i+1]))):
 			initial_top10_posi_num += 1.0
-		if (1==int(float(ndcg[cmp_optimal_idx-1].strip('\r\n').split(' ')[i+1]))):
+		if (1==int(float(cmp_ndcg[cmp_optimal_idx-1].strip('\r\n').split(' ')[i+1]))):
 			cmp_optimal_top10_posi_num += 1.0
-		if (1==int(float(ndcg[2].strip('\r\n').split(' ')[i+1]))):
+		if (1==int(float(cmp_ndcg[2].strip('\r\n').split(' ')[i+1]))):
 			cmp_initial_top10_posi_num += 1.0
+	optimal_top10_posi_num += optimal_top10_posi_num_temp
 
 	# initial mean_ndcg
 	temp_i = float(ndcg[0].strip('\r\n').split(' ')[1])
@@ -127,7 +130,7 @@ for u in range(0,user_num):
 	whole_ndcg_imgIdx.append(ndcg[optimal_idx+1])
 
 	# whole_top_10_pos_num
-	whole_top_10_pos_num.append(int(optimal_top10_posi_num))
+	whole_top_10_pos_num.append(int(optimal_top10_posi_num_temp))
 
 optimal_mean_ndcg /= count_o
 initial_mean_ndcg /= count_i
@@ -145,12 +148,12 @@ cmp_num_gain = cmp_optimal_top10_posi_num/cmp_initial_top10_posi_num
 
 optimal_initial_mean_ndcg_fp = open(root+'training_script/results/figures/optimal_initial_mean_ndcg.txt','w')
 optimal_initial_mean_ndcg_fp.write(str(optimal_mean_ndcg)+' '+str(initial_mean_ndcg)+' '+str(gain)+'\r\n')
-optimal_initial_mean_ndcg_fp.write(str(cmp_optimal_mean_ndcg)+' '+str(cmp_initial_mean_ndcg)+' '+str(cmp_gain)'\r\n')
+optimal_initial_mean_ndcg_fp.write(str(cmp_optimal_mean_ndcg)+' '+str(cmp_initial_mean_ndcg)+' '+str(cmp_gain)+'\r\n')
 optimal_initial_mean_ndcg_fp.close
 
 top10_posi_num_fp = open(root+'training_script/results/figures/top10_posi_num.txt','w')
-top10_posi_num_fp.write(str(optimal_top10_posi_num)+' '+str(initial_top10_posi_num)+''+str(num_gain)+'\r\n')
-top10_posi_num_fp.write(str(cmp_optimal_top10_posi_num)+' '+str(cmp_initial_top10_posi_num)+''+str(cmp_num_gain)+'\r\n')
+top10_posi_num_fp.write(str(optimal_top10_posi_num)+' '+str(initial_top10_posi_num)+' '+str(num_gain)+'\r\n')
+top10_posi_num_fp.write(str(cmp_optimal_top10_posi_num)+' '+str(cmp_initial_top10_posi_num)+' '+str(cmp_num_gain)+'\r\n')
 top10_posi_num_fp.close()
 
 ndcg_at_length = 30
