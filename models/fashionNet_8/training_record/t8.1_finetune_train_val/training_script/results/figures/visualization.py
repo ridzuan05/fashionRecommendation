@@ -202,8 +202,6 @@ print("max_top_10_pos_num = {}, min_top_10_pos_num = {}".format(max_top_10_pos_n
 
 path_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/tvt_pn_tbs_k_txt/val_'
 
-user_with_wrong_imgIdx = 24
-
 # retrieve best top_10 outfits for 4 users
 best_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/training_script/results/figures/charts/best/'
 best_u_count = 0
@@ -212,8 +210,6 @@ for n in range(max_top_10_pos_num,min_top_10_pos_num-1,-1):
 	max_index = [i for i, x in enumerate(whole_top_10_pos_num) if x == n]
 	for j in range(0,len(max_index)):
 		single_max_index = max_index[j]
-		if (single_max_index <= user_with_wrong_imgIdx):
-			continue
 		single_ndcg_label = whole_ndcg_label[single_max_index].strip('\r\n').split(' ')
 		for k in range(0,5):
 			if (0 == int(float(single_ndcg_label[0]))):
@@ -287,8 +283,6 @@ for n in range(min_top_10_pos_num,max_top_10_pos_num+1):
 	min_index = [i for i, x in enumerate(whole_top_10_pos_num) if x == n]
 	for j in range(0,len(min_index)):
 		single_min_index = min_index[j]
-		if (single_min_index <= user_with_wrong_imgIdx):
-			continue
 		single_ndcg_label = whole_ndcg_label[single_min_index].strip('\r\n').split(' ')
 		for k in range(0,5):
 			if (0 == int(float(single_ndcg_label[0]))):
