@@ -202,7 +202,7 @@ layer {
   param{
     name:"conv2_w_"
   }
-  param{0
+  param{
     name:"conv2_b_"
   }
   convolution_param {
