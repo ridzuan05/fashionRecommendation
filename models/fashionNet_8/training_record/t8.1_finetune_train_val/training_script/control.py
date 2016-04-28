@@ -20,8 +20,9 @@ from sklearn.metrics import confusion_matrix
 uID = '^666^'
 # caffemodel_idx
 cID = ['239168','0']
-# U_k(next i=0)[10_0.0001*(0,1)] training epoch
-end_iter = 410 # 10 training epoch
+# U_k(next i=0)[10_0.0001*(0,1)] training epoch, with 239168.caffemodel
+# U_k(next i=0)[18_0.0001*(0,1)] training epoch, with 0.caffemodel
+end_iter = [410, 738]
 val_interval = 8 # 1/5 training epoch
 # set gpu idx
 caffe.set_mode_gpu()
@@ -268,7 +269,9 @@ for c in range(0,len(cID)):
 
     optimal_mNDCG_id = 0
 
-    for i in range (start_iter,end_iter+1):
+    start_val_idx = end_iter[c]-88
+
+    for i in range (start_iter,end_iter[c]+1):
         # save train data (just for reference, not using threshold_fp=0.999)
         train_bat_accu = solver.net.blobs['accuracy'].data
         train_bat_loss = solver.net.blobs['rank_loss'].data
@@ -280,11 +283,11 @@ for c in range(0,len(cID)):
         tr_avg_bat_accu_loss.write(str(i)+' '+str(train_avg_accu)+' '+str(train_avg_loss)+' '+str(train_bat_accu)+' '+str(train_bat_loss)+'\r\n')
         tr_avg_bat_accu_loss.close()
         if(i%visual_interval==0):
-            print("\n{}~[U_{}/{}]Iters done:{}/{}, train_avg_accu={}, train_avg_loss={}.\n".format(c,int(uID),user_num,i,end_iter,train_avg_accu,train_avg_loss))
+            print("\n{}~[U_{}/{}]Iters done:{}/{}, train_avg_accu={}, train_avg_loss={}.\n".format(c,int(uID),user_num,i,end_iter[c],train_avg_accu,train_avg_loss))
             print("                                  train_bat_accu={}, train_bat_loss={}.\n".format(train_bat_accu,train_bat_loss))
 
         # validation, save caffemodel, and stop criteria
-        if (((i>=320) and (i%val_interval==0)) or (i==end_iter)):
+        if (((i>=start_val_idx) and (i%val_interval==0)) or (i==end_iter[c])):
 
             # validation
             val_avg_accu,val_avg_loss,\
@@ -298,7 +301,7 @@ for c in range(0,len(cID)):
             val_avg_accu_loss_f.write(str(i)+' '+str(val_avg_accu)+' '+str(val_avg_loss)+'\r\n')
             # val_avg_accu_loss_f.txt
             val_avg_accu_loss_f.close()
-            print("\n{}~[U_{}/{}]Iters done:{}/{}, val_avg_accu={}, val_avg_loss={}.\n".format(c,int(uID),user_num,i,end_iter,val_avg_accu,val_avg_loss))
+            print("\n{}~[U_{}/{}]Iters done:{}/{}, val_avg_accu={}, val_avg_loss={}.\n".format(c,int(uID),user_num,i,end_iter[c],val_avg_accu,val_avg_loss))
 
             # ndcg computation
             mean_ndcg,ndcg_at,\
@@ -335,7 +338,7 @@ for c in range(0,len(cID)):
                     target_params[pr][1][...] = source_params[pr][1] #bias
                 net.save(recordDir_data+'fashion_params_8_'+str(i)+'.caffemodel') 
 
-                if (i==end_iter):
+                if (i==end_iter[c]):
                     # NDCG_at.png
                     ndcg = open(recordDir_data+'ndcg_mean_label_at_imgIdx.txt').readlines()
                     # optimal ndcg_at@(1~30)
@@ -371,7 +374,7 @@ for c in range(0,len(cID)):
                     target_params[pr][1][...] = source_params[pr][1] #bias
                 net.save(recordDir_data+'cmp_fashion_params_8_'+str(i)+'.caffemodel')
 
-                if (i==end_iter):
+                if (i==end_iter[c]):
                     # NDCG_at.png
                     ndcg = open(recordDir_data+'cmp_ndcg_mean_label_at_imgIdx.txt').readlines()
                     # optimal ndcg_at@(1~30)
@@ -418,8 +421,8 @@ for c in range(0,len(cID)):
         solver.step(1)
 
     # save caffemodel for optimal mean_ndcg of this user
-    for i in range (320,end_iter+1):
-        if ((i%val_interval==0) or (i==end_iter)):
+    for i in range (start_val_idx,end_iter[c]+1):
+        if ((i%val_interval==0) or (i==end_iter[c])):
             if (optimal_mNDCG_id != i):
                 if (c==0):
                     os.system('rm '+recordDir_data+'fashion_params_8_'+str(i)+'.caffemodel')

@@ -16,13 +16,15 @@ rc('mathtext', default='regular')
 # valiation & confusion matix
 from sklearn.metrics import confusion_matrix
 
+# test folder
+test_fd = 'U_test'
 # test User_idx
-tUID = '100'
+tUID = '1'
 # caffemodel_idx
 # cID = '239168'
 cID = '0'
-# U_k(next i=0)[100_0.0001*(1,100)] training epoch
-end_iter = 4100 # 100 training epoch
+# U_k(next i=0)[18_0.0001*(1,100)] training epoch
+end_iter = 738 # 18 training epoch
 val_interval = 8 # 1/5 training epoch
 # set gpu idx
 caffe.set_mode_gpu()
@@ -188,7 +190,7 @@ solver.test_nets[0].copy_from(caffemodel_path)
 
 # results folder
 recordDir = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/training_script/results/'
-recordDir_data = recordDir+'data/U_test/'
+recordDir_data = recordDir+'data/'+test_fd+'/'
 
 if 'results' not in os.listdir('/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/training_script/'):
     os.system('mkdir '+recordDir)
@@ -199,7 +201,7 @@ if 'data' not in os.listdir(recordDir):
 if 'figures' not in os.listdir(recordDir):
     os.system('mkdir '+recordDir+'figures')
 
-if ('U_test') not in os.listdir(recordDir+'data/'):
+if (test_fd) not in os.listdir(recordDir+'data/'):
     os.system('mkdir '+recordDir_data)
 
 k = 0
