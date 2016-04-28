@@ -137,14 +137,20 @@ initial_mean_ndcg /= count_i
 optimal_top10_posi_num /= count_o
 initial_top10_posi_num /= count_i
 gain = optimal_mean_ndcg/initial_mean_ndcg
-num_gain = optimal_top10_posi_num/initial_top10_posi_num
+if (initial_top10_posi_num==0):
+	num_gain = 999
+else:
+	num_gain = optimal_top10_posi_num/initial_top10_posi_num
 
 cmp_optimal_mean_ndcg /= cmp_count_o
 cmp_initial_mean_ndcg /= cmp_count_i
 cmp_optimal_top10_posi_num /= cmp_count_o
 cmp_initial_top10_posi_num /= cmp_count_i
 cmp_gain = cmp_optimal_mean_ndcg/cmp_initial_mean_ndcg
-cmp_num_gain = cmp_optimal_top10_posi_num/cmp_initial_top10_posi_num
+if (cmp_initial_top10_posi_num==0):
+	cmp_num_gain = 999
+else:
+	cmp_num_gain = cmp_optimal_top10_posi_num/cmp_initial_top10_posi_num
 
 optimal_initial_mean_ndcg_fp = open(root+'training_script/results/figures/optimal_initial_mean_ndcg.txt','w')
 optimal_initial_mean_ndcg_fp.write(str(optimal_mean_ndcg)+' '+str(initial_mean_ndcg)+' '+str(gain)+'\r\n')
@@ -263,7 +269,7 @@ for n in range(max_top_10_pos_num,min_top_10_pos_num-1,-1):
 					blank_image.save(best_root+U_k+'/outfits_10.png')
 
 					# write ./charts/best/U_k(best_u_count)/labels_10.txt
-					single_ndcg_label_fp = open(best_root+U_k+'/labels_100.txt','w')
+					single_ndcg_label_fp = open(best_root+U_k+'/labels_30.txt','w')
 					single_ndcg_label_fp.write(whole_ndcg_label[single_max_index])
 					single_ndcg_label_fp.write('U_'+str(single_max_index)+'\r\n')
 					single_ndcg_label_fp.close()
@@ -336,7 +342,7 @@ for n in range(min_top_10_pos_num,max_top_10_pos_num+1):
 					blank_image.save(worst_root+U_k+'/outfits_10.png')
 
 					# write ./charts/best/U_k(best_u_count)/labels_10.txt
-					single_ndcg_label_fp = open(worst_root+U_k+'/labels_100.txt','w')
+					single_ndcg_label_fp = open(worst_root+U_k+'/labels_30.txt','w')
 					single_ndcg_label_fp.write(whole_ndcg_label[single_min_index])
 					single_ndcg_label_fp.write('U_'+str(single_min_index)+'\r\n')
 					single_ndcg_label_fp.close()
