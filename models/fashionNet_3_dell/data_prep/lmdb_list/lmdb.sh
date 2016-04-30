@@ -1,5 +1,5 @@
-EXAMPLE=/local2/home/tong/fashionRecommendation/models/fashionNet_1/data_prep/lmdb_data
-DATA=/local2/home/tong/fashionRecommendation/models/fashionNet_1/data_prep/lmdb_list
+EXAMPLE=/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/lmdb_data
+DATA=/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/lmdb_list
 TOOLS=/local2/home/tong/caffe-master/build/tools
 
 DATA_ROOT=/local2/..

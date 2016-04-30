@@ -69,9 +69,9 @@ def get_all_tuples(all_sets, unique_images, minimum_sets_num):
         if (len(user_ids)==800):
                 break                    
                         
-    fn_top = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/general_list/img_list_top.txt'
-    fn_bottom = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/general_list/img_list_bottom.txt'
-    fn_shoe = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/general_list/img_list_shoe.txt'
+    fn_top = '/home/dell/fashionRecommendation/models/fashionNet_3_dell/data_prep/general_list/img_list_top.txt'
+    fn_bottom = '/home/dell/fashionRecommendation/models/fashionNet_3_dell/data_prep/general_list/img_list_bottom.txt'
+    fn_shoe = '/home/dell/fashionRecommendation/models/fashionNet_3_dell/data_prep/general_list/img_list_shoe.txt'
 
 #    root_folder = "data"         
 #    fn_top = "%s\\img_list\\img_list_top.txt" % root_folder
@@ -172,7 +172,7 @@ def get_all_tuples(all_sets, unique_images, minimum_sets_num):
 
     #for each folder_names mentioned above
     #for i in range(len(folder_names)):
-    sub_folder = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/general_list/'
+    sub_folder = '/home/dell/fashionRecommendation/models/fashionNet_3_dell/data_prep/general_list/'
     #sub_folder = "%s\\%s" % (root_folder, folder_names[i])
     if not os.path.isdir(sub_folder): #mkdir for each folder_names
         os.mkdir(sub_folder)

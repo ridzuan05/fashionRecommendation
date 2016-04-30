@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-g_root = "/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/"
+g_root = "/home/dell/fashionRecommendation/models/fashionNet_3_dell/data_prep/"
 
 data_type = ['train_', 'val_', 'test_']
 attr_type = ['p_', 'n_']
@@ -14,7 +14,7 @@ for i in range(0,len(data_type)):
 
 			for line in imgData_source:
 				line_temp = line.split('/')
-				new_line = "/local/tong/fashionRecommendation/data/images/"+line_temp[9]+"/"+line_temp[12]
+				new_line = "/ssd_data/dell/fashion/"+line_temp[9]+"/"+line_temp[12]
 				imgData_target.write(new_line)
 
 			imgData_source.close()
