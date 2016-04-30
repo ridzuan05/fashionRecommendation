@@ -109,7 +109,7 @@ def get_subset(sets_file, start, end):
 #organize all imaegs of all users
 def get_all_items():
     
-    item_folder = '/local2/home/tong/fashionRecommendation/data/Polyvore_large/polyvore_item/data'; #for source path of all items (users)
+    item_folder = '/home/dell/fashionRecommendation/data/Polyvore_large/polyvore_item/data'; #for source path of all items (users)
     item_files = [os.path.join(item_folder, f) for f in os.listdir(item_folder) if f.endswith('.jsonl')] #for individual paths of all items (users)
   
     failed_images = list([]) #record images url that have not been downloaded by user id
@@ -128,10 +128,10 @@ def get_all_items():
         file_name_s = item_files[i].split('/')[-1].split('_') # [user name, [items.jsonl] or [items, append.jsonl]]
         user_name = file_name_s[0] #user name
         if (file_name_s[-1] == "items.jsonl"): #items.jsonl
-            img_folder = '/local2/home/tong/fashionRecommendation/data/Polyvore_large/1120_users/images/'+user_name+'/items/full'        
+            img_folder = '/home/dell/fashionRecommendation/data/Polyvore_large/1120_users/images/'+user_name+'/items/full'        
             #img_folder = "C:\\Users\\yanghu\\Documents\\Finder\\Fashion\\Dataset\\Polyvore\\%s\\items\\full" % user_name #a folder name by user name
         else: #append.jsonl,for the earliest 203 users
-            img_folder = '/local2/home/tong/fashionRecommendation/data/Polyvore_large/1120_users/images/'+user_name+'/items_append/full'
+            img_folder = '/home/dell/fashionRecommendation/data/Polyvore_large/1120_users/images/'+user_name+'/items_append/full'
             #img_folder = "C:\\Users\\yanghu\\Documents\\Finder\\Fashion\\Dataset\\Polyvore\\%s\\items_append\\full" % user_name #a folder name by user name  
         #if user_name not in ignore_users:
         imgs_downloaded = [f for f in os.listdir(img_folder) if f.endswith('.jpg')] #list of images downloaded wrt user name
@@ -224,10 +224,10 @@ def is_set_valid(items_in_set):
     
 def get_valid_sets(fashion_items, unique_images, user_number):
     
-    sets_file_folder = '/local2/home/tong/fashionRecommendation/data/Polyvore_large/polyvore_set/data'; #for source path of all sets wrt users
+    sets_file_folder = '/home/dell/fashionRecommendation/data/Polyvore_large/polyvore_set/data'; #for source path of all sets wrt users
     sets_files = [os.path.join(sets_file_folder, f) for f in os.listdir(sets_file_folder) if f.endswith('.jsonl')] #for individual paths of all sets wrt users
  
-    item_folder = '/local2/home/tong/fashionRecommendation/data/Polyvore_large/polyvore_item/data'; #for source path of all items wrt users
+    item_folder = '/home/dell/fashionRecommendation/data/Polyvore_large/polyvore_item/data'; #for source path of all items wrt users
     item_files = set([f for f in os.listdir(item_folder) if f.endswith('.jsonl')]) #for individual paths of all items wrt users
 
     all_sets = list([]) #store all information about sets, organized by user name
@@ -241,7 +241,7 @@ def get_valid_sets(fashion_items, unique_images, user_number):
         print 'for all user sets: ' + str(i+1) + ' / ' + str(len(sets_files))
         #flag = get_subset(sets_files[i], SUBSET_START, SUBSET_END)
         user_name = sets_files[i].split('/')[-1].split('_')[0] #get user name of this set
-        img_folder = '/local2/home/tong/fashionRecommendation/data/Polyvore_large/1120_users/images/'+user_name+'/sets/full'
+        img_folder = '/home/dell/fashionRecommendation/data/Polyvore_large/1120_users/images/'+user_name+'/sets/full'
         #img_folder = "C:\\Users\\yanghu\\Documents\\Finder\\Fashion\\Dataset\\Polyvore\\%s\\sets\\full" % user_name #a folder name by user name
 
 #        if (user_name not in ignore_users) and (user_name+'_items.jsonl' in item_files):
