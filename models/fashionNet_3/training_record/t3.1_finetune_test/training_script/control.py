@@ -20,14 +20,14 @@ from sklearn.metrics import confusion_matrix
 uID = '^666^'
 
 # source folder
-recordDir0 = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/training_script/results/'
+recordDir0 = '/local2/home/tong/fashionRecommendation/models/fashionNet_3/training_record/t3.1_finetune_train_val/training_script/results/'
 recordDir_data0 = recordDir0+'data/U_'+uID+'/'
 
 # results folder
-recordDir = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_test/training_script/results/'
+recordDir = '/local2/home/tong/fashionRecommendation/models/fashionNet_3/training_record/t3.1_finetune_test/training_script/results/'
 recordDir_data = recordDir+'data/U_'+uID+'/'
 
-if 'results' not in os.listdir('/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_test/training_script/'):
+if 'results' not in os.listdir('/local2/home/tong/fashionRecommendation/models/fashionNet_3/training_record/t3.1_finetune_test/training_script/'):
     os.system('mkdir '+recordDir)
 
 if 'data' not in os.listdir(recordDir):
@@ -211,7 +211,7 @@ test_avg_accu_loss_f = open(recordDir_data+'test_avg_accu_loss.txt','w')
 test_avg_accu_loss_f.close()
 
 # solver
-solver = caffe.SGDSolver('/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_test/solver_prototxt/fashion_solver_8_k/fashion_solver_8_'+uID+'.prototxt')
+solver = caffe.SGDSolver('/local2/home/tong/fashionRecommendation/models/fashionNet_3/training_record/t3.1_finetune_test/solver_prototxt/fashion_solver_3_k/fashion_solver_3_'+uID+'.prototxt')
 
 test_iter = 8 # 1 test epoch
 
@@ -239,11 +239,11 @@ for c in range(0,len(cID)):
 
     # caffemodel
     if (c%2==0):
-        caffemodel_path = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_train_val/fashion_params_8_'+cID[c]+'.caffemodel'
+        caffemodel_path = '/local2/home/tong/fashionRecommendation/models/fashionNet_3/training_record/t3.1_train_val/fashion_params_3_'+cID[c]+'.caffemodel'
     elif (c==1):
-        caffemodel_path = recordDir_data0+'fashion_params_8_'+cID[c]+'.caffemodel'
+        caffemodel_path = recordDir_data0+'fashion_params_3_'+cID[c]+'.caffemodel'
     elif (c==3):
-        caffemodel_path = recordDir_data0+'cmp_fashion_params_8_'+cID[c]+'.caffemodel'
+        caffemodel_path = recordDir_data0+'cmp_fashion_params_3_'+cID[c]+'.caffemodel'
     solver.net.copy_from(caffemodel_path)
     solver.test_nets[0].copy_from(caffemodel_path)
 

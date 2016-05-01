@@ -1,5 +1,5 @@
 
-net: "/home/dell/fashionRecommendation/models/fashionNet_3/fashion_train_val_3.prototxt"
+net: "/home/dell/fashionRecommendation/models/fashionNet_3_dell/fashion_train_val_3.prototxt"
 
 test_iter: 0
 
