@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import os
 import Image
 
-root = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/'
+root = '/home/dell/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_test/'
 
 # user_number
 user_num = 800
@@ -63,14 +63,11 @@ for u in range(0,user_num):
 	ndcg = open(root+'training_script/results/data/U_'+str(u)+'/ndcg_mean_label_at_imgIdx.txt').readlines()
 	cmp_ndcg = open(root+'training_script/results/data/U_'+str(u)+'/cmp_ndcg_mean_label_at_imgIdx.txt').readlines()
 	
-	# optimal mean_ndcg, including initial caffemodel (namely, the general caffemodel)
-	optimal_meanNDCG_row_id_value = open(root+'training_script/results/data/U_'+str(u)+'/optimal_meanNDCG_row_id_value.txt').readlines()
+	optimal_idx = -2
+	temp_o = float(ndcg[-4].strip('\r\n').split(' ')[1])
 
-	optimal_idx = int(optimal_meanNDCG_row_id_value[0].strip('\r\n').split(' ')[0])
-	temp_o = float(optimal_meanNDCG_row_id_value[0].strip('\r\n').split(' ')[2])
-
-	cmp_optimal_idx =  int(optimal_meanNDCG_row_id_value[1].strip('\r\n').split(' ')[0])
-	cmp_temp_o = float(optimal_meanNDCG_row_id_value[1].strip('\r\n').split(' ')[2])
+	cmp_optimal_idx =  -2
+	cmp_temp_o = float(cmp_ndcg[-4].strip('\r\n').split(' ')[1])
 	
 	optimal_mean_ndcg += temp_o
 	count_o += 1.0
@@ -80,11 +77,11 @@ for u in range(0,user_num):
 	optimal_top10_posi_num_temp = 0.0
 
 	for i in range(0,posi_num_length):
-		if (1==int(float(ndcg[optimal_idx-1].strip('\r\n').split(' ')[i+1]))):
+		if (1==int(float(ndcg[-3].strip('\r\n').split(' ')[i+1]))):
 			optimal_top10_posi_num_temp += 1.0
 		if (1==int(float(ndcg[1].strip('\r\n').split(' ')[i+1]))):
 			initial_top10_posi_num += 1.0
-		if (1==int(float(cmp_ndcg[cmp_optimal_idx-1].strip('\r\n').split(' ')[i+1]))):
+		if (1==int(float(cmp_ndcg[-3].strip('\r\n').split(' ')[i+1]))):
 			cmp_optimal_top10_posi_num += 1.0
 		if (1==int(float(cmp_ndcg[1].strip('\r\n').split(' ')[i+1]))):
 			cmp_initial_top10_posi_num += 1.0
@@ -206,10 +203,10 @@ max_top_10_pos_num = max(whole_top_10_pos_num)
 min_top_10_pos_num = min(whole_top_10_pos_num)
 print("max_top_10_pos_num = {}, min_top_10_pos_num = {}".format(max_top_10_pos_num,min_top_10_pos_num))
 
-path_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/tvt_pn_tbs_k_txt/val_'
+path_root = '/home/dell/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/tvt_pn_tbs_k_txt/val_'
 
 # retrieve best top_10 outfits for 4 users
-best_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/training_script/results/figures/charts/best/'
+best_root = '/home/dell/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_test/training_script/results/figures/charts/best/'
 best_u_count = 0
 flag_n = 0
 for n in range(max_top_10_pos_num,min_top_10_pos_num-1,-1):
@@ -282,7 +279,7 @@ for n in range(max_top_10_pos_num,min_top_10_pos_num-1,-1):
 		break
 
 # retrieve worst top_10 outfits for 4 users
-worst_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_train_val/training_script/results/figures/charts/worst/'
+worst_root = '/home/dell/fashionRecommendation/models/fashionNet_8/training_record/t8.1_finetune_test/training_script/results/figures/charts/worst/'
 worst_u_count = 0
 flag_n = 0
 for n in range(min_top_10_pos_num,max_top_10_pos_num+1):

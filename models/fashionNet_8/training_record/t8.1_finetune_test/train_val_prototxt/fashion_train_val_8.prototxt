@@ -1,0 +1,1056 @@
+name: "fashionNet_8"
+
+############################ loading data
+########## training data
+###### posi outfit
+layer{
+  name: "top"
+  type: "ImageData"
+  top:  "top"
+  top:  "label_top"
+  include{
+    phase: TRAIN
+  }
+  transform_param{
+    mirror:true
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/top_mean.binaryproto"
+  }
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/tvt_pn_tbs_k_txt/val_p_top_^666^.txt"
+    batch_size:1
+    #backend:LMDB
+  }
+}
+layer{
+  name: "bot"
+  type: "ImageData"
+  top:  "bot"
+  top:  "label_bot"
+  include{
+    phase: TRAIN
+  }
+  transform_param{
+    mirror:true
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/bot_mean.binaryproto"
+  }
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/tvt_pn_tbs_k_txt/val_p_bot_^666^.txt"
+    batch_size:1
+    #backend:LMDB
+  }
+}
+layer{
+  name: "sho"
+  type: "ImageData"
+  top:  "sho"
+  top:  "label_sho"
+  include{
+    phase: TRAIN
+  }
+  transform_param{
+    mirror:true
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/sho_mean.binaryproto"
+  }
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/tvt_pn_tbs_k_txt/val_p_sho_^666^.txt"
+    batch_size:1
+    #backend:LMDB
+  }
+}
+###### nega outfit
+layer{
+  name: "top_n"
+  type: "ImageData"
+  top:  "top_n"
+  top:  "label_top_n"
+  include{
+    phase: TRAIN
+  }
+  transform_param{
+    mirror:true
+    #crop_size:224
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/top_mean.binaryproto"
+  }
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/tvt_pn_tbs_k_txt/val_n_top_^666^.txt"
+    batch_size:1
+    #backend:LMDB
+  }
+}
+layer{
+  name: "bot_n"
+  type: "ImageData"
+  top:  "bot_n"
+  top:  "label_bot_n"
+  include{
+    phase: TRAIN
+  }
+  transform_param{
+    mirror:true
+    #crop_size:224
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/bot_mean.binaryproto"
+  }
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/tvt_pn_tbs_k_txt/val_n_bot_^666^.txt"
+    batch_size:1
+    #backend:LMDB
+  }
+}
+layer{
+  name: "sho_n"
+  type: "ImageData"
+  top:  "sho_n"
+  top:  "label_sho_n"
+  include{
+    phase: TRAIN
+  }
+  transform_param{
+    mirror:true
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/sho_mean.binaryproto"
+  }
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/tvt_pn_tbs_k_txt/val_n_sho_^666^.txt"
+    batch_size:1
+    #backend:LMDB
+  }
+}
+########## validation data
+###### posi outfit
+layer{
+  name: "top"
+  type: "ImageData"
+  top:  "top"
+  top:  "label_top"
+  include{
+    phase: TEST
+  }
+  transform_param{
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/top_mean.binaryproto"
+  }
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/tvt_pn_tbs_k_txt/test_p_top_^666^.txt"
+    batch_size:50
+    #backend:LMDB
+  }
+}
+layer{
+  name: "bot"
+  type: "ImageData"
+  top:  "bot"
+  top:  "label_bot"
+  include{
+    phase: TEST
+  }
+  transform_param{
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/bot_mean.binaryproto"
+  }
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/tvt_pn_tbs_k_txt/test_p_bot_^666^.txt"
+    batch_size:50
+    #backend:LMDB
+  }
+}
+layer{
+  name: "sho"
+  type: "ImageData"
+  top:  "sho"
+  top:  "label_sho"
+  include{
+    phase: TEST
+  }
+  transform_param{
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/sho_mean.binaryproto"
+  }
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/tvt_pn_tbs_k_txt/test_p_sho_^666^.txt"
+    batch_size:50
+    #backend:LMDB
+  }
+}
+###### nega outfit
+layer{
+  name: "top_n"
+  type: "ImageData"
+  top:  "top_n"
+  top:  "label_top_n"
+  include{
+    phase: TEST
+  }
+  transform_param{
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/top_mean.binaryproto"
+  }
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/tvt_pn_tbs_k_txt/test_n_top_^666^.txt"
+    batch_size:50
+    #backend:LMDB
+  }
+}
+layer{
+  name: "bot_n"
+  type: "ImageData"
+  top:  "bot_n"
+  top:  "label_bot_n"
+  include{
+    phase: TEST
+  }
+  transform_param{
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/bot_mean.binaryproto"
+  }
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/tvt_pn_tbs_k_txt/test_n_bot_^666^.txt"
+    batch_size:50
+    #backend:LMDB
+  }
+}
+layer{
+  name: "sho_n"
+  type: "ImageData"
+  top:  "sho_n"
+  top:  "label_sho_n"
+  include{
+    phase: TEST
+  }
+  transform_param{
+    mean_file:"/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/mean_prep/sho_mean.binaryproto"
+  }
+  image_data_param{
+    source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/tvt_pn_tbs_k_txt/test_n_sho_^666^.txt"
+    batch_size:50
+    #backend:LMDB
+  }
+}
+############################ stack_over_channel
+layer {
+  name: "tbs_imgs"
+  bottom: "top"
+  bottom: "bot"
+  bottom: "sho"
+  top: "tbs_imgs"
+  type: "Concat"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "tbs_imgs_n"
+  bottom: "top_n"
+  bottom: "bot_n"
+  bottom: "sho_n"
+  top: "tbs_imgs_n"
+  type: "Concat"
+  concat_param {
+    axis: 1
+  }
+}
+############################ left side net
+layer{
+  name:   "conv1_new" # conv1_top
+  type:   "Convolution"
+  bottom: "tbs_imgs"
+  top:    "conv1"
+  param{
+    lr_mult:100 
+    decay_mult:1
+    name:"conv1_w_"
+  }
+  param{
+    lr_mult:200
+    decay_mult:0
+    name:"conv1_b_"
+  }
+  convolution_param{
+      num_output: 96
+      kernel_size: 7
+      stride: 2
+      weight_filler{
+        type:"gaussian"
+        std:0.01
+      }
+      bias_filler{
+        type:"constant"
+        value:0
+      }
+  }
+}
+######
+layer{
+  name:   "relu1" # relu1_top
+  type:   "ReLU"
+  bottom: "conv1"
+  top:    "conv1"
+}
+######
+layer {
+  name:   "norm1"
+  type:   "LRN"
+  bottom: "conv1"
+  top:    "norm1"
+  lrn_param {
+    local_size: 5
+    alpha: 0.0005
+    beta: 0.75
+    k: 2
+  }
+}
+######
+layer {
+  name:   "pool1"
+  type:   "Pooling"
+  bottom: "norm1"
+  top:    "pool1"  
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+######
+layer {
+  bottom: "pool1"
+  top:    "conv2"
+  name:   "conv2" # conv2_top
+  type:   "Convolution"
+  param{
+    lr_mult: 1
+    decay_mult:1
+    name:"conv2_w_"
+  }
+  param{
+    lr_mult: 2
+    decay_mult:0
+    name:"conv2_b_"
+  }
+  convolution_param {
+    num_output: 256
+    pad: 1
+    kernel_size: 5
+    stride: 2
+    weight_filler{
+      type:"gaussian"
+      std:0.01
+    }
+    bias_filler{
+      type:"constant"
+      value:0.1
+    }
+  }
+}
+######
+layer {
+  bottom: "conv2"
+  top:    "conv2"
+  name:   "relu2" # relu2_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "conv2"
+  top:    "norm2"
+  name:   "norm2" # norm2_top
+  type:   "LRN"
+  lrn_param {
+    local_size: 5
+    alpha: 0.0005
+    beta: 0.75
+    k: 2
+  }
+}
+######
+layer {
+  bottom: "norm2"
+  top:    "pool2"
+  name:   "pool2"
+  type:   "Pooling"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+######
+layer {
+  bottom: "pool2"
+  top:    "conv3"
+  name:   "conv3" # conv3_top
+  type:   "Convolution"
+  param{
+    lr_mult: 1
+    decay_mult:1
+    name:"conv3_w_"
+  }
+  param{
+    lr_mult: 2
+    decay_mult:0
+    name:"conv3_b_"
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    kernel_size: 3
+    weight_filler{
+      type:"gaussian"
+      std:0.01
+    }
+    bias_filler{
+      type:"constant"
+      value:0
+    }
+  }
+}
+######
+layer {
+  bottom: "conv3"
+  top:    "conv3"
+  name:   "relu3" # relu3_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "conv3"
+  top:    "conv4"
+  name:   "conv4" # conv4_top
+  type:   "Convolution"
+  param{
+    lr_mult: 1
+    decay_mult:1
+    name:"conv4_w_"
+  }
+  param{
+    lr_mult: 2
+    decay_mult:0
+    name:"conv4_b_"
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    kernel_size: 3
+    weight_filler{
+      type:"gaussian"
+      std:0.01
+    }
+    bias_filler{
+      type:"constant"
+      value:0.1
+    }
+  }
+}
+######
+layer {
+  bottom: "conv4"
+  top:    "conv4"
+  name:   "relu4" # relu4_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "conv4"
+  top:    "conv5"
+  name:   "conv5" # conv5_top
+  type:   "Convolution"
+  param{
+    lr_mult: 1
+    decay_mult:1
+    name:"conv5_w_"
+  }
+  param{
+    lr_mult: 2
+    decay_mult:0
+    name:"conv5_b_"
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    kernel_size: 3
+    weight_filler{
+      type:"gaussian"
+      std:0.01
+    }
+    bias_filler{
+      type:"constant"
+      value:0.1
+    }
+  }
+}
+######
+layer {
+  bottom: "conv5"
+  top:    "conv5"
+  name:   "relu5" # relu5_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "conv5"
+  top:    "pool5"
+  name:   "pool5"
+  type:   "Pooling"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+######
+layer {
+  bottom: "pool5"
+  top:    "fc6"
+  name:   "fc6" # fc6_top
+  type:   "InnerProduct"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+    name:"fc6_w_"
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+    name:"fc6_b_"
+  }
+  inner_product_param {
+    num_output: 4096
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 0.1
+    }    
+  }
+}
+######
+layer {
+  bottom: "fc6"
+  top:    "fc6"
+  name:   "relu6" # relu6_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "fc6"
+  top:    "fc6"
+  name:   "drop6" # drop6_top
+  type:   "Dropout"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+######
+layer {
+  bottom: "fc6"
+  top:    "fc7"
+  name:   "fc7" # fc7_top
+  type:   "InnerProduct"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+    name:"fc7_w_"
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+    name:"fc7_b_"
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 0.1
+    }    
+  }
+}
+######
+layer {
+  bottom: "fc7"
+  top:    "fc7"
+  name:   "relu7" # relu7_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "fc7"
+  top:    "fc7"
+  name:   "drop7" # drop7_top
+  type:   "Dropout"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+######
+layer {
+  bottom: "fc7"
+  top:    "fc8_dislike_like"
+  name:   "fc8_dislike_like" # fc8_top
+  type:   "InnerProduct"
+  param {
+    lr_mult: 100
+    decay_mult: 1
+    name:"fc8_w_"
+  }
+  param {
+    lr_mult: 200
+    decay_mult: 0
+    name:"fc8_b_"
+  }
+  inner_product_param {
+    num_output: 2
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 0.1
+    }    
+  }
+}
+######
+layer {
+  bottom: "fc8_dislike_like"
+  top: "fc8_dislike_like_sm"
+  name: "fc8_dislike_like_sm"
+  type: "Softmax"
+}
+######
+layer {
+  bottom: "fc8_dislike_like_sm"
+  top: "dislike"
+  top: "like"
+  name: "like"
+  type: "Slice"
+  slice_param {
+    axis: 1
+    slice_point: 1
+  }
+}
+############################ right side net
+layer{
+  name:   "conv1_n" # conv1_top
+  type:   "Convolution"
+  bottom: "tbs_imgs_n"
+  top:    "conv1_n"
+  param{
+    lr_mult: 100
+    decay_mult:1
+    name:"conv1_w_"
+  }
+  param{
+    lr_mult: 200
+    decay_mult:0
+    name:"conv1_b_"
+  }
+  convolution_param{
+      num_output: 96
+      kernel_size: 7
+      stride: 2
+      weight_filler{
+        type:"gaussian"
+        std:0.01
+      }
+      bias_filler{
+        type:"constant"
+        value:0
+      }
+  }
+}
+######
+layer{
+  name:   "relu1_n" # relu1_top
+  type:   "ReLU"
+  bottom: "conv1_n"
+  top:    "conv1_n"
+}
+######
+layer {
+  name:   "norm1_n"
+  type:   "LRN"
+  bottom: "conv1_n"
+  top:    "norm1_n"
+  lrn_param {
+    local_size: 5
+    alpha: 0.0005
+    beta: 0.75
+    k: 2
+  }
+}
+######
+layer {
+  name:   "pool1_n"
+  type:   "Pooling"
+  bottom: "norm1_n"
+  top:    "pool1_n"  
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+######
+layer {
+  bottom: "pool1_n"
+  top:    "conv2_n"
+  name:   "conv2_n" # conv2_top
+  type:   "Convolution"
+  param{
+    lr_mult: 1
+    decay_mult:1
+    name:"conv2_w_"
+  }
+  param{
+    lr_mult: 2
+    decay_mult:0
+    name:"conv2_b_"
+  }
+  convolution_param {
+    num_output: 256
+    pad: 1
+    kernel_size: 5
+    stride: 2
+    weight_filler{
+      type:"gaussian"
+      std:0.01
+    }
+    bias_filler{
+      type:"constant"
+      value:0.1
+    }
+  }
+}
+######
+layer {
+  bottom: "conv2_n"
+  top:    "conv2_n"
+  name:   "relu2_n" # relu2_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "conv2_n"
+  top:    "norm2_n"
+  name:   "norm2_n" # norm2_top
+  type:   "LRN"
+  lrn_param {
+    local_size: 5
+    alpha: 0.0005
+    beta: 0.75
+    k: 2
+  }
+}
+######
+layer {
+  bottom: "norm2_n"
+  top:    "pool2_n"
+  name:   "pool2_n"
+  type:   "Pooling"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+######
+layer {
+  bottom: "pool2_n"
+  top:    "conv3_n"
+  name:   "conv3_n" # conv3_top
+  type:   "Convolution"
+  param{
+    lr_mult: 1
+    decay_mult:1
+    name:"conv3_w_"
+  }
+  param{
+    lr_mult: 2
+    decay_mult:0
+    name:"conv3_b_"
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    kernel_size: 3
+    weight_filler{
+      type:"gaussian"
+      std:0.01
+    }
+    bias_filler{
+      type:"constant"
+      value:0
+    }
+  }
+}
+######
+layer {
+  bottom: "conv3_n"
+  top:    "conv3_n"
+  name:   "relu3_n" # relu3_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "conv3_n"
+  top:    "conv4_n"
+  name:   "conv4_n" # conv4_top
+  type:   "Convolution"
+  param{
+    lr_mult: 1
+    decay_mult:1
+    name:"conv4_w_"
+  }
+  param{
+    lr_mult: 2
+    decay_mult:0
+    name:"conv4_b_"
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    kernel_size: 3
+    weight_filler{
+      type:"gaussian"
+      std:0.01
+    }
+    bias_filler{
+      type:"constant"
+      value:0.1
+    }
+  }
+}
+######
+layer {
+  bottom: "conv4_n"
+  top:    "conv4_n"
+  name:   "relu4_n" # relu4_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "conv4_n"
+  top:    "conv5_n"
+  name:   "conv5_n" # conv5_top
+  type:   "Convolution"
+  param{
+    lr_mult: 1
+    decay_mult:1
+    name:"conv5_w_"
+  }
+  param{
+    lr_mult: 2
+    decay_mult:0
+    name:"conv5_b_"
+  }
+  convolution_param {
+    num_output: 512
+    pad: 1
+    kernel_size: 3
+    weight_filler{
+      type:"gaussian"
+      std:0.01
+    }
+    bias_filler{
+      type:"constant"
+      value:0.1
+    }
+  }
+}
+######
+layer {
+  bottom: "conv5_n"
+  top:    "conv5_n"
+  name:   "relu5_n" # relu5_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "conv5_n"
+  top:    "pool5_n"
+  name:   "pool5_n"
+  type:   "Pooling"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+######
+layer {
+  bottom: "pool5_n"
+  top:    "fc6_n"
+  name:   "fc6_n" # fc6_top
+  type:   "InnerProduct"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+    name:"fc6_w_"
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+    name:"fc6_b_"
+  }
+  inner_product_param {
+    num_output: 4096
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 0.1
+    }    
+  }
+}
+######
+layer {
+  bottom: "fc6_n"
+  top:    "fc6_n"
+  name:   "relu6_n" # relu6_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "fc6_n"
+  top:    "fc6_n"
+  name:   "drop6_n" # drop6_top
+  type:   "Dropout"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+######
+layer {
+  bottom: "fc6_n"
+  top:    "fc7_n"
+  name:   "fc7_n" # fc7_top
+  type:   "InnerProduct"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+    name:"fc7_w_"
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+    name:"fc7_b_"
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 0.1
+    }    
+  }
+}
+######
+layer {
+  bottom: "fc7_n"
+  top:    "fc7_n"
+  name:   "relu7_n" # relu7_top
+  type:   "ReLU"
+}
+######
+layer {
+  bottom: "fc7_n"
+  top:    "fc7_n"
+  name:   "drop7_n" # drop7_top_n
+  type:   "Dropout"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+######
+layer {
+  bottom: "fc7_n"
+  top:    "fc8_dislike_like_n"
+  name:   "fc8_dislike_like_n" # fc8_top
+  type:   "InnerProduct"
+  param {
+    lr_mult: 100
+    decay_mult: 1
+    name:"fc8_w_"
+  }
+  param {
+    lr_mult: 200
+    decay_mult: 0
+    name:"fc8_b_"
+  }
+  inner_product_param {
+    num_output: 2
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 0.1
+    }    
+  }
+}
+######
+layer {
+  bottom: "fc8_dislike_like_n"
+  top: "fc8_dislike_like_sm_n"
+  name: "fc8_dislike_like_sm_n"
+  type: "Softmax"
+}
+######
+layer {
+  bottom: "fc8_dislike_like_sm_n"
+  top: "dislike_n"
+  top: "like_n"
+  name: "like_n"
+  type: "Slice"
+  slice_param {
+    axis: 1
+    slice_point: 1
+  }
+}
+########################### rankloss training
+layer{
+  name:   "rank_loss"
+  type:   "RankLoss"
+  bottom: "like"
+  bottom: "like_n"
+  top:    "rank_loss"
+}
+########################### better visualization & show accuracy
+layer {
+  name:   "lable"
+  type:   "Eltwise"
+  bottom: "label_top"
+  bottom: "label_bot"
+  bottom: "label_sho"
+  bottom: "label_top_n"
+  bottom: "label_bot_n"
+  bottom: "label_sho_n"
+  top:    "lable" # always 1
+  eltwise_param{ 
+    operation: MAX
+  }  
+}
+######
+layer {
+  name:   "for_computing_accuracy"
+  bottom: "dislike"
+  bottom: "dislike_n" # should always be larger
+  top:    "nega_VS_posi"
+  type:   "Concat"
+  concat_param {
+    axis: 1
+  }
+}
+######
+layer {
+  name:   "accuracy"
+  bottom: "nega_VS_posi"
+  bottom: "lable" # always 1
+  top:    "accuracy"
+  type:   "Accuracy"
+}
