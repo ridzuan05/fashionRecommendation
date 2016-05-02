@@ -24,8 +24,10 @@ for u_dell in range(0,len(checkSize_dell)):
 				itemsNum = str(int(checkSize_dell_list[2])-int(checkSize_list[2]))
 				items_append = str(int(checkSize_dell_list[3])-int(checkSize_list[3]))
 				items_appendNum = str(int(checkSize_dell_list[4])-int(checkSize_list[4]))
-
-				checkSize_cmp_fp.write(userName+' '+items+' '+itemsNum+' '+items_append+' '+items_appendNum+'\r\n')
+				sets = str(int(checkSize_dell_list[5])-int(checkSize_list[5]))
+				setsNum = str(int(checkSize_dell_list[6])-int(checkSize_list[6]))
+	
+				checkSize_cmp_fp.write(userName+' '+items+' '+itemsNum+' '+items_append+' '+items_appendNum+' '+sets+' '+setsNum+'\r\n')
 
                                 checkSize_cmp_fp.close()
 

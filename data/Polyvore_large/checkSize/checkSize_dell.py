@@ -26,9 +26,9 @@ for u in range(0,len(userNames)):
 		items_append =userNames_folder+userNames[u]+'/items_append/full/'
 		items_appendImgs = os.listdir(items_append)
 		items_appendImgsNum = len(items_appendImgs)
-		checkSize_fp.write('1 '+str(items_appendImgsNum)+'\r\n')
+		checkSize_fp.write('1 '+str(items_appendImgsNum)+' ')
 	else:
-		checkSize_fp.write('0 0\r\n')
+		checkSize_fp.write('0 0 ')
 
 	if 'sets' in userContents:
 		sets =userNames_folder+userNames[u]+'/sets/full/'
