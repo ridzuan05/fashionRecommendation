@@ -5,10 +5,10 @@ import re
 import random
 import os
 
-g_root = '/home/dell/fashionRecommendation/models/fashionNet_3_dell/data_prep/general_list/'
-l_root = '/home/dell/fashionRecommendation/models/fashionNet_3_dell/data_prep/lmdb_list/tvt_pn_tbs_k_txt/'
+g_root = '/home/dell/fashionRecommendation/models/fashionNet_8/data_prep/general_list/'
+l_root = '/home/dell/fashionRecommendation/models/fashionNet_8/data_prep/lmdb_list/tvt_pn_tbs_k_txt/'
 
-check = '/home/dell/fashionRecommendation/models/fashionNet_3_dell/data_prep/lmdb_list/'
+check = '/home/dell/fashionRecommendation/models/fashionNet_8/data_prep/lmdb_list/'
 if 'tvt_pn_tbs_k_txt' not in os.listdir(check):
     os.system('mkdir '+l_root)
 

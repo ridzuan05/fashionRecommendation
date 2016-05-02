@@ -2,7 +2,7 @@
 
 import os
 
-l_root = "/home/dell/fashionRecommendation/models/fashionNet_3_dell/data_prep/"
+l_root = "/home/dell/fashionRecommendation/models/fashionNet_8/data_prep/"
 
 if 'tvt_pn_tbs_k_txt' not in os.listdir(l_root+'imgdata_list'):
     os.system('mkdir '+l_root+"imgdata_list/tvt_pn_tbs_k_txt")

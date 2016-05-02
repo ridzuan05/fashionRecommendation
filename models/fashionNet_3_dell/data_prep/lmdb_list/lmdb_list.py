@@ -4,8 +4,8 @@ from itertools import izip
 import re
 import random
 
-g_root = '/home/dell/fashionRecommendation/models/fashionNet_3_dell/data_prep/general_list/'
-l_root = '/home/dell/fashionRecommendation/models/fashionNet_3_dell/data_prep/lmdb_list/'
+g_root = '/home/dell/fashionRecommendation/models/fashionNet_8/data_prep/general_list/'
+l_root = '/home/dell/fashionRecommendation/models/fashionNet_8/data_prep/lmdb_list/'
 
 pa_top = []
 pa_bot = []

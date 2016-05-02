@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-g_root = "/home/dell/fashionRecommendation/models/fashionNet_3_dell/data_prep/"
+g_root = "/home/dell/fashionRecommendation/models/fashionNet_8/data_prep/"
 
 data_type = ['train_', 'val_', 'test_']
 attr_type = ['p_', 'n_']
