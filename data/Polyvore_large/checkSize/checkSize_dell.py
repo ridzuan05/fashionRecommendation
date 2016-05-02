@@ -30,4 +30,12 @@ for u in range(0,len(userNames)):
 	else:
 		checkSize_fp.write('0 0\r\n')
 
+	if 'sets' in userContents:
+		sets =userNames_folder+userNames[u]+'/sets/full/'
+		setsImgs = os.listdir(sets)
+		setsImgsNum = len(setsImgs)
+		checkSize_fp.write('1 '+str(setsImgsNum)+'\r\n')
+	else:
+		checkSize_fp.write('0 0\r\n')
+
 checkSize_fp.close()
