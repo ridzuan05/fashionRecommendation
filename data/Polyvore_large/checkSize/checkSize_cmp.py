@@ -4,17 +4,20 @@ checkSize = open('./checkSize.txt').readlines()
 checkSize_dell = open('./checkSize_dell.txt').readlines()
 
 checkSize_cmp_fp = open('./checkSize_cmp.txt','w')
+checkSize_cmp_fp.close()
 
 for u_dell in range(0,len(checkSize_dell)):
 	for u in range(0,len(checkSize)):
 
-		checkSize_dell_list = checkSize_dell.strip('\r\n').split(' ')
-		checkSize_list = checkSize.strip('\r\n').split(' ')
+		checkSize_dell_list = checkSize_dell[u_dell].strip('\r\n').split(' ')
+		checkSize_list = checkSize[u].strip('\r\n').split(' ')
 
 		# if userName match
 		if (checkSize_dell_list[0] == checkSize_list[0]):
 			# if userContents don't match
 			if (checkSize_dell_list != checkSize_list):
+
+                                checkSize_cmp_fp = open('./checkSize_cmp.txt','a')
 
 				userName = checkSize_dell_list[0]
 				items = str(int(checkSize_dell_list[1])-int(checkSize_list[1]))
@@ -24,6 +27,6 @@ for u_dell in range(0,len(checkSize_dell)):
 
 				checkSize_cmp_fp.write(userName+' '+items+' '+itemsNum+' '+items_append+' '+items_appendNum+'\r\n')
 
-		break
+                                checkSize_cmp_fp.close()
 
-checkSize_cmp_fp.close()
+			break
