@@ -127,7 +127,7 @@ layer {
   }
   image_data_param {
     source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/val_p_top.txt"
-    batch_size:50
+    batch_size:5
   }
 }
 layer {
@@ -143,7 +143,7 @@ layer {
   }
   image_data_param {
     source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/val_p_bot.txt"
-    batch_size:50
+    batch_size:5
   }
 }
 layer {
@@ -159,7 +159,7 @@ layer {
   }
   image_data_param {
     source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/val_p_sho.txt"
-    batch_size:50
+    batch_size:5
   }
 }
 ###### nega outfit
@@ -176,7 +176,7 @@ layer {
   }
   image_data_param {
     source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/val_n_top.txt"
-    batch_size:50
+    batch_size:5
   }
 }
 layer {
@@ -192,7 +192,7 @@ layer {
   }
   image_data_param {
     source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/val_n_bot.txt"
-    batch_size:50
+    batch_size:5
   }
 }
 layer {
@@ -208,7 +208,7 @@ layer {
   }
   image_data_param {
     source:"/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/val_n_sho.txt"
-    batch_size:50
+    batch_size:5
   }
 }
 ############################ left side (positive) net
