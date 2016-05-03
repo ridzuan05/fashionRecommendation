@@ -14,35 +14,35 @@ user_num = 800
 
 optimal_mean_ndcg = 0.0
 initial_mean_ndcg = 0.0
-cmp_optimal_mean_ndcg = 0.0
-cmp_initial_mean_ndcg = 0.0
+# cmp_optimal_mean_ndcg = 0.0
+# cmp_initial_mean_ndcg = 0.0
 
 count_o = 0.0
 count_i = 0.0
-cmp_count_o = 0.0
-cmp_count_i = 0.0
+# cmp_count_o = 0.0
+# cmp_count_i = 0.0
 
 optimal_initial_idx = []
 optimal_initial_mean_ndcg = []
-cmp_optimal_initial_idx = []
-cmp_optimal_initial_mean_ndcg = []
+# cmp_optimal_initial_idx = []
+# cmp_optimal_initial_mean_ndcg = []
 
 # initialization to zero
 optimal_ndcg_at = [0.0] * 30
 initial_ndcg_at = [0.0] * 30
-cmp_optimal_ndcg_at = [0.0] * 30
-cmp_initial_ndcg_at = [0.0] * 30
+# cmp_optimal_ndcg_at = [0.0] * 30
+# cmp_initial_ndcg_at = [0.0] * 30
 
 count_optimal_ndcg_at = [0.0] * 30
 count_initial_ndcg_at = [0.0] * 30
-cmp_count_optimal_ndcg_at = [0.0] * 30
-cmp_count_initial_ndcg_at = [0.0] * 30
+# cmp_count_optimal_ndcg_at = [0.0] * 30
+# cmp_count_initial_ndcg_at = [0.0] * 30
 
 posi_num_length = 10
 optimal_top10_posi_num = 0.0
 initial_top10_posi_num = 0.0
-cmp_optimal_top10_posi_num = 0.0
-cmp_initial_top10_posi_num = 0.0
+# cmp_optimal_top10_posi_num = 0.0
+# cmp_initial_top10_posi_num = 0.0
 
 if 'charts' not in os.listdir(root+'training_script/results/figures/'):
     os.system('mkdir '+root+'training_script/results/figures/charts/')
@@ -61,7 +61,7 @@ whole_top_30_pos_num = []
 for u in range(0,user_num):
 	# read ndcg_mean_label_at_imgIdx.txt
 	ndcg = open(root+'training_script/results/data/U_'+str(u)+'/ndcg_mean_label_at_imgIdx.txt').readlines()
-	cmp_ndcg = open(root+'training_script/results/data/U_'+str(u)+'/cmp_ndcg_mean_label_at_imgIdx.txt').readlines()
+	# cmp_ndcg = open(root+'training_script/results/data/U_'+str(u)+'/cmp_ndcg_mean_label_at_imgIdx.txt').readlines()
 	
 	# optimal mean_ndcg, including initial caffemodel (namely, the general caffemodel)
 	optimal_meanNDCG_row_id_value = open(root+'training_script/results/data/U_'+str(u)+'/optimal_meanNDCG_row_id_value.txt').readlines()
@@ -69,13 +69,13 @@ for u in range(0,user_num):
 	optimal_idx = int(optimal_meanNDCG_row_id_value[0].strip('\r\n').split(' ')[0])
 	temp_o = float(optimal_meanNDCG_row_id_value[0].strip('\r\n').split(' ')[2])
 
-	cmp_optimal_idx =  int(optimal_meanNDCG_row_id_value[1].strip('\r\n').split(' ')[0])
-	cmp_temp_o = float(optimal_meanNDCG_row_id_value[1].strip('\r\n').split(' ')[2])
+	# cmp_optimal_idx =  int(optimal_meanNDCG_row_id_value[1].strip('\r\n').split(' ')[0])
+	# cmp_temp_o = float(optimal_meanNDCG_row_id_value[1].strip('\r\n').split(' ')[2])
 	
 	optimal_mean_ndcg += temp_o
 	count_o += 1.0
-	cmp_optimal_mean_ndcg += cmp_temp_o
-	cmp_count_o += 1.0
+	# cmp_optimal_mean_ndcg += cmp_temp_o
+	# cmp_count_o += 1.0
 
 	optimal_top10_posi_num_temp = 0.0
 
@@ -84,45 +84,45 @@ for u in range(0,user_num):
 			optimal_top10_posi_num_temp += 1.0
 		if (1==int(float(ndcg[1].strip('\r\n').split(' ')[i+1]))):
 			initial_top10_posi_num += 1.0
-		if (1==int(float(cmp_ndcg[cmp_optimal_idx-1].strip('\r\n').split(' ')[i+1]))):
-			cmp_optimal_top10_posi_num += 1.0
-		if (1==int(float(cmp_ndcg[1].strip('\r\n').split(' ')[i+1]))):
-			cmp_initial_top10_posi_num += 1.0
+		# if (1==int(float(cmp_ndcg[cmp_optimal_idx-1].strip('\r\n').split(' ')[i+1]))):
+			# cmp_optimal_top10_posi_num += 1.0
+		# if (1==int(float(cmp_ndcg[1].strip('\r\n').split(' ')[i+1]))):
+			# cmp_initial_top10_posi_num += 1.0
 	optimal_top10_posi_num += optimal_top10_posi_num_temp
 
 	# initial mean_ndcg
 	temp_i = float(ndcg[0].strip('\r\n').split(' ')[1])
 	initial_mean_ndcg += temp_i
 	count_i += 1.0
-	cmp_temp_i = float(cmp_ndcg[0].strip('\r\n').split(' ')[1])
-	cmp_initial_mean_ndcg += cmp_temp_i
-	cmp_count_i += 1.0
+	# cmp_temp_i = float(cmp_ndcg[0].strip('\r\n').split(' ')[1])
+	# cmp_initial_mean_ndcg += cmp_temp_i
+	# cmp_count_i += 1.0
 
 	# (optimal_mean_ndcg / initial_mean_ndcg)
 	optimal_initial_mean_ndcg.append(float(temp_o/temp_i))
 	optimal_initial_idx.append(u)
-	cmp_optimal_initial_mean_ndcg.append(float(cmp_temp_o/cmp_temp_i))
-	cmp_optimal_initial_idx.append(u)
+	# cmp_optimal_initial_mean_ndcg.append(float(cmp_temp_o/cmp_temp_i))
+	# cmp_optimal_initial_idx.append(u)
 
 	# optimal ndcg_at@(1~30)
 	o_ndcg_size = len(ndcg[optimal_idx].strip('\r\n').split(' '))-1
 	for n in range(0,o_ndcg_size):
 		optimal_ndcg_at[n] += float(ndcg[optimal_idx].strip('\r\n').split(' ')[n+1])
 		count_optimal_ndcg_at[n] += 1.0
-	cmp_o_ndcg_size = len(cmp_ndcg[cmp_optimal_idx].strip('\r\n').split(' '))-1
-	for n in range(0,cmp_o_ndcg_size):
-		cmp_optimal_ndcg_at[n] += float(cmp_ndcg[cmp_optimal_idx].strip('\r\n').split(' ')[n+1])
-		cmp_count_optimal_ndcg_at[n] += 1.0
+	# cmp_o_ndcg_size = len(cmp_ndcg[cmp_optimal_idx].strip('\r\n').split(' '))-1
+	# for n in range(0,cmp_o_ndcg_size):
+	# 	cmp_optimal_ndcg_at[n] += float(cmp_ndcg[cmp_optimal_idx].strip('\r\n').split(' ')[n+1])
+	# 	cmp_count_optimal_ndcg_at[n] += 1.0
 
 	# initial ndcg_at@(1~30)
 	i_ndcg_size = len(ndcg[2].strip('\r\n').split(' '))-1
 	for n in range(0,i_ndcg_size):
 		initial_ndcg_at[n] += float(ndcg[2].strip('\r\n').split(' ')[n+1])
 		count_initial_ndcg_at[n] += 1.0
-	cmp_i_ndcg_size = len(cmp_ndcg[2].strip('\r\n').split(' '))-1
-	for n in range(0,cmp_i_ndcg_size):
-		cmp_initial_ndcg_at[n] += float(cmp_ndcg[2].strip('\r\n').split(' ')[n+1])
-		cmp_count_initial_ndcg_at[n] += 1.0
+	# cmp_i_ndcg_size = len(cmp_ndcg[2].strip('\r\n').split(' '))-1
+	# for n in range(0,cmp_i_ndcg_size):
+	# 	cmp_initial_ndcg_at[n] += float(cmp_ndcg[2].strip('\r\n').split(' ')[n+1])
+	# 	cmp_count_initial_ndcg_at[n] += 1.0
 
 	# whole_ndcg_label
 	whole_ndcg_label.append(ndcg[optimal_idx-1])
@@ -142,41 +142,41 @@ if (initial_top10_posi_num==0):
 else:
 	num_gain = optimal_top10_posi_num/initial_top10_posi_num
 
-cmp_optimal_mean_ndcg /= cmp_count_o
-cmp_initial_mean_ndcg /= cmp_count_i
-cmp_optimal_top10_posi_num /= cmp_count_o
-cmp_initial_top10_posi_num /= cmp_count_i
-cmp_gain = cmp_optimal_mean_ndcg/cmp_initial_mean_ndcg
-if (cmp_initial_top10_posi_num==0):
-	cmp_num_gain = 999
-else:
-	cmp_num_gain = cmp_optimal_top10_posi_num/cmp_initial_top10_posi_num
+# cmp_optimal_mean_ndcg /= cmp_count_o
+# cmp_initial_mean_ndcg /= cmp_count_i
+# cmp_optimal_top10_posi_num /= cmp_count_o
+# cmp_initial_top10_posi_num /= cmp_count_i
+# cmp_gain = cmp_optimal_mean_ndcg/cmp_initial_mean_ndcg
+# if (cmp_initial_top10_posi_num==0):
+# 	cmp_num_gain = 999
+# else:
+# 	cmp_num_gain = cmp_optimal_top10_posi_num/cmp_initial_top10_posi_num
 
 optimal_initial_mean_ndcg_fp = open(root+'training_script/results/figures/optimal_initial_mean_ndcg.txt','w')
 optimal_initial_mean_ndcg_fp.write(str(optimal_mean_ndcg)+' '+str(initial_mean_ndcg)+' '+str(gain)+'\r\n')
-optimal_initial_mean_ndcg_fp.write(str(cmp_optimal_mean_ndcg)+' '+str(cmp_initial_mean_ndcg)+' '+str(cmp_gain)+'\r\n')
+# optimal_initial_mean_ndcg_fp.write(str(cmp_optimal_mean_ndcg)+' '+str(cmp_initial_mean_ndcg)+' '+str(cmp_gain)+'\r\n')
 optimal_initial_mean_ndcg_fp.close
 
 top10_posi_num_fp = open(root+'training_script/results/figures/top10_posi_num.txt','w')
 top10_posi_num_fp.write(str(optimal_top10_posi_num)+' '+str(initial_top10_posi_num)+' '+str(num_gain)+'\r\n')
-top10_posi_num_fp.write(str(cmp_optimal_top10_posi_num)+' '+str(cmp_initial_top10_posi_num)+' '+str(cmp_num_gain)+'\r\n')
+# top10_posi_num_fp.write(str(cmp_optimal_top10_posi_num)+' '+str(cmp_initial_top10_posi_num)+' '+str(cmp_num_gain)+'\r\n')
 top10_posi_num_fp.close()
 
 ndcg_at_length = 30
 ndcg_at_idx = []
 for n in range(0,ndcg_at_length):
 	optimal_ndcg_at[n] /= count_optimal_ndcg_at[n]
-	cmp_optimal_ndcg_at[n] /= cmp_count_optimal_ndcg_at[n]
+	# cmp_optimal_ndcg_at[n] /= cmp_count_optimal_ndcg_at[n]
 	initial_ndcg_at[n] /= count_initial_ndcg_at[n]
-	cmp_initial_ndcg_at[n] /= cmp_count_initial_ndcg_at[n]
+	# cmp_initial_ndcg_at[n] /= cmp_count_initial_ndcg_at[n]
 	ndcg_at_idx.append(n+1)
 
 fig = plt.figure()
 ax_left = fig.add_subplot(111)
 ax_left.plot(ndcg_at_idx, optimal_ndcg_at, '--g', label = 'Optimal_NDCG@')
 ax_left.plot(ndcg_at_idx, initial_ndcg_at, '--b', label = 'Initial_NDCG@')
-ax_left.plot(ndcg_at_idx, cmp_optimal_ndcg_at, '-.g', label = 'Cmp_Optimal_NDCG@')
-ax_left.plot(ndcg_at_idx, cmp_initial_ndcg_at, '-.b', label = 'Cmp_Initial_NDCG@')
+# ax_left.plot(ndcg_at_idx, cmp_optimal_ndcg_at, '-.g', label = 'Cmp_Optimal_NDCG@')
+# ax_left.plot(ndcg_at_idx, cmp_initial_ndcg_at, '-.b', label = 'Cmp_Initial_NDCG@')
 lines_left, labels_left = ax_left.get_legend_handles_labels()   
 ax_left.legend(lines_left, labels_left, loc=0)
 ax_left.grid()
@@ -189,7 +189,7 @@ plt.close('all')
 fig = plt.figure()
 ax_left = fig.add_subplot(111)
 ax_left.plot(optimal_initial_idx, optimal_initial_mean_ndcg, '--g', label = 'Finetune')
-ax_left.plot(cmp_optimal_initial_idx, cmp_optimal_initial_mean_ndcg, '--b', label = 'Direct')
+# ax_left.plot(cmp_optimal_initial_idx, cmp_optimal_initial_mean_ndcg, '--b', label = 'Direct')
 lines_left, labels_left = ax_left.get_legend_handles_labels()   
 ax_left.legend(lines_left, labels_left, loc=0)
 ax_left.grid()

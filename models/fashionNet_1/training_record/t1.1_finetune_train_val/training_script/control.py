@@ -243,7 +243,7 @@ cmp_optimal_ndcg_at_idx = []
 cmp_first_ndcg_at = []
 cmp_first_ndcg_at_idx = []
 
-for c in range(0,len(cID)):
+for c in range(0,1):
 
     # caffemodel
     caffemodel_path = '/local2/home/tong/fashionRecommendation/models/fashionNet_1/training_record/t1.1_train_val/fashion_params_1_'+cID[c]+'.caffemodel'
@@ -326,7 +326,6 @@ for c in range(0,len(cID)):
             ndcg_mean_label_at_imgIdx_f.write(str(i)+' '+temp1+'\r\n') # ndcg_imgIdx
             ndcg_mean_label_at_imgIdx_f.close()
 
-
         # validation, save caffemodel, and stop criteria
         if (((i>=start_val_idx) and (i%val_interval==0)) or (i==end_iter[c])):
 
@@ -407,6 +406,19 @@ for c in range(0,len(cID)):
                     optimal_meanNDCG_id_value_f = open(recordDir_data+'optimal_meanNDCG_row_id_value.txt','a')
                     optimal_meanNDCG_id_value_f.write(str(optimal_idx)+' '+str(optimal_mNDCG_id)+' '+str(optimal_mNDCG)+'\r\n')
                     optimal_meanNDCG_id_value_f.close()
+
+                    fig = plt.figure()
+                    ax_left = fig.add_subplot(111)
+                    ax_left.plot(optimal_ndcg_at_idx, optimal_ndcg_at, '--g', label = 'Optimal_NDCG@')
+                    ax_left.plot(first_ndcg_at_idx, first_ndcg_at, '--b', label = 'Initial_NDCG@')
+                    lines_left, labels_left = ax_left.get_legend_handles_labels()   
+                    ax_left.legend(lines_left, labels_left, loc=0)
+                    ax_left.grid()
+                    ax_left.set_xlabel("m = (1,2,...,30)")
+                    ax_left.set_ylabel("mean_NDCG@")
+                    ax_left.set_title("mean_NDCG@m of User_{}".format(uID))
+                    plt.savefig(recordDir_data+'finetune_NDCG_at.png', bbox_inches='tight')
+                    plt.close('all')
             else:
                 # save caffemodel
                 source_params = {pr: (solver.net.params[pr][0].data,solver.net.params[pr][1].data) for pr in params}
