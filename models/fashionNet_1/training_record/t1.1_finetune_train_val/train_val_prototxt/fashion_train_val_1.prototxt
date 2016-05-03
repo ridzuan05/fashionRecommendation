@@ -1296,12 +1296,12 @@ layer{
   param {
     lr_mult: 100
     decay_mult: 1
-    name: "metric_fc1_w"
+    name: "metric_fc1_w_tb"
   }
   param {
     lr_mult: 200
     decay_mult: 0
-    name: "metric_fc1_b"
+    name: "metric_fc1_b_tb"
   }
   inner_product_param {
     num_output: 512
@@ -1324,12 +1324,12 @@ layer{
   param {
     lr_mult: 100
     decay_mult: 1
-    name: "metric_fc1_w"
+    name: "metric_fc1_w_ts"
   }
   param {
     lr_mult: 200
     decay_mult: 0
-    name: "metric_fc1_b"
+    name: "metric_fc1_b_ts"
   }
   inner_product_param {
     num_output: 512
@@ -1352,12 +1352,12 @@ layer{
   param {
     lr_mult: 100
     decay_mult: 1
-    name: "metric_fc1_w"
+    name: "metric_fc1_w_bs"
   }
   param {
     lr_mult: 200
     decay_mult: 0
-    name: "metric_fc1_b"
+    name: "metric_fc1_b_bs"
   }
   inner_product_param {
     num_output: 512
@@ -1380,12 +1380,12 @@ layer{
   param {
     lr_mult: 100
     decay_mult: 1
-    name: "metric_fc2_w"
+    name: "metric_fc2_w_tb"
   }
   param {
     lr_mult: 200
     decay_mult: 0
-    name: "metric_fc2_b"
+    name: "metric_fc2_b_tb"
   }
   inner_product_param {
     num_output: 512
@@ -1408,12 +1408,12 @@ layer{
   param {
     lr_mult: 100
     decay_mult: 1
-    name: "metric_fc2_w"
+    name: "metric_fc2_w_ts"
   }
   param {
     lr_mult: 200
     decay_mult: 0
-    name: "metric_fc2_b"
+    name: "metric_fc2_b_ts"
   }
   inner_product_param {
     num_output: 512
@@ -1436,12 +1436,12 @@ layer{
   param {
     lr_mult: 100
     decay_mult: 1
-    name: "metric_fc2_w"
+    name: "metric_fc2_w_bs"
   }
   param {
     lr_mult: 200
     decay_mult: 0
-    name: "metric_fc2_b"
+    name: "metric_fc2_b_bs"
   }
   inner_product_param {
     num_output: 512
@@ -2647,12 +2647,12 @@ layer{
   param {
     lr_mult: 100
     decay_mult: 1
-    name: "metric_fc1_w"
+    name: "metric_fc1_w_tb"
   }
   param {
     lr_mult: 200
     decay_mult: 0
-    name: "metric_fc1_b"
+    name: "metric_fc1_b_tb"
   }
   inner_product_param {
     num_output: 512
@@ -2675,12 +2675,12 @@ layer{
   param {
     lr_mult: 100
     decay_mult: 1
-    name: "metric_fc1_w"
+    name: "metric_fc1_w_ts"
   }
   param {
     lr_mult: 200
     decay_mult: 0
-    name: "metric_fc1_b"
+    name: "metric_fc1_b_ts"
   }
   inner_product_param {
     num_output: 512
@@ -2703,12 +2703,12 @@ layer{
   param {
     lr_mult: 100
     decay_mult: 1
-    name: "metric_fc1_w"
+    name: "metric_fc1_w_bs"
   }
   param {
     lr_mult: 200
     decay_mult: 0
-    name: "metric_fc1_b"
+    name: "metric_fc1_b_bs"
   }
   inner_product_param {
     num_output: 512
@@ -2731,12 +2731,12 @@ layer{
   param {
     lr_mult: 100
     decay_mult: 1
-    name: "metric_fc2_w"
+    name: "metric_fc2_w_tb"
   }
   param {
     lr_mult: 200
     decay_mult: 0
-    name: "metric_fc2_b"
+    name: "metric_fc2_b_tb"
   }
   inner_product_param {
     num_output: 512
@@ -2759,12 +2759,12 @@ layer{
   param {
     lr_mult: 100
     decay_mult: 1
-    name: "metric_fc2_w"
+    name: "metric_fc2_w_ts"
   }
   param {
     lr_mult: 200
     decay_mult: 0
-    name: "metric_fc2_b"
+    name: "metric_fc2_b_ts"
   }
   inner_product_param {
     num_output: 512
@@ -2787,12 +2787,12 @@ layer{
   param {
     lr_mult: 100
     decay_mult: 1
-    name: "metric_fc2_w"
+    name: "metric_fc2_w_bs"
   }
   param {
     lr_mult: 200
     decay_mult: 0
-    name: "metric_fc2_b"
+    name: "metric_fc2_b_bs"
   }
   inner_product_param {
     num_output: 512

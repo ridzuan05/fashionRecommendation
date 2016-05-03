@@ -847,10 +847,10 @@ layer{
   name: "metric_fc1_tb"
   type: "InnerProduct"
   param {
-    name: "metric_fc1_w"
+    name: "metric_fc1_w_tb"
   }
   param {
-    name: "metric_fc1_b"
+    name: "metric_fc1_b_tb"
   }
   inner_product_param {
     num_output: 512
@@ -863,10 +863,10 @@ layer{
   name: "metric_fc1_ts"
   type: "InnerProduct"
   param {
-    name: "metric_fc1_w"
+    name: "metric_fc1_w_ts"
   }
   param {
-    name: "metric_fc1_b"
+    name: "metric_fc1_b_ts"
   }
   inner_product_param {
     num_output: 512
@@ -879,10 +879,10 @@ layer{
   name: "metric_fc1_bs"
   type: "InnerProduct"
   param {
-    name: "metric_fc1_w"
+    name: "metric_fc1_w_bs"
   }
   param {
-    name: "metric_fc1_b"
+    name: "metric_fc1_b_bs"
   }
   inner_product_param {
     num_output: 512
@@ -895,10 +895,10 @@ layer{
   name: "metric_fc2_tb"
   type: "InnerProduct"
   param {
-    name: "metric_fc2_w"
+    name: "metric_fc2_w_tb"
   }
   param {
-    name: "metric_fc2_b"
+    name: "metric_fc2_b_tb"
   }
   inner_product_param {
     num_output: 512
@@ -911,10 +911,10 @@ layer{
   name: "metric_fc2_ts"
   type: "InnerProduct"
   param {
-    name: "metric_fc2_w"
+    name: "metric_fc2_w_ts"
   }
   param {
-    name: "metric_fc2_b"
+    name: "metric_fc2_b_ts"
   }
   inner_product_param {
     num_output: 512
@@ -927,10 +927,10 @@ layer{
   name: "metric_fc2_bs"
   type: "InnerProduct"
   param {
-    name: "metric_fc2_w"
+    name: "metric_fc2_w_bs"
   }
   param {
-    name: "metric_fc2_b"
+    name: "metric_fc2_b_bs"
   }
   inner_product_param {
     num_output: 512 
