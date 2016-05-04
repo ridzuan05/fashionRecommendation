@@ -3059,8 +3059,8 @@ layer {
 layer {
   name:   "for_computing_accuracy"
   type:   "Concat"
-  bottom: "dislike"
-  bottom: "dislike_n" # should always be larger
+  bottom: "like_n"
+  bottom: "like" # should always be larger
   top:    "nega_VS_posi"
   concat_param {
     axis: 1
