@@ -1200,12 +1200,12 @@ layer {
   }
 }
 ######
-layer {
-  bottom: "fc7_top"
-  top:    "fc7_top_normed"
-  name:   "norm7" # norm7_top
-  type:   "Normalization"
-}
+#layer {
+#  bottom: "fc7_top"
+#  top:    "fc7_top_normed"
+#  name:   "norm7" # norm7_top
+#  type:   "Normalization"
+#}
 ######
 layer {
   bottom: "fc7_bottom"
@@ -1217,12 +1217,12 @@ layer {
   }
 }
 ######
-layer {
-  bottom: "fc7_bottom"
-  top:    "fc7_bottom_normed"
-  name:   "norm7_bottom"
-  type:   "Normalization"
-}
+#layer {
+#  bottom: "fc7_bottom"
+#  top:    "fc7_bottom_normed"
+#  name:   "norm7_bottom"
+#  type:   "Normalization"
+#}
 ######
 layer {
   bottom: "fc7_shoes"
@@ -1233,20 +1233,20 @@ layer {
     dropout_ratio: 0.5
   }
 }
-layer {
-  bottom: "fc7_shoes"
-  top:    "fc7_shoes_normed"
-  name:   "norm7_shoes"
-  type:   "Normalization"
-}
+#layer {
+#  bottom: "fc7_shoes"
+#  top:    "fc7_shoes_normed"
+#  name:   "norm7_shoes"
+#  type:   "Normalization"
+#}
 #triplet metric net
 ######
 layer {
   name:   "outfit_feaVec"
   type:   "Concat"
-  bottom: "fc7_top_normed"
-  bottom: "fc7_bottom_normed"
-  bottom: "fc7_shoes_normed"
+  bottom: "fc7_top"
+  bottom: "fc7_bottom"
+  bottom: "fc7_shoes"
   top:    "outfit_feaVec"
   concat_param {
     axis: 1
@@ -2357,12 +2357,12 @@ layer {
   }
 }
 ######
-layer {
-  bottom: "fc7_top_n"
-  top:    "fc7_top_n_normed"
-  name:   "norm7_n" # norm7_top_n
-  type:   "Normalization"
-}
+#layer {
+#  bottom: "fc7_top_n"
+#  top:    "fc7_top_n_normed"
+#  name:   "norm7_n" # norm7_top_n
+#  type:   "Normalization"
+#}
 ######
 layer {
   bottom: "fc7_bottom_n"
@@ -2374,12 +2374,12 @@ layer {
   }
 }
 ######
-layer {
-  bottom: "fc7_bottom_n"
-  top:    "fc7_bottom_n_normed"
-  name:   "norm7_bottom_n"
-  type:   "Normalization"
-}
+#layer {
+#  bottom: "fc7_bottom_n"
+#  top:    "fc7_bottom_n_normed"
+#  name:   "norm7_bottom_n"
+#  type:   "Normalization"
+#}
 ######
 layer {
   bottom: "fc7_shoes_n"
@@ -2391,20 +2391,20 @@ layer {
   }
 }
 ######
-layer {
-  bottom: "fc7_shoes_n"
-  top:    "fc7_shoes_n_normed"
-  name:   "norm7_shoes_n"
-  type:   "Normalization"
-}
+#layer {
+#  bottom: "fc7_shoes_n"
+#  top:    "fc7_shoes_n_normed"
+#  name:   "norm7_shoes_n"
+#  type:   "Normalization"
+#}
 #triplet metric net
 ######
 layer {
   name:   "outfit_feaVec_n"
   type:   "Concat"
-  bottom: "fc7_top_n_normed"
-  bottom: "fc7_bottom_n_normed"
-  bottom: "fc7_shoes_n_normed"
+  bottom: "fc7_top_n"
+  bottom: "fc7_bottom_n"
+  bottom: "fc7_shoes_n"
   top:    "outfit_feaVec_n"
   concat_param {
     axis: 1
