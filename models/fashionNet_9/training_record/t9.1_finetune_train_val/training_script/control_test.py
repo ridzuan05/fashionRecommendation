@@ -21,7 +21,7 @@ test_fd = 'U_test'
 # test User_idx
 tUID = '0'
 # caffemodel_idx
-# cID = '239168'
+# cID = '242400'
 cID = '0'
 # U_k(next i=0)[18_0.0001*(1,100)] training epoch
 end_iter = 738 # 18 training epoch
