@@ -66,8 +66,6 @@ def test_avg(test_iter, img_idx, test_tuple_num):
         
     img_idx_pos = []
     img_idx_neg = []
-    
-    false_posi_thresh = 1.0
 
     for i in range(0,test_iter):
         # one test_batch_size computation
@@ -86,16 +84,15 @@ def test_avg(test_iter, img_idx, test_tuple_num):
             avg_loss += np.log(1+1.0/np.exp(diff))
 
             # for scores_pos & nr_tuples_pos[count_posi] & img_idx_pos
-            if  ((img_idx%6==0) and (posi_pref_score<=false_posi_thresh)):
+            if  (img_idx%6==0):
                 scores_pos.append(posi_pref_score)
                 count_posi += 1
                 img_idx_pos.append(img_idx)
 
             # for scores_neg & nr_tuples_neg[count_nega] & img_idx_neg
-            if (nega_pref_score<=false_posi_thresh):
-                scores_neg.append(nega_pref_score)
-                count_nega += 1
-                img_idx_neg.append(img_idx)
+            scores_neg.append(nega_pref_score)
+            count_nega += 1
+            img_idx_neg.append(img_idx)
 
             # record test_top/bot/sho's img_idx
             img_idx += 1
