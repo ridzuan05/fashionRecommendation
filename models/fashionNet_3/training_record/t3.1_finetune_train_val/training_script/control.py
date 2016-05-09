@@ -219,7 +219,7 @@ solver = caffe.SGDSolver('/local2/home/tong/fashionRecommendation/models/fashion
 
 start_iter = 0
 visual_interval = 4 # 1/10 training epoch
-val_iter = 6 # 1 test epoch
+val_iter = 7 # 1 test epoch
 
 # val_tuple_num
 val_tuple_num = 276

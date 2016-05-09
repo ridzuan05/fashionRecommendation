@@ -8,7 +8,7 @@ matplotlib.use('Agg') # Must be before importing matplotlib.pyplot or pylab!
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
-sys.path.insert(0,'/local2/home/tong/caffe-master/python')
+sys.path.insert(0,'/home/dell/caffe-master/python')
 import caffe
 import os
 from matplotlib import rc
@@ -176,10 +176,10 @@ def get_ndcg(scores_pos, scores_neg, nr_tuples_pos, nr_tuples_neg, img_idx_pos, 
     return (mean_ndcg, ndcg_at, ndcg_label, ndcg_imgIdx)
 
 # results folder
-recordDir = '/local2/home/tong/fashionRecommendation/models/fashionNet_3_dell/training_record/t3.1_finetune_train_val/training_script/results/'
+recordDir = '/home/dell/fashionRecommendation/models/fashionNet_3_dell/training_record/t3.1_finetune_train_val/training_script/results/'
 recordDir_data = recordDir+'data/U_'+uID+'/'
 
-if 'results' not in os.listdir('/local2/home/tong/fashionRecommendation/models/fashionNet_3_dell/training_record/t3.1_finetune_train_val/training_script/'):
+if 'results' not in os.listdir('/home/dell/fashionRecommendation/models/fashionNet_3_dell/training_record/t3.1_finetune_train_val/training_script/'):
     os.system('mkdir '+recordDir)
 
 if 'data' not in os.listdir(recordDir):
@@ -212,14 +212,14 @@ optimal_meanNDCG_id_value_f = open(recordDir_data+'optimal_meanNDCG_row_id_value
 optimal_meanNDCG_id_value_f.close()
 
 #for saving caffemodel
-net = caffe.Net('/local2/home/tong/fashionRecommendation/models/fashionNet_3_dell/fashion_deploy_3.prototxt', caffe.TEST)
+net = caffe.Net('/home/dell/fashionRecommendation/models/fashionNet_3_dell/fashion_deploy_3.prototxt', caffe.TEST)
 
 # solver
-solver = caffe.SGDSolver('/local2/home/tong/fashionRecommendation/models/fashionNet_3_dell/training_record/t3.1_finetune_train_val/solver_prototxt/fashion_solver_3_k/fashion_solver_3_'+uID+'.prototxt')
+solver = caffe.SGDSolver('/home/dell/fashionRecommendation/models/fashionNet_3_dell/training_record/t3.1_finetune_train_val/solver_prototxt/fashion_solver_3_k/fashion_solver_3_'+uID+'.prototxt')
 
 start_iter = 0
 visual_interval = 4 # 1/10 training epoch
-val_iter = 6 # 1 test epoch
+val_iter = 7 # 1 test epoch
 
 # val_tuple_num
 val_tuple_num = 276
@@ -246,7 +246,7 @@ cmp_first_ndcg_at_idx = []
 for c in range(0,1):
 
     # caffemodel
-    caffemodel_path = '/local2/home/tong/fashionRecommendation/models/fashionNet_3_dell/training_record/t3.1_train_val/fashion_params_3_'+cID[c]+'.caffemodel'
+    caffemodel_path = '/home/dell/fashionRecommendation/models/fashionNet_3_dell/training_record/t3.1_train_val/fashion_params_3_'+cID[c]+'.caffemodel'
     solver.net.copy_from(caffemodel_path)
     solver.test_nets[0].copy_from(caffemodel_path)
 
