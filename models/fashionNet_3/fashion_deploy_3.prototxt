@@ -1019,12 +1019,12 @@ layer {
   }
 }
 ######
-layer {
-  bottom: "fc7_top"
-  top:    "fc7_top_normed"
-  name:   "norm7" # norm7_top
-  type:   "Normalization"
-}
+#layer {
+#  bottom: "fc7_top"
+#  top:    "fc7_top_normed"
+#  name:   "norm7" # norm7_top
+#  type:   "Normalization"
+#}
 ######
 layer {
   bottom: "fc7_bottom"
@@ -1036,12 +1036,12 @@ layer {
   }
 }
 ######
-layer {
-  bottom: "fc7_bottom"
-  top:    "fc7_bottom_normed"
-  name:   "norm7_bottom"
-  type:   "Normalization"
-}
+#layer {
+#  bottom: "fc7_bottom"
+#  top:    "fc7_bottom_normed"
+#  name:   "norm7_bottom"
+#  type:   "Normalization"
+#}
 ######
 layer {
   bottom: "fc7_shoes"
@@ -1052,12 +1052,12 @@ layer {
     dropout_ratio: 0.5
   }
 }
-layer {
-  bottom: "fc7_shoes"
-  top:    "fc7_shoes_normed"
-  name:   "norm7_shoes"
-  type:   "Normalization"
-}
+#layer {
+#  bottom: "fc7_shoes"
+#  top:    "fc7_shoes_normed"
+#  name:   "norm7_shoes"
+#  type:   "Normalization"
+#}
 ###################triplet metric net
 layer {
   name:   "outfit_feaVec"
