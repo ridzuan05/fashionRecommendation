@@ -206,7 +206,7 @@ max_top_30_pos_num = max(whole_top_30_pos_num)
 min_top_30_pos_num = min(whole_top_30_pos_num)
 print("max_top_30_pos_num = {}, min_top_30_pos_num = {}".format(max_top_30_pos_num,min_top_30_pos_num))
 
-path_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_3/data_prep/imgdata_list/tvt_pn_tbs_k_txt/val_'
+path_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/tvt_pn_tbs_k_txt/val_'
 
 # retrieve best top_30 outfits for 4 users
 best_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_3/training_record/t3.1_finetune_train_val/training_script/results/figures/charts/best/'

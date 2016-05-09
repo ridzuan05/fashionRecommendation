@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import os
 import Image
 
-root = '/local2/home/tong/fashionRecommendation/models/fashionNet_3_dell/training_record/t3.1_finetune_train_val/'
+root = '/home/dell/fashionRecommendation/models/fashionNet_3_dell/training_record/t3.1_finetune_train_val/'
 
 # user_number
 user_num = 800
@@ -206,10 +206,10 @@ max_top_30_pos_num = max(whole_top_30_pos_num)
 min_top_30_pos_num = min(whole_top_30_pos_num)
 print("max_top_30_pos_num = {}, min_top_30_pos_num = {}".format(max_top_30_pos_num,min_top_30_pos_num))
 
-path_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_3_dell/data_prep/imgdata_list/tvt_pn_tbs_k_txt/val_'
+path_root = '/home/dell/fashionRecommendation/models/fashionNet_3_dell/data_prep/imgdata_list/tvt_pn_tbs_k_txt/val_'
 
 # retrieve best top_30 outfits for 4 users
-best_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_3_dell/training_record/t3.1_finetune_train_val/training_script/results/figures/charts/best/'
+best_root = '/home/dell/fashionRecommendation/models/fashionNet_3_dell/training_record/t3.1_finetune_train_val/training_script/results/figures/charts/best/'
 best_u_count = 0
 flag_n = 0
 for n in range(max_top_30_pos_num,min_top_30_pos_num-1,-1):
@@ -282,7 +282,7 @@ for n in range(max_top_30_pos_num,min_top_30_pos_num-1,-1):
 		break
 
 # retrieve worst top_30 outfits for 4 users
-worst_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_3_dell/training_record/t3.1_finetune_train_val/training_script/results/figures/charts/worst/'
+worst_root = '/home/dell/fashionRecommendation/models/fashionNet_3_dell/training_record/t3.1_finetune_train_val/training_script/results/figures/charts/worst/'
 worst_u_count = 0
 flag_n = 0
 for n in range(min_top_30_pos_num,max_top_30_pos_num+1):
