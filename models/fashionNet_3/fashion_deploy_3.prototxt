@@ -1062,9 +1062,9 @@ layer {
 layer {
   name:   "outfit_feaVec"
   type:   "Concat"
-  bottom: "fc7_top_normed"
-  bottom: "fc7_bottom_normed"
-  bottom: "fc7_shoes_normed"
+  bottom: "fc7_top"
+  bottom: "fc7_bottom"
+  bottom: "fc7_shoes"
   top:    "outfit_feaVec"
   concat_param {
     axis: 1
