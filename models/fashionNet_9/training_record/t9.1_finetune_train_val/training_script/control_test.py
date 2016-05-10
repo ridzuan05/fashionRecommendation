@@ -20,7 +20,7 @@ from sklearn.metrics import confusion_matrix
 test_fd = 'U_test'
 # test_fd = 'U_test1'
 # test User_idx
-tUID = '0'
+tUID = '9'
 # caffemodel_idx
 cID = '242400'
 # cID = '0'
@@ -226,6 +226,10 @@ val_avg_accu = 0
 val_avg_loss = 0
 
 img_idx = 0
+
+# start.txt
+start_f = open(recordDir_data+'start.txt','w')
+start_f.close()
 
 # ndcg_mean_label_at_imgIdx.txt
 ndcg_mean_label_at_imgIdx_f = open(recordDir_data+'ndcg_mean_label_at_imgIdx.txt','w')
