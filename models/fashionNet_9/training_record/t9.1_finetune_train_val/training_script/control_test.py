@@ -18,14 +18,17 @@ from sklearn.metrics import confusion_matrix
 
 # test folder 'U_test' or 'U_test2'
 test_fd = 'U_test'
+# test_fd = 'U_test1'
 # test User_idx
 tUID = '0'
 # caffemodel_idx
-# cID = '242400'
-cID = '0'
+cID = '242400'
+# cID = '0'
 # U_k(next i=0)[18_0.0001*(1,100)] training epoch
-end_iter = 738 # 18 training epoch
+end_iter = 137 # 3.34 training epoch
+# end_iter = 738 # 18 training epoch
 val_interval = 8 # 1/5 training epoch
+# start_val_idx = end_iter-88+6
 # set gpu idx
 caffe.set_mode_gpu()
 caffe.set_device(0)
