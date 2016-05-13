@@ -226,12 +226,12 @@ layer{
   bottom: "top"
   top:    "conv1_top"
   param{
-    lr_mult:1 
+    lr_mult:0 
     decay_mult:1
     name:"conv1_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv1_b_"
   }
@@ -256,12 +256,12 @@ layer{
   bottom: "bot"
   top:    "conv1_bottom"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv1_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv1_b_"
   }
@@ -286,12 +286,12 @@ layer{
   bottom: "sho"
   top:    "conv1_shoes"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv1_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv1_b_"
   }
@@ -412,12 +412,12 @@ layer {
   name:   "conv2" # conv2_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv2_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv2_b_"
   }
@@ -443,12 +443,12 @@ layer {
   name:   "conv2_bottom"
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv2_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv2_b_"
   }
@@ -474,12 +474,12 @@ layer {
   name:   "conv2_shoes"
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv2_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv2_b_"
   }
@@ -601,12 +601,12 @@ layer {
   name:   "conv3" # conv3_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv3_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv3_b_"
   }
@@ -631,12 +631,12 @@ layer {
   name:   "conv3_bottom"
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv3_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv3_b_"
   }
@@ -661,12 +661,12 @@ layer {
   name:   "conv3_shoes"
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv3_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv3_b_"
   }
@@ -712,12 +712,12 @@ layer {
   name:   "conv4" # conv4_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv4_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv4_b_"
   }
@@ -742,12 +742,12 @@ layer {
   name:   "conv4_bottom"
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv4_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv4_b_"
   }
@@ -772,12 +772,12 @@ layer {
   name:   "conv4_shoes"
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv4_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv4_b_"
   }
@@ -823,12 +823,12 @@ layer {
   name:   "conv5" # conv5_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv5_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv5_b_"
   }
@@ -853,12 +853,12 @@ layer {
   name:   "conv5_bottom"
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv5_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv5_b_"
   }
@@ -883,12 +883,12 @@ layer {
   name:   "conv5_shoes"
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv5_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv5_b_"
   }
@@ -970,12 +970,12 @@ layer {
   name:   "fc6" # fc6_top
   type:   "InnerProduct"
   param {
-    lr_mult: 1
+    lr_mult: 0
     decay_mult: 1
     name:"fc6_w_"
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
     name:"fc6_b_"
   }
@@ -998,12 +998,12 @@ layer {
   name:   "fc6_bottom"
   type:   "InnerProduct"
   param {
-    lr_mult: 1
+    lr_mult: 0
     decay_mult: 1
     name:"fc6_w_"
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
     name:"fc6_b_"
   }
@@ -1026,12 +1026,12 @@ layer {
   name:   "fc6_shoes"
   type:   "InnerProduct"
   param {
-    lr_mult: 1
+    lr_mult: 0
     decay_mult: 1
     name:"fc6_w_"
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
     name:"fc6_b_"
   }
@@ -1105,12 +1105,12 @@ layer {
   name:   "fc7" # fc7_top
   type:   "InnerProduct"
   param {
-    lr_mult: 1
+    lr_mult: 0
     decay_mult: 1
     name:"fc7_w_"
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
     name:"fc7_b_"
   }
@@ -1133,12 +1133,12 @@ layer {
   name:   "fc7_bottom"
   type:   "InnerProduct"
   param {
-    lr_mult: 1
+    lr_mult: 0
     decay_mult: 1
     name:"fc7_w_"
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
     name:"fc7_b_"
   }
@@ -1161,12 +1161,12 @@ layer {
   name:   "fc7_shoes"
   type:   "InnerProduct"
   param {
-    lr_mult: 1
+    lr_mult: 0
     decay_mult: 1
     name:"fc7_w_"
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
     name:"fc7_b_"
   }
@@ -1383,12 +1383,12 @@ layer{
   bottom: "top_n"
   top:    "conv1_top_n"
   param{
-    lr_mult:1 
+    lr_mult:0
     decay_mult:1
     name:"conv1_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv1_b_"
   }
@@ -1413,12 +1413,12 @@ layer{
   bottom: "bot_n"
   top:    "conv1_bottom_n"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv1_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv1_b_"
   }
@@ -1443,12 +1443,12 @@ layer{
   bottom: "sho_n"
   top:    "conv1_shoes_n"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv1_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv1_b_"
   }
@@ -1569,12 +1569,12 @@ layer {
   name:   "conv2_n" # conv2_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv2_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv2_b_"
   }
@@ -1600,12 +1600,12 @@ layer {
   name:   "conv2_bottom_n"
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv2_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv2_b_"
   }
@@ -1631,12 +1631,12 @@ layer {
   name:   "conv2_shoes_n"
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv2_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv2_b_"
   }
@@ -1758,12 +1758,12 @@ layer {
   name:   "conv3_n" # conv3_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv3_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv3_b_"
   }
@@ -1788,12 +1788,12 @@ layer {
   name:   "conv3_bottom_n"
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv3_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv3_b_"
   }
@@ -1818,12 +1818,12 @@ layer {
   name:   "conv3_shoes_n"
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv3_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv3_b_"
   }
@@ -1869,12 +1869,12 @@ layer {
   name:   "conv4_n" # conv4_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv4_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv4_b_"
   }
@@ -1899,12 +1899,12 @@ layer {
   name:   "conv4_bottom_n"
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv4_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv4_b_"
   }
@@ -1929,12 +1929,12 @@ layer {
   name:   "conv4_shoes_n"
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv4_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv4_b_"
   }
@@ -1980,12 +1980,12 @@ layer {
   name:   "conv5_n" # conv5_top
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv5_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv5_b_"
   }
@@ -2010,12 +2010,12 @@ layer {
   name:   "conv5_bottom_n"
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv5_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv5_b_"
   }
@@ -2040,12 +2040,12 @@ layer {
   name:   "conv5_shoes_n"
   type:   "Convolution"
   param{
-    lr_mult:1
+    lr_mult:0
     decay_mult:1
     name:"conv5_w_"
   }
   param{
-    lr_mult:2
+    lr_mult:0
     decay_mult:0
     name:"conv5_b_"
   }
@@ -2127,12 +2127,12 @@ layer {
   name:   "fc6_n" # fc6_top
   type:   "InnerProduct"
   param {
-    lr_mult: 1
+    lr_mult: 0
     decay_mult: 1
     name:"fc6_w_"
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
     name:"fc6_b_"
   }
@@ -2155,12 +2155,12 @@ layer {
   name:   "fc6_bottom_n"
   type:   "InnerProduct"
   param {
-    lr_mult: 1
+    lr_mult: 0
     decay_mult: 1
     name:"fc6_w_"
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
     name:"fc6_b_"
   }
@@ -2183,12 +2183,12 @@ layer {
   name:   "fc6_shoes_n"
   type:   "InnerProduct"
   param {
-    lr_mult: 1
+    lr_mult: 0
     decay_mult: 1
     name:"fc6_w_"
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
     name:"fc6_b_"
   }
@@ -2262,12 +2262,12 @@ layer {
   name:   "fc7_n" # fc7_top
   type:   "InnerProduct"
   param {
-    lr_mult: 1
+    lr_mult: 0
     decay_mult: 1
     name:"fc7_w_"
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
     name:"fc7_b_"
   }
@@ -2290,12 +2290,12 @@ layer {
   name:   "fc7_bottom_n"
   type:   "InnerProduct"
   param {
-    lr_mult: 1
+    lr_mult: 0
     decay_mult: 1
     name:"fc7_w_"
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
     name:"fc7_b_"
   }
@@ -2318,12 +2318,12 @@ layer {
   name:   "fc7_shoes_n"
   type:   "InnerProduct"
   param {
-    lr_mult: 1
+    lr_mult: 0
     decay_mult: 1
     name:"fc7_w_"
   }
   param {
-    lr_mult: 2
+    lr_mult: 0
     decay_mult: 0
     name:"fc7_b_"
   }
