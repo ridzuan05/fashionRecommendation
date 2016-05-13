@@ -152,7 +152,7 @@ else:
 optimal_initial_mean_ndcg_fp = open(root+'training_script/results/figures/optimal_initial_mean_ndcg.txt','w')
 optimal_initial_mean_ndcg_fp.write(str(optimal_mean_ndcg)+' '+str(initial_mean_ndcg)+' '+str(gain)+'\r\n')
 optimal_initial_mean_ndcg_fp.write(str(cmp_optimal_mean_ndcg)+' '+str(cmp_initial_mean_ndcg)+' '+str(cmp_gain)+'\r\n')
-optimal_initial_mean_ndcg_fp.close
+optimal_initial_mean_ndcg_fp.close()
 
 top10_posi_num_fp = open(root+'training_script/results/figures/top10_posi_num.txt','w')
 top10_posi_num_fp.write(str(optimal_top10_posi_num)+' '+str(initial_top10_posi_num)+' '+str(num_gain)+'\r\n')
