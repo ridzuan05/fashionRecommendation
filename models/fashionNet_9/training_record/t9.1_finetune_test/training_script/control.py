@@ -45,7 +45,7 @@ optimal_meanNDCG_row_id_value_whole = open(recordDir_data0+'optimal_meanNDCG_row
 cID.append('242400')
 cID.append(optimal_meanNDCG_row_id_value_whole[0].strip('\r\n').split(' ')[1])
 cID.append('0')
-cID.append(optimal_meanNDCG_row_id_value_whole[1].strip('\r\n').split(' ')[1])
+# cID.append(optimal_meanNDCG_row_id_value_whole[1].strip('\r\n').split(' ')[1])
 
 # set gpu idx
 caffe.set_mode_gpu()
