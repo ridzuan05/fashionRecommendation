@@ -243,7 +243,7 @@ cmp_first_ndcg_at_idx = []
 for c in range(0,1):
 
     # caffemodel
-    caffemodel_path = '/home/dell/fashionRecommendation/models/fashionNet_9/training_record/t9.2_train_val/fashion_params_9_'+cID[c]+'.caffemodel'
+    caffemodel_path = '/home/dell/fashionRecommendation/models/fashionNet_9/training_record/t9.1_train_val/fashion_params_9_'+cID[c]+'.caffemodel'
     solver.net.copy_from(caffemodel_path)
     solver.test_nets[0].copy_from(caffemodel_path)
 

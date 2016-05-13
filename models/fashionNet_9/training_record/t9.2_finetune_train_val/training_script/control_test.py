@@ -184,7 +184,7 @@ net = caffe.Net('/home/dell/fashionRecommendation/models/fashionNet_9/fashion_de
 solver = caffe.SGDSolver('/home/dell/fashionRecommendation/models/fashionNet_9/training_record/t9.2_finetune_train_val/solver_prototxt/fashion_solver_9_k/fashion_solver_9_'+tUID+'.prototxt')
 
 # caffemodel
-caffemodel_path = '/home/dell/fashionRecommendation/models/fashionNet_9/training_record/t9.2_train_val/fashion_params_9_'+cID+'.caffemodel'
+caffemodel_path = '/home/dell/fashionRecommendation/models/fashionNet_9/training_record/t9.1_train_val/fashion_params_9_'+cID+'.caffemodel'
 solver.net.copy_from(caffemodel_path)
 solver.test_nets[0].copy_from(caffemodel_path)
 
