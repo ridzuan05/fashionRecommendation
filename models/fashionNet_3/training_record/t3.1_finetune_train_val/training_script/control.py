@@ -22,7 +22,7 @@ uID = '^666^'
 cID = ['239168','0']
 # U_k(next i=0)[10_0.0001*(0,1)] training epoch, with 239168.caffemodel
 # U_k(next i=0)[18_0.0001*(0,1)] training epoch, with 0.caffemodel
-end_iter = [410, 738]
+end_iter = [137, 738]
 val_interval = 8 # 1/5 training epoch
 # set gpu idx
 caffe.set_mode_gpu()
@@ -269,7 +269,8 @@ for c in range(0,1):
 
     optimal_mNDCG_id = 0
 
-    start_val_idx = end_iter[c]-88+6
+    # start_val_idx = end_iter[c]-88+6
+    start_val_idx = 56
 
     for i in range (start_iter,end_iter[c]+1):
         # save train data (just for reference, not using threshold_fp=0.999)

@@ -232,7 +232,7 @@ cmp_optimal_ndcg_at_idx = []
 cmp_first_ndcg_at = []
 cmp_first_ndcg_at_idx = []
 
-for c in range(0,2):
+for c in range(0,3):
 
     # caffemodel
     if (c%2==0):
@@ -286,53 +286,53 @@ for c in range(0,2):
     ndcg_mean_label_at_imgIdx_f.write(cID[c]+' '+temp1+'\r\n') # ndcg_imgIdx
     ndcg_mean_label_at_imgIdx_f.close()
     
-    if (c==1):
-        # NDCG_at.png
-        ndcg = open(recordDir_data+'ndcg_mean_label_at_imgIdx.txt').readlines()
+    # if (c==1):
+    #     # NDCG_at.png
+    #     ndcg = open(recordDir_data+'ndcg_mean_label_at_imgIdx.txt').readlines()
 
-        # optimal ndcg_at@(1~30)
-        o_ndcg_size = len(ndcg[-2].strip('\r\n').split(' '))-1
-        for n in range(0,o_ndcg_size):
-            optimal_ndcg_at_idx.append(n+1)
-            optimal_ndcg_at.append(float(ndcg[-2].strip('\r\n').split(' ')[n+1]))
+    #     # optimal ndcg_at@(1~30)
+    #     o_ndcg_size = len(ndcg[-2].strip('\r\n').split(' '))-1
+    #     for n in range(0,o_ndcg_size):
+    #         optimal_ndcg_at_idx.append(n+1)
+    #         optimal_ndcg_at.append(float(ndcg[-2].strip('\r\n').split(' ')[n+1]))
 
-        # first ndcg_at@(1~30)
-        f_ndcg_size = len(ndcg[2].strip('\r\n').split(' '))-1
-        for n in range(0,f_ndcg_size):
-            first_ndcg_at_idx.append(n+1)
-            first_ndcg_at.append(float(ndcg[2].strip('\r\n').split(' ')[n+1]))    
+    #     # first ndcg_at@(1~30)
+    #     f_ndcg_size = len(ndcg[2].strip('\r\n').split(' '))-1
+    #     for n in range(0,f_ndcg_size):
+    #         first_ndcg_at_idx.append(n+1)
+    #         first_ndcg_at.append(float(ndcg[2].strip('\r\n').split(' ')[n+1]))    
 
-        # # NDCG_at.png
-        # ndcg = open(recordDir_data+'cmp_ndcg_mean_label_at_imgIdx.txt').readlines()
+    #     # # NDCG_at.png
+    #     # ndcg = open(recordDir_data+'cmp_ndcg_mean_label_at_imgIdx.txt').readlines()
 
-        # # optimal ndcg_at@(1~30)
-        # o_ndcg_size = len(ndcg[-2].strip('\r\n').split(' '))-1
-        # for n in range(0,o_ndcg_size):
-        #     cmp_optimal_ndcg_at_idx.append(n+1)
-        #     cmp_optimal_ndcg_at.append(float(ndcg[-2].strip('\r\n').split(' ')[n+1]))
+    #     # # optimal ndcg_at@(1~30)
+    #     # o_ndcg_size = len(ndcg[-2].strip('\r\n').split(' '))-1
+    #     # for n in range(0,o_ndcg_size):
+    #     #     cmp_optimal_ndcg_at_idx.append(n+1)
+    #     #     cmp_optimal_ndcg_at.append(float(ndcg[-2].strip('\r\n').split(' ')[n+1]))
 
-        # # first ndcg_at@(1~30)
-        # f_ndcg_size = len(ndcg[2].strip('\r\n').split(' '))-1
-        # for n in range(0,f_ndcg_size):
-        #     cmp_first_ndcg_at_idx.append(n+1)
-        #     cmp_first_ndcg_at.append(float(ndcg[2].strip('\r\n').split(' ')[n+1]))
+    #     # # first ndcg_at@(1~30)
+    #     # f_ndcg_size = len(ndcg[2].strip('\r\n').split(' '))-1
+    #     # for n in range(0,f_ndcg_size):
+    #     #     cmp_first_ndcg_at_idx.append(n+1)
+    #     #     cmp_first_ndcg_at.append(float(ndcg[2].strip('\r\n').split(' ')[n+1]))
 
-        fig = plt.figure()
-        ax_left = fig.add_subplot(111)
-        ax_left.plot(optimal_ndcg_at_idx, optimal_ndcg_at, '--g', label = 'Optimal_NDCG@')
-        ax_left.plot(first_ndcg_at_idx, first_ndcg_at, '--b', label = 'Initial_NDCG@')
-        # ax_left.plot(cmp_optimal_ndcg_at_idx, cmp_optimal_ndcg_at, '-.g', label = 'Cmp_Optimal_NDCG@')
-        # ax_left.plot(cmp_first_ndcg_at_idx, cmp_first_ndcg_at, '-.b', label = 'Cmp_Initial_NDCG@')
-        lines_left, labels_left = ax_left.get_legend_handles_labels()   
-        ax_left.legend(lines_left, labels_left, loc=0)
-        ax_left.grid()
-        ax_left.set_xlabel("m = (1,2,...,30)")
-        ax_left.set_ylabel("mean_NDCG@")
-        ax_left.set_title("mean_NDCG@m of User_{}".format(uID))
-        plt.savefig(recordDir_data+'finetune_NDCG_at.png', bbox_inches='tight')
-        plt.close('all')
+    #     fig = plt.figure()
+    #     ax_left = fig.add_subplot(111)
+    #     ax_left.plot(optimal_ndcg_at_idx, optimal_ndcg_at, '--g', label = 'Optimal_NDCG@')
+    #     ax_left.plot(first_ndcg_at_idx, first_ndcg_at, '--b', label = 'Initial_NDCG@')
+    #     # ax_left.plot(cmp_optimal_ndcg_at_idx, cmp_optimal_ndcg_at, '-.g', label = 'Cmp_Optimal_NDCG@')
+    #     # ax_left.plot(cmp_first_ndcg_at_idx, cmp_first_ndcg_at, '-.b', label = 'Cmp_Initial_NDCG@')
+    #     lines_left, labels_left = ax_left.get_legend_handles_labels()   
+    #     ax_left.legend(lines_left, labels_left, loc=0)
+    #     ax_left.grid()
+    #     ax_left.set_xlabel("m = (1,2,...,30)")
+    #     ax_left.set_ylabel("mean_NDCG@")
+    #     ax_left.set_title("mean_NDCG@m of User_{}".format(uID))
+    #     plt.savefig(recordDir_data+'finetune_NDCG_at.png', bbox_inches='tight')
+    #     plt.close('all')
 
-    if (c==3):
+    if (c==2):
         # NDCG_at.png
         ndcg = open(recordDir_data+'ndcg_mean_label_at_imgIdx.txt').readlines()
 
@@ -351,11 +351,11 @@ for c in range(0,2):
         # NDCG_at.png
         ndcg = open(recordDir_data+'cmp_ndcg_mean_label_at_imgIdx.txt').readlines()
 
-        # optimal ndcg_at@(1~30)
-        o_ndcg_size = len(ndcg[-2].strip('\r\n').split(' '))-1
-        for n in range(0,o_ndcg_size):
-            cmp_optimal_ndcg_at_idx.append(n+1)
-            cmp_optimal_ndcg_at.append(float(ndcg[-2].strip('\r\n').split(' ')[n+1]))
+        # # optimal ndcg_at@(1~30)
+        # o_ndcg_size = len(ndcg[-2].strip('\r\n').split(' '))-1
+        # for n in range(0,o_ndcg_size):
+        #     cmp_optimal_ndcg_at_idx.append(n+1)
+        #     cmp_optimal_ndcg_at.append(float(ndcg[-2].strip('\r\n').split(' ')[n+1]))
 
         # first ndcg_at@(1~30)
         f_ndcg_size = len(ndcg[2].strip('\r\n').split(' '))-1
@@ -367,7 +367,7 @@ for c in range(0,2):
         ax_left = fig.add_subplot(111)
         ax_left.plot(optimal_ndcg_at_idx, optimal_ndcg_at, '--g', label = 'Optimal_NDCG@')
         ax_left.plot(first_ndcg_at_idx, first_ndcg_at, '--b', label = 'Initial_NDCG@')
-        ax_left.plot(cmp_optimal_ndcg_at_idx, cmp_optimal_ndcg_at, '-.g', label = 'Cmp_Optimal_NDCG@')
+        # ax_left.plot(cmp_optimal_ndcg_at_idx, cmp_optimal_ndcg_at, '-.g', label = 'Cmp_Optimal_NDCG@')
         ax_left.plot(cmp_first_ndcg_at_idx, cmp_first_ndcg_at, '-.b', label = 'Cmp_Initial_NDCG@')
         lines_left, labels_left = ax_left.get_legend_handles_labels()   
         ax_left.legend(lines_left, labels_left, loc=0)
