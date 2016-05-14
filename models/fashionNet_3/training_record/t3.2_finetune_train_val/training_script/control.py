@@ -26,7 +26,7 @@ end_iter = [137, 738]
 val_interval = 8 # 1/5 training epoch
 # set gpu idx
 caffe.set_mode_gpu()
-caffe.set_device(2)
+caffe.set_device(0)
 
 def test_avg(val_iter, img_idx, val_tuple_num):
         
