@@ -42,7 +42,7 @@ if 'U_^666^' not in os.listdir(recordDir+'data/'):
 # caffemodel_idx
 cID = []
 optimal_meanNDCG_row_id_value_whole = open(recordDir_data0+'optimal_meanNDCG_row_id_value.txt').readlines()
-cID.append('239168')
+cID.append('242400')
 cID.append(optimal_meanNDCG_row_id_value_whole[0].strip('\r\n').split(' ')[1])
 cID.append('0')
 # cID.append(optimal_meanNDCG_row_id_value_whole[1].strip('\r\n').split(' ')[1])

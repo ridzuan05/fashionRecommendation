@@ -19,8 +19,8 @@ from sklearn.metrics import confusion_matrix
 # test User_idx
 uID = '^666^'
 # caffemodel_idx
-cID = ['239168','0']
-# U_k(next i=0)[10_0.0001*(0,1)] training epoch, with 239168.caffemodel
+cID = ['242400','0']
+# U_k(next i=0)[10_0.0001*(0,1)] training epoch, with 242400.caffemodel
 # U_k(next i=0)[18_0.0001*(0,1)] training epoch, with 0.caffemodel
 end_iter = [137, 738]
 val_interval = 8 # 1/5 training epoch
