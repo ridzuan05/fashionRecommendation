@@ -14,8 +14,6 @@ matplotlib.use('Agg') # Must be before importing matplotlib.pyplot or pylab!
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
-sys.path.insert(0,'/home/dell/caffe-master/python')
-import caffe
 import os
 from matplotlib import rc
 rc('mathtext', default='regular')
