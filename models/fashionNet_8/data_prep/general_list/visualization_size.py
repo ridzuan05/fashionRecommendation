@@ -7,6 +7,19 @@ Created on Mon Apr 21 10:51:44 2014
 @author: yanghu
 """
 
+import operator
+#import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('Agg') # Must be before importing matplotlib.pyplot or pylab!
+import matplotlib.pyplot as plt
+import numpy as np
+import sys
+sys.path.insert(0,'/home/dell/caffe-master/python')
+import caffe
+import os
+from matplotlib import rc
+rc('mathtext', default='regular')
+
 import os
 import json
 import operator
