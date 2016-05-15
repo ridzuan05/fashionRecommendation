@@ -343,24 +343,33 @@ import numpy as np
 #     print("minimum_sets_num = {}, when percent is: {}, total user_num is: {}\n".format(minimum_sets_num, percent[i], count))
 
 user_outfit = []
-
+nr_tuples_sum = 0.0
 #to generate dict_tops/bot/sho & i_top/bot/sho & user_ids
 for i in range(len(all_sets)): #for each user
     nr_tuples = 0 #valid tuples num for each user
     for j in range(len(all_sets[i]['valid_sets'])): #for each valid tuple of user_i
         nr_tuples += len(all_sets[i]['valid_sets'][j]['items'][0]) # (can be multiple top items here, will be split later)
-	user_outfit.append(nr_tuples)
+    user_outfit.append(nr_tuples)
+    nr_tuples_sum += nr_tuples
 
-y, x = np.histogram(n_valid_sets, bins=np.linspace(1, max(n_valid_sets), 100)
+print("\nuser num: {}, outfits num: {}\n".format(len(all_sets), nr_tuples_sum))
 
-fig = plt.figure()
-ax_left = fig.add_subplot(111)
-ax_left.plot(x, y, '--g')
-lines_left, labels_left = ax_left.get_legend_handles_labels()   
-ax_left.legend(lines_left, labels_left, loc=0)
-ax_left.grid()
-ax_left.set_xlabel("outfit number / user")
-ax_left.set_ylabel("user number")
-ax_left.set_title("Polyvore outfit dataset size")
+y, x = np.histogram(user_outfit, bins=np.linspace(1, max(user_outfit), 100))
+
+plt.bar(x[:-1], y, width=1)
+plt.xlim(min(x), max(x))
+plt.grid()
 plt.savefig(root+'./dataset_size.png', bbox_inches='tight')
 plt.close('all')
+
+# fig = plt.figure()
+# ax_left = fig.add_subplot(111)
+# ax_left.plot(x, y, '--g')
+# lines_left, labels_left = ax_left.get_legend_handles_labels()   
+# ax_left.legend(lines_left, labels_left, loc=0)
+# ax_left.grid()
+# ax_left.set_xlabel("outfit number / user")
+# ax_left.set_ylabel("user number")
+# ax_left.set_title("Polyvore outfit dataset size")
+# plt.savefig(root+'./dataset_size.png', bbox_inches='tight')
+# plt.close('all')
