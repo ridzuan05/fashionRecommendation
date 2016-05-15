@@ -172,10 +172,10 @@ for n in range(0,ndcg_at_length):
 
 fig = plt.figure()
 ax_left = fig.add_subplot(111)
-ax_left.plot(ndcg_at_idx, optimal_ndcg_at, '--g', label = 'Optimal_NDCG@')
-ax_left.plot(ndcg_at_idx, initial_ndcg_at, '--b', label = 'Initial_NDCG@')
+ax_left.plot(ndcg_at_idx, optimal_ndcg_at, '--g', label = 'tsf')
+ax_left.plot(ndcg_at_idx, initial_ndcg_at, '--b', label = 'ugf')
 # ax_left.plot(ndcg_at_idx, cmp_optimal_ndcg_at, '-.g', label = 'Cmp_Optimal_NDCG@')
-ax_left.plot(ndcg_at_idx, cmp_initial_ndcg_at, '-.b', label = 'Cmp_Initial_NDCG@')
+ax_left.plot(ndcg_at_idx, cmp_initial_ndcg_at, '-.b', label = 'nf')
 lines_left, labels_left = ax_left.get_legend_handles_labels()   
 ax_left.legend(lines_left, labels_left, loc=0)
 ax_left.grid()
