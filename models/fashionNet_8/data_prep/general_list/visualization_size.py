@@ -356,10 +356,14 @@ print("\nuser num: {}, outfits num: {}\n".format(len(all_sets), nr_tuples_sum))
 
 y, x = np.histogram(user_outfit, bins=np.linspace(1, max(user_outfit), 100))
 
+fig = plt.figure()
 plt.bar(x[:-1], y, width=1)
 plt.xlim(min(x), max(x))
 plt.grid()
-plt.savefig(root+'./dataset_size.png', bbox_inches='tight')
+plt.xlabel("outfit number / user")
+plt.ylabel("user number")
+plt.title("Polyvore outfit dataset size")
+plt.savefig('./dataset_size.png', bbox_inches='tight')
 plt.close('all')
 
 # fig = plt.figure()
