@@ -58,6 +58,12 @@ whole_ndcg_label = []
 whole_ndcg_imgIdx = []
 whole_top_10_pos_num = []
 
+ndcg_length = 30
+top_k_optimal = [0.0]*30
+top_k_initial = [0.0]*30
+cmp_top_k_optimal = [0.0]*30
+cmp_top_k_initial = [0.0]*30
+
 for u in range(0,user_num):
 	# read ndcg_mean_label_at_imgIdx.txt
 	ndcg = open(root+'training_script/results/data/U_'+str(u)+'/ndcg_mean_label_at_imgIdx.txt').readlines()
@@ -75,6 +81,18 @@ for u in range(0,user_num):
 	cmp_count_o += 1.0
 
 	optimal_top10_posi_num_temp = 0.0
+
+	for l in range(0,ndcg_length):
+		for i in range(0,l+1):
+			if (1==int(float(ndcg[-3].strip('\r\n').split(' ')[i+1]))):
+				top_k_optimal[l] += 1.0
+			if (1==int(float(ndcg[1].strip('\r\n').split(' ')[i+1]))):
+				top_k_initial[l] += 1.0
+			if (1==int(float(cmp_ndcg[-3].strip('\r\n').split(' ')[i+1]))):
+				cmp_top_k_optimal[l] += 1.0
+			if (1==int(float(cmp_ndcg[1].strip('\r\n').split(' ')[i+1]))):
+				cmp_top_k_initial[l] += 1.0
+
 
 	for i in range(0,posi_num_length):
 		if (1==int(float(ndcg[-3].strip('\r\n').split(' ')[i+1]))):
@@ -159,6 +177,29 @@ top10_posi_num_fp.write(str(optimal_top10_posi_num)+' '+str(initial_top10_posi_n
 top10_posi_num_fp.write(str(cmp_optimal_top10_posi_num)+' '+str(cmp_initial_top10_posi_num)+' '+str(cmp_num_gain)+'\r\n')
 top10_posi_num_fp.close()
 
+top_k_idx = []
+for n in range(0,ndcg_length):
+	top_k_optimal[n] /= count_o
+	top_k_initial[n] /= count_i
+	cmp_top_k_optimal[n] /= cmp_count_o
+	cmp_top_k_initial[n] /= cmp_count_i
+	top_k_idx.append(n+1)
+
+fig = plt.figure()
+ax_left = fig.add_subplot(111)
+ax_left.plot(top_k_idx, top_k_optimal, '--g', label = 'tsf')
+ax_left.plot(top_k_idx, top_k_initial, '--b', label = 'ugf')
+ax_left.plot(top_k_idx, cmp_top_k_optimal, '-.g', label = 'usf')
+ax_left.plot(top_k_idx, cmp_top_k_initial, '-.b', label = 'nf')
+lines_left, labels_left = ax_left.get_legend_handles_labels()   
+ax_left.legend(lines_left, labels_left, loc=0)
+ax_left.grid()
+ax_left.set_xlabel("k = (1,2,...,30)")
+ax_left.set_ylabel("posivie outfit number")
+ax_left.set_title("Top-k positive outfit number")
+plt.savefig(root+'training_script/results/figures/top_k_posi_num.png', bbox_inches='tight')
+plt.close('all')
+
 ndcg_at_length = 30
 ndcg_at_idx = []
 for n in range(0,ndcg_at_length):
@@ -178,8 +219,8 @@ lines_left, labels_left = ax_left.get_legend_handles_labels()
 ax_left.legend(lines_left, labels_left, loc=0)
 ax_left.grid()
 ax_left.set_xlabel("m = (1,2,...,30)")
-ax_left.set_ylabel("mean_NDCG@")
-ax_left.set_title("mean_NDCG@m of [User_0, User_799]")
+ax_left.set_ylabel("NDCG@m")
+ax_left.set_title("NDCG@m")
 plt.savefig(root+'training_script/results/figures/NDCG_at.png', bbox_inches='tight')
 plt.close('all')
 
