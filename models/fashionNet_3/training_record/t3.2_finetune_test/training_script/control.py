@@ -49,7 +49,7 @@ cID.append('0')
 
 # set gpu idx
 caffe.set_mode_gpu()
-caffe.set_device(2)
+caffe.set_device(0)
 
 def test_avg(test_iter, img_idx, test_tuple_num):
         
