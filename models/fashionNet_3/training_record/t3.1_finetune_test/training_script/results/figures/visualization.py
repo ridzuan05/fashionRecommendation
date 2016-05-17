@@ -64,6 +64,7 @@ top_k_initial = [0.0]*30
 cmp_top_k_initial = [0.0]*30
 
 for u in range(0,user_num):
+#for u in range(3,198):
 	# read ndcg_mean_label_at_imgIdx.txt
 	ndcg = open(root+'training_script/results/data/U_'+str(u)+'/ndcg_mean_label_at_imgIdx.txt').readlines()
 	cmp_ndcg = open(root+'training_script/results/data/U_'+str(u)+'/cmp_ndcg_mean_label_at_imgIdx.txt').readlines()
@@ -235,6 +236,22 @@ ax_left.set_ylabel("mean_NDCG@")
 ax_left.set_title("mean_NDCG@m of [User_0, User_799]")
 plt.savefig(root+'training_script/results/figures/NDCG_at.png', bbox_inches='tight')
 plt.close('all')
+
+ndcg_at_idx_temp = str(ndcg_at_idx[0])
+optimal_ndcg_at_temp = str(optimal_ndcg_at[0])
+initial_ndcg_at_temp = str(initial_ndcg_at[0])
+cmp_initial_ndcg_at_temp = str(cmp_initial_ndcg_at[0])
+for f in range(1,len(ndcg_at_idx)):
+	ndcg_at_idx_temp += ' '+str(ndcg_at_idx[f])
+	optimal_ndcg_at_temp += ' '+str(optimal_ndcg_at[f])
+	initial_ndcg_at_temp += ' '+str(initial_ndcg_at[f])
+	cmp_initial_ndcg_at_temp += ' '+str(cmp_initial_ndcg_at[f])
+new_finetune_ndcg_at_fp = open(root+'training_script/results/figures/NDCG_at.txt','w')
+new_finetune_ndcg_at_fp.write(ndcg_at_idx_temp+'\r\n')
+new_finetune_ndcg_at_fp.write(optimal_ndcg_at_temp+'\r\n')
+new_finetune_ndcg_at_fp.write(initial_ndcg_at_temp+'\r\n')
+new_finetune_ndcg_at_fp.write(cmp_initial_ndcg_at_temp+'\r\n')
+new_finetune_ndcg_at_fp.close()
 
 fig = plt.figure()
 ax_left = fig.add_subplot(111)
