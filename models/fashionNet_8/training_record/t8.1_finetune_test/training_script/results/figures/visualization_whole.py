@@ -14,7 +14,7 @@ optimal_ndcg_at = []
 initial_ndcg_at = []
 cmp_initial_ndcg_at = []
 
-new_optimal_ndcg_at = []
+cmp_optimal_ndcg_at = []
 
 ndcg_at_whole = open('./NDCG_at.txt').readlines()
 
@@ -28,9 +28,11 @@ for i in range(0,ndcg_at_length):
 
 fig = plt.figure()
 ax_left = fig.add_subplot(111)
+plt.ylim([0,1])
+plt.xlim([1,30])
 ax_left.plot(ndcg_at_idx, optimal_ndcg_at, '-r', label = 'two-stage (whole)', LineWidth = 3)
 ax_left.plot(ndcg_at_idx, initial_ndcg_at, '--b', label = 'the first stage', LineWidth = 3)
-ax_left.plot(ndcg_at_idx, cmp_optimal_ndcg_at, ':y', label = 'direct personalization', LineWidth = 3)
+ax_left.plot(ndcg_at_idx, cmp_optimal_ndcg_at, ':k', label = 'direct personalization', LineWidth = 3)
 ax_left.plot(ndcg_at_idx, cmp_initial_ndcg_at, '.c', label = 'no training', LineWidth = 3)
 lines_left, labels_left = ax_left.get_legend_handles_labels()   
 ax_left.legend(lines_left, labels_left, loc=0)
@@ -48,7 +50,7 @@ top_k_optimal = []
 top_k_initial = []
 cmp_top_k_initial = []
 
-new_top_k_optimal = []
+cmp_top_k_optimal = []
 
 top_k_posi_num_whole = open('./top_k_posi_num.txt').readlines()
 
@@ -61,9 +63,11 @@ for i in range(0,ndcg_at_length):
 
 fig = plt.figure()
 ax_left = fig.add_subplot(111)
+plt.ylim([0,30])
+plt.xlim([1,30])
 ax_left.plot(top_k_idx, top_k_optimal, '-r', label = 'two-stage (whole)', LineWidth = 3)
 ax_left.plot(top_k_idx, top_k_initial, '--b', label = 'the first stage', LineWidth = 3)
-ax_left.plot(top_k_idx, cmp_top_k_optimal, ':y', label = 'direct personalization', LineWidth = 3)
+ax_left.plot(top_k_idx, cmp_top_k_optimal, ':k', label = 'direct personalization', LineWidth = 3)
 ax_left.plot(top_k_idx, cmp_top_k_initial, '.c', label = 'no training', LineWidth = 3)
 lines_left, labels_left = ax_left.get_legend_handles_labels()   
 ax_left.legend(lines_left, labels_left, loc=0)

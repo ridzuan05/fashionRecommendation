@@ -16,7 +16,7 @@ cmp_initial_ndcg_at = []
 
 new_optimal_ndcg_at = []
 
-ndcg_at_whole = open('../../../../t9.1_finetune_test/training_script/results/figures/NDCG_at.txt').readlines()
+ndcg_at_whole = open('../../../../t3.1_finetune_test/training_script/results/figures/NDCG_at.txt').readlines()
 new_ndcg_at_whole = open('./NDCG_at.txt').readlines()
 
 ndcg_at_length = 30
@@ -54,7 +54,7 @@ cmp_top_k_initial = []
 
 new_top_k_optimal = []
 
-top_k_posi_num_whole = open('../../../../t9.1_finetune_test/training_script/results/figures/top_k_posi_num.txt').readlines()
+top_k_posi_num_whole = open('../../../../t3.1_finetune_test/training_script/results/figures/top_k_posi_num.txt').readlines()
 new_top_k_posi_num_whole = open('./top_k_posi_num.txt').readlines()
 
 for i in range(0,ndcg_at_length):
