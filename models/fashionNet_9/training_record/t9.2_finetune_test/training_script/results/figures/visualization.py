@@ -187,6 +187,13 @@ ax_left.set_title("mean_NDCG@m of [User_0, User_799]")
 plt.savefig(root+'training_script/results/figures/NDCG_at.png', bbox_inches='tight')
 plt.close('all')
 
+optimal_ndcg_at_temp = str(optimal_ndcg_at[0])
+for f in range(1,len(ndcg_at_idx)):
+	optimal_ndcg_at_temp += ' '+str(optimal_ndcg_at[f])
+new_finetune_ndcg_at_fp = open(root+'training_script/results/figures/NDCG_at.txt','w')
+new_finetune_ndcg_at_fp.write(optimal_ndcg_at_temp+'\r\n')
+new_finetune_ndcg_at_fp.close()
+
 # fig = plt.figure()
 # ax_left = fig.add_subplot(111)
 # ax_left.plot(optimal_initial_idx, optimal_initial_mean_ndcg, '--g', label = 'Finetune')
