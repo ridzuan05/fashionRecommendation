@@ -196,6 +196,22 @@ ax_left.set_title("Top-k positive outfit number")
 plt.savefig(root+'training_script/results/figures/top_k_posi_num.png', bbox_inches='tight')
 plt.close('all')
 
+top_k_idx_temp = str(top_k_idx[0])
+top_k_optimal_temp = str(top_k_optimal[0])
+top_k_initial_temp = str(top_k_initial[0])
+cmp_top_k_initial_temp = str(cmp_top_k_initial[0])
+for f in range(1,len(top_k_idx)):
+	top_k_idx_temp += ' '+str(top_k_idx[f])
+	top_k_optimal_temp += ' '+str(top_k_optimal[f])
+	top_k_initial_temp += ' '+str(top_k_initial[f])
+	cmp_top_k_initial_temp += ' '+str(cmp_top_k_initial[f])
+top_k_posi_num_fp = open(root+'training_script/results/figures/top_k_posi_num.txt','w')
+top_k_posi_num_fp.write(top_k_idx_temp+'\r\n')
+top_k_posi_num_fp.write(top_k_optimal_temp+'\r\n')
+top_k_posi_num_fp.write(top_k_initial_temp+'\r\n')
+top_k_posi_num_fp.write(cmp_top_k_initial_temp+'\r\n')
+top_k_posi_num_fp.close()
+
 ndcg_at_length = 30
 ndcg_at_idx = []
 for n in range(0,ndcg_at_length):
