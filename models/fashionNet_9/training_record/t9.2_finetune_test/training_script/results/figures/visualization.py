@@ -171,6 +171,8 @@ top10_posi_num_fp.write(str(optimal_top10_posi_num)+'\r\n')
 # top10_posi_num_fp.write(str(cmp_initial_top10_posi_num)+'\r\n')
 top10_posi_num_fp.close()
 
+for n in range(0,ndcg_length):
+	new_top_k_optimal[n] /= count_o
 new_top_k_optimal_temp = str(new_top_k_optimal[0])
 for f in range(1,ndcg_length):
 	new_top_k_optimal_temp += ' '+str(new_top_k_optimal[f])
