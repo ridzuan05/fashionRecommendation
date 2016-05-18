@@ -15,7 +15,7 @@ if 'control_k' not in os.listdir(s_root):
     os.system('mkdir '+s_root+'control_k')
 
 # generate control_k.py for each user
-for u in range(0,user_num):
+for u in range(0,3):
     # open k_fp
     k_fp = open(s_root+'control_k/control_'+str(u)+'.py','w')
     # write control_k.py
@@ -24,6 +24,21 @@ for u in range(0,user_num):
         if(len(temp)==3):	        	
             if(temp[1]==str(666)):
 	        temp[1] = str(u)
+            temp = temp[0]+temp[1]+temp[2]
+        else:
+            temp = temp[0]
+        k_fp.write(temp)
+    k_fp.close()
+
+for u in range(669,800):
+    # open k_fp
+    k_fp = open(s_root+'control_k/control_'+str(u)+'.py','w')
+    # write control_k.py
+    for i in range(0,len(s_fp)):
+        temp = s_fp[i].split('^')
+        if(len(temp)==3):
+            if(temp[1]==str(666)):
+                temp[1] = str(u)
             temp = temp[0]+temp[1]+temp[2]
         else:
             temp = temp[0]
