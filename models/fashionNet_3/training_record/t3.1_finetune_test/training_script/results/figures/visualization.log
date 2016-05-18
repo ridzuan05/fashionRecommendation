@@ -1,9 +1,9 @@
-max_top_10_pos_num = 10, min_top_10_pos_num = 2
+max_top_10_pos_num = 10, min_top_10_pos_num = 0
 Best_0: top_10_pos_num = 10
 Best_1: top_10_pos_num = 10
 Best_2: top_10_pos_num = 10
 Best_3: top_10_pos_num = 10
-Worst_0: top_10_pos_num = 6
+Worst_0: top_10_pos_num = 5
 Worst_1: top_10_pos_num = 6
-Worst_2: top_10_pos_num = 7
-Worst_3: top_10_pos_num = 7
+Worst_2: top_10_pos_num = 6
+Worst_3: top_10_pos_num = 6

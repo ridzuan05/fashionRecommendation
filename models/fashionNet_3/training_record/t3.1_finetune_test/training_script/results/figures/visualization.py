@@ -64,7 +64,7 @@ top_k_initial = [0.0]*30
 cmp_top_k_initial = [0.0]*30
 
 for u in range(0,user_num):
-#for u in range(3,198):
+#for u in range(3,406):
 	# read ndcg_mean_label_at_imgIdx.txt
 	ndcg = open(root+'training_script/results/data/U_'+str(u)+'/ndcg_mean_label_at_imgIdx.txt').readlines()
 	cmp_ndcg = open(root+'training_script/results/data/U_'+str(u)+'/cmp_ndcg_mean_label_at_imgIdx.txt').readlines()
