@@ -44,19 +44,19 @@ if (new == 0):
 		for i in range(0,10):
 
 			if (i < 5):
-				if (initial[i+1] == 1.0):
+				if (float(initial[i+1]) == 1.0):
 					initial_top5_temp += 1
-				if (stage_one[i+1] == 1.0):
+				if (float(stage_one[i+1]) == 1.0):
 					stage_one_top5_temp += 1
-				if (stage_two_whole[i+1] == 1.0):
+				if (float(stage_two_whole[i+1]) == 1.0):
 					stage_two_whole_top5_temp += 1			
 
-			if (initial[i+1] == 1.0):
-				initial_top10_temp += 1
-			if (stage_one[i+1] == 1.0):
-				stage_one_top10_temp += 1
-			if (stage_two_whole[i+1] == 1.0):
-				stage_two_whole_top10_temp += 1	
+			if (float(initial[i+1]) == 1.0):
+				initial_top5_temp += 1
+			if (float(stage_one[i+1]) == 1.0):
+				stage_one_top5_temp += 1
+			if (float(stage_two_whole[i+1]) == 1.0):
+				stage_two_whole_top5_temp += 1		
 
 		initial_top5 += str(initial_top5_temp)+' '
 		initial_top10 += str(initial_top10_temp)+' '
@@ -93,10 +93,10 @@ elif (new == 1):
 		for i in range(0,10):
 
 			if (i < 5):
-				if (stage_two_partial[i+1] == 1.0):
+				if (float(stage_two_partial[i+1]) == 1.0):
 					stage_two_partial_top5_temp += 1		
 
-			if (stage_two_partial[i+1] == 1.0):
+			if (float(stage_two_partial[i+1]) == 1.0):
 				stage_two_partial_top10_temp += 1
 
 		stage_two_partial_top5 += str(stage_two_partial_top5_temp)+' '
