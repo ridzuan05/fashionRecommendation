@@ -212,6 +212,6 @@ for i in range(0,10):
 	bot_img = Image.open(bot_path)
 	blank_image.paste(bot_img,(i*224,224*10))
 	sho_img = Image.open(sho_path)
-	blank_image.paste(sho_img,(i*224,224*12))
+	blank_image.paste(sho_img,(i*224,224*11))
 
 blank_image.save('./U_'+str(targetUser0)+'.png')
