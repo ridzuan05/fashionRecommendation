@@ -25,6 +25,9 @@ if (new == 0):
 	stage_two_whole_top5 = ''
 	stage_two_whole_top10 = ''
 
+	large_figure_data_fp = open('./large_figure_data.txt','w')
+	large_figure_data_fp.close()
+
 	for u in range(0,userNum):
 
 		initial_top5_temp = 0
@@ -65,6 +68,15 @@ if (new == 0):
 		stage_two_whole_top5 += str(stage_two_whole_top5_temp)+' '
 		stage_two_whole_top10 += str(stage_two_whole_top10_temp)+' '
 
+		large_figure_data_fp = open('./large_figure_data.txt','a')
+		large_figure_data_fp.write(f1[1])
+		large_figure_data_fp.write(f1[3])
+		large_figure_data_fp.write(f2[1])
+		large_figure_data_fp.write(f2[3])
+		large_figure_data_fp.write(f2[-3])
+		large_figure_data_fp.write(f2[-1])
+		large_figure_data_fp.close()
+
 	top_k_posi_num_all_users_fp = open('./top_k_posi_num_all_users.txt','w')
 	top_k_posi_num_all_users_fp.write(initial_top5+'\r\n')
 	top_k_posi_num_all_users_fp.write(initial_top10+'\r\n')
@@ -74,15 +86,6 @@ if (new == 0):
 	top_k_posi_num_all_users_fp.write(stage_two_whole_top10+'\r\n')
 	top_k_posi_num_all_users_fp.close()
 
-	large_figure_data_fp = open('./large_figure_data.txt','w')
-	large_figure_data_fp.write(f1[1])
-	large_figure_data_fp.write(f1[3])
-	large_figure_data_fp.write(f2[1])
-	large_figure_data_fp.write(f2[3])
-	large_figure_data_fp.write(f2[-3])
-	large_figure_data_fp.write(f2[-1])
-	large_figure_data_fp.close()
-
 ##############################################################
 
 elif (new == 1):
@@ -90,6 +93,9 @@ elif (new == 1):
 	stage_two_partial_top5 = ''
 	stage_two_partial_top10 = ''
 
+	large_figure_data_partial_fp = open('./large_figure_data_partial.txt','w')
+	large_figure_data_partial_fp.close()
+	
 	for u in range(0,userNum):
 
 		stage_two_partial_top5_temp = 0
@@ -111,12 +117,12 @@ elif (new == 1):
 		stage_two_partial_top5 += str(stage_two_partial_top5_temp)+' '
 		stage_two_partial_top10 += str(stage_two_partial_top10_temp)+' '
 
+		large_figure_data_partial_fp = open('./large_figure_data_partial.txt','a')
+		large_figure_data_partial_fp.write(f3[1])
+		large_figure_data_partial_fp.write(f3[3])
+		large_figure_data_partial_fp.close()
+
 	top_k_posi_num_all_users_fp = open('./top_k_posi_num_all_users_partiall.txt','w')
 	top_k_posi_num_all_users_fp.write(stage_two_partial_top5+'\r\n')
 	top_k_posi_num_all_users_fp.write(stage_two_partial_top10+'\r\n')
 	top_k_posi_num_all_users_fp.close()
-
-	large_figure_data_partial_fp = open('./large_figure_data_partial.txt','w')
-	large_figure_data_partial_fp.write(f3[1])
-	large_figure_data_partial_fp.write(f3[3])
-	large_figure_data_partial_fp.close()
