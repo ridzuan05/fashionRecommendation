@@ -18,6 +18,13 @@ new = 0
 
 if (new == 0):
 
+	initial_top5 = ''
+	initial_top10 = ''
+	stage_one_top5 = ''
+	stage_one_top10 = ''
+	stage_two_whole_top5 = ''
+	stage_two_whole_top10 = ''
+
 	for u in range(0,userNum):
 
 		initial_top5_temp = 0
@@ -70,6 +77,9 @@ if (new == 0):
 ##############################################################
 
 elif (new == 1):
+
+	stage_two_partial_top5 = ''
+	stage_two_partial_top10 = ''
 
 	for u in range(0,userNum):
 
