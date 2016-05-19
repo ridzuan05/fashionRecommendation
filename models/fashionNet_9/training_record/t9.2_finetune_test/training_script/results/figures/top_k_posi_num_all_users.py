@@ -12,7 +12,7 @@ userNum = 800
 root1 = '/local2/home/tong/fashionRecommendation/models/fashionNet_9/training_record/t9.1_finetune_test/training_script/results/data/U_'
 root2 = '/home/dell/fashionRecommendation/models/fashionNet_9/training_record/t9.2_finetune_test/training_script/results/data/U_'
 
-new = 1
+new = 0
 
 ##############################################################
 
@@ -74,6 +74,15 @@ if (new == 0):
 	top_k_posi_num_all_users_fp.write(stage_two_whole_top10+'\r\n')
 	top_k_posi_num_all_users_fp.close()
 
+	large_figure_data_fp = open('./large_figure_data.txt','w')
+	large_figure_data_fp.write(f1[1])
+	large_figure_data_fp.write(f1[3])
+	large_figure_data_fp.write(f2[1])
+	large_figure_data_fp.write(f2[3])
+	large_figure_data_fp.write(f2[-3])
+	large_figure_data_fp.write(f2[-1])
+	large_figure_data_fp.close()
+
 ##############################################################
 
 elif (new == 1):
@@ -106,3 +115,8 @@ elif (new == 1):
 	top_k_posi_num_all_users_fp.write(stage_two_partial_top5+'\r\n')
 	top_k_posi_num_all_users_fp.write(stage_two_partial_top10+'\r\n')
 	top_k_posi_num_all_users_fp.close()
+
+	large_figure_data_partial_fp = open('./large_figure_data_partial.txt','w')
+	large_figure_data_partial_fp.write(f3[1])
+	large_figure_data_partial_fp.write(f3[3])
+	large_figure_data_partial_fp.close()
