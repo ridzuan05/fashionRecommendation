@@ -12,7 +12,7 @@ userNum = 800
 root1 = '/local2/home/tong/fashionRecommendation/models/fashionNet_9/training_record/t9.1_finetune_test/training_script/results/data/U_'
 root2 = '/home/dell/fashionRecommendation/models/fashionNet_9/training_record/t9.2_finetune_test/training_script/results/data/U_'
 
-new = 0
+new = 1
 
 ##############################################################
 
