@@ -52,11 +52,11 @@ if (new == 0):
 					stage_two_whole_top5_temp += 1			
 
 			if (float(initial[i+1]) == 1.0):
-				initial_top5_temp += 1
+				initial_top10_temp += 1
 			if (float(stage_one[i+1]) == 1.0):
-				stage_one_top5_temp += 1
+				stage_one_top10_temp += 1
 			if (float(stage_two_whole[i+1]) == 1.0):
-				stage_two_whole_top5_temp += 1		
+				stage_two_whole_top10_temp += 1		
 
 		initial_top5 += str(initial_top5_temp)+' '
 		initial_top10 += str(initial_top10_temp)+' '
