@@ -30,18 +30,33 @@ for i in range(0,ndcg_at_length):
 
 fig = plt.figure()
 ax_left = fig.add_subplot(111)
-plt.ylim([0,1])
-plt.xlim([1,30])
-ax_left.plot(ndcg_at_idx, optimal_ndcg_at, '-r', label = 'two-stage (whole)', LineWidth = 3)
-ax_left.plot(ndcg_at_idx, new_optimal_ndcg_at, '--g', label = 'two-stage (partial)', LineWidth = 3)
-ax_left.plot(ndcg_at_idx, initial_ndcg_at, ':b', label = 'the first stage', LineWidth = 3)
-ax_left.plot(ndcg_at_idx, cmp_initial_ndcg_at, '.c', label = 'no training', LineWidth = 3)
+
+ax_left.plot(ndcg_at_idx, cmp_initial_ndcg_at, '.r', label = 'Initial', LineWidth = 8)
+ax_left.plot(ndcg_at_idx, initial_ndcg_at, ':b', label = 'Stage one', LineWidth = 8)
+ax_left.plot(ndcg_at_idx, new_optimal_ndcg_at, '--g', label = 'Stage two (partial)', LineWidth = 4)
+ax_left.plot(ndcg_at_idx, optimal_ndcg_at, '-c', label = 'Stage two (whole)', LineWidth = 4)
 lines_left, labels_left = ax_left.get_legend_handles_labels()   
-ax_left.legend(lines_left, labels_left, loc=0)
+ax_left.legend(lines_left, labels_left, loc=1)
 ax_left.grid()
 ax_left.set_xlabel("m = (1,2,...,30)")
 ax_left.set_ylabel("NDCG@m")
-ax_left.set_title("NDCG@m")
+ax_left.set_title("NDCG@m", fontsize='x-large')
+
+plt.ylim([0,1])
+plt.xlim([1,30])
+ax_left.xaxis.get_label().set_size('x-large')
+ax_left.yaxis.get_label().set_size('x-large')
+for label in ax_left.xaxis.get_ticklabels():
+    label.set_fontsize(18)
+for label in ax_left.yaxis.get_ticklabels():
+    label.set_fontsize(18) 
+leg = ax_left.get_legend()
+if(leg):
+    ltext  = leg.get_texts()  # all the text.Text instance in the legend      
+    plt.setp(ltext, fontsize='x-large')
+
+plt.legend(loc='upper center', bbox_to_anchor=(0.6,0.99),ncol=2,fancybox=True,shadow=True)
+
 plt.savefig('./NDCG_at_whole.png', bbox_inches='tight')
 plt.close('all')
 
@@ -67,17 +82,32 @@ for i in range(0,ndcg_at_length):
 
 fig = plt.figure()
 ax_left = fig.add_subplot(111)
-plt.ylim([0,30])
-plt.xlim([1,30])
-ax_left.plot(top_k_idx, top_k_optimal, '-r', label = 'two-stage (whole)', LineWidth = 3)
-ax_left.plot(top_k_idx, new_top_k_optimal, '--g', label = 'two-stage (partial)', LineWidth = 3)
-ax_left.plot(top_k_idx, top_k_initial, ':b', label = 'the first stage', LineWidth = 3)
-ax_left.plot(top_k_idx, cmp_top_k_initial, '.c', label = 'no training', LineWidth = 3)
+
+ax_left.plot(top_k_idx, cmp_top_k_initial, '.r', label = 'Initial', LineWidth = 8)
+ax_left.plot(top_k_idx, top_k_initial, ':b', label = 'Stage one', LineWidth = 8)
+ax_left.plot(top_k_idx, new_top_k_optimal, '--g', label = 'Stage two (partial)', LineWidth = 4)
+ax_left.plot(top_k_idx, top_k_optimal, '-c', label = 'Stage two (whole)', LineWidth = 4)
 lines_left, labels_left = ax_left.get_legend_handles_labels()   
-ax_left.legend(lines_left, labels_left, loc=0)
+ax_left.legend(lines_left, labels_left, loc=1)
 ax_left.grid()
 ax_left.set_xlabel("k = (1,2,...,30)")
 ax_left.set_ylabel("posivie outfit number")
-ax_left.set_title("Top-k positive outfit number")
+ax_left.set_title("Top-k positive outfit number", fontsize='x-large')
+
+plt.ylim([0,30])
+plt.xlim([1,30])
+ax_left.xaxis.get_label().set_size('x-large')
+ax_left.yaxis.get_label().set_size('x-large')
+for label in ax_left.xaxis.get_ticklabels():
+    label.set_fontsize(18)
+for label in ax_left.yaxis.get_ticklabels():
+    label.set_fontsize(18) 
+leg = ax_left.get_legend()
+if(leg):
+    ltext  = leg.get_texts()  # all the text.Text instance in the legend      
+    plt.setp(ltext, fontsize='x-large')
+
+plt.legend(loc='upper center', bbox_to_anchor=(0.6,0.99),ncol=2,fancybox=True,shadow=True)
+
 plt.savefig('./top_k_posi_num.png', bbox_inches='tight')
 plt.close('all')

@@ -30,18 +30,33 @@ for i in range(0,ndcg_at_length):
 
 fig = plt.figure()
 ax_left = fig.add_subplot(111)
-plt.ylim([0,1])
-plt.xlim([1,30])
-ax_left.plot(ndcg_at_idx, optimal_ndcg_at, '-r', label = 'two-stage (whole)', LineWidth = 3)
-ax_left.plot(ndcg_at_idx, new_optimal_ndcg_at, '--g', label = 'two-stage (partial)', LineWidth = 3)
-ax_left.plot(ndcg_at_idx, initial_ndcg_at, ':b', label = 'the first stage', LineWidth = 3)
-ax_left.plot(ndcg_at_idx, cmp_initial_ndcg_at, '.c', label = 'no training', LineWidth = 3)
+
+ax_left.plot(ndcg_at_idx, cmp_initial_ndcg_at, '.r', label = 'Initial', LineWidth = 8)
+ax_left.plot(ndcg_at_idx, initial_ndcg_at, ':b', label = 'Stage one', LineWidth = 8)
+ax_left.plot(ndcg_at_idx, new_optimal_ndcg_at, '--g', label = 'Stage two (partial)', LineWidth = 4)
+ax_left.plot(ndcg_at_idx, optimal_ndcg_at, '-c', label = 'Stage two (whole)', LineWidth = 4)
 lines_left, labels_left = ax_left.get_legend_handles_labels()   
-ax_left.legend(lines_left, labels_left, loc=0)
+ax_left.legend(lines_left, labels_left, loc=1)
 ax_left.grid()
 ax_left.set_xlabel("m = (1,2,...,30)")
 ax_left.set_ylabel("NDCG@m")
-ax_left.set_title("NDCG@m")
+ax_left.set_title("NDCG@m",fontsize='x-large')
+
+plt.ylim([0,1])
+plt.xlim([1,30])
+ax_left.xaxis.get_label().set_size('x-large')
+ax_left.yaxis.get_label().set_size('x-large')
+for label in ax_left.xaxis.get_ticklabels():
+    label.set_fontsize(18)
+for label in ax_left.yaxis.get_ticklabels():
+    label.set_fontsize(18) 
+leg = ax_left.get_legend()
+if(leg):
+    ltext  = leg.get_texts()  # all the text.Text instance in the legend      
+    plt.setp(ltext, fontsize='x-large')
+
+plt.legend(loc='upper center', bbox_to_anchor=(0.6,0.99),ncol=2,fancybox=True,shadow=True)
+
 plt.savefig('./NDCG_at_whole.png', bbox_inches='tight')
 plt.close('all')
 
@@ -67,156 +82,32 @@ for i in range(0,ndcg_at_length):
 
 fig = plt.figure()
 ax_left = fig.add_subplot(111)
-plt.ylim([0,30])
-plt.xlim([1,30])
-ax_left.plot(top_k_idx, top_k_optimal, '-r', label = 'two-stage (whole)', LineWidth = 3)
-ax_left.plot(top_k_idx, new_top_k_optimal, '--g', label = 'two-stage (partial)', LineWidth = 3)
-ax_left.plot(top_k_idx, top_k_initial, ':b', label = 'the first stage', LineWidth = 3)
-ax_left.plot(top_k_idx, cmp_top_k_initial, '.c', label = 'no training', LineWidth = 3)
+
+ax_left.plot(top_k_idx, cmp_top_k_initial, '.r', label = 'Initial', LineWidth = 8)
+ax_left.plot(top_k_idx, top_k_initial, ':b', label = 'Stage one', LineWidth = 8)
+ax_left.plot(top_k_idx, new_top_k_optimal, '--g', label = 'Stage two (partial)', LineWidth = 4)
+ax_left.plot(top_k_idx, top_k_optimal, '-c', label = 'Stage two (whole)', LineWidth = 4)
 lines_left, labels_left = ax_left.get_legend_handles_labels()   
-ax_left.legend(lines_left, labels_left, loc=0)
+ax_left.legend(lines_left, labels_left, loc=1)
 ax_left.grid()
 ax_left.set_xlabel("k = (1,2,...,30)")
 ax_left.set_ylabel("posivie outfit number")
-ax_left.set_title("Top-k positive outfit number")
+ax_left.set_title("Top-k positive outfit number", fontsize='x-large')
+
+plt.ylim([0,30])
+plt.xlim([1,30])
+ax_left.xaxis.get_label().set_size('x-large')
+ax_left.yaxis.get_label().set_size('x-large')
+for label in ax_left.xaxis.get_ticklabels():
+    label.set_fontsize(18)
+for label in ax_left.yaxis.get_ticklabels():
+    label.set_fontsize(18) 
+leg = ax_left.get_legend()
+if(leg):
+    ltext  = leg.get_texts()  # all the text.Text instance in the legend      
+    plt.setp(ltext, fontsize='x-large')
+
+plt.legend(loc='upper center', bbox_to_anchor=(0.6,0.99),ncol=2,fancybox=True,shadow=True)
+
 plt.savefig('./top_k_posi_num.png', bbox_inches='tight')
 plt.close('all')
-
-##########################################
-
-path_root = '/local2/home/tong/fashionRecommendation/models/fashionNet_8/data_prep/imgdata_list/tvt_pn_tbs_k_txt/test_'
-
-f1 = open('./top_k_posi_num_all_users.txt').readlines()
-f2 = open('./top_k_posi_num_all_users_partiall.txt').readlines()
-
-initial_top5 = f1[0].strip('\r\n').split(' ')
-initial_top10 = f1[1].strip('\r\n').split(' ')
-stage_one_top5 = f1[2].strip('\r\n').split(' ')
-stage_one_top10 = f1[3].strip('\r\n').split(' ')
-stage_two_whole_top5 = f1[4].strip('\r\n').split(' ')
-stage_two_whole_top10 = f1[5].strip('\r\n').split(' ')
-
-stage_two_partial_top5 = f2[0].strip('\r\n').split(' ')
-stage_two_partial_top10 = f2[1].strip('\r\n').split(' ')
-
-large_figure_data = open('./large_figure_data.txt').readlines()
-large_figure_data_partial = open('./large_figure_data_partial.txt').readlines()
-
-userNum = 800
-
-######### 10 users
-
-targetUser = []
-
-for u in range(0,userNum):
-	if ((int(initial_top5[u]) >= 0) and (int(initial_top5[u]) <= 1)):
-		if ((int(initial_top10[u]) >= 1) and (int(initial_top10[u]) <= 1)):
-			if ((int(stage_one_top5[u]) >= 0) and (int(stage_one_top5[u]) <= 3)):
-				if ((int(stage_one_top10[u]) >= 4) and (int(stage_one_top10[u]) <= 6)):
-					if ((int(stage_two_partial_top5[u]) >= 4) and (int(stage_two_partial_top5[u]) <= 5)):
-						if ((int(stage_two_partial_top10[u]) >= 8) and (int(stage_two_partial_top10[u]) <= 10)):
-							if ((int(stage_two_whole_top5[u]) >= 4) and (int(stage_two_whole_top5[u]) <= 5)):
-								if ((int(stage_two_whole_top10[u]) >= 8) and (int(stage_two_whole_top10[u]) <= 10)):
-									targetUser.append(u)
-									if (len(targetUser) == 10):
-										break
-
-for u in range(0,len(targetUser)):
-	targetUser0 = targetUser[u]
-
-	p_top_paths = open(path_root+'p_top_'+str(targetUser0)+'.txt').readlines()
-	p_bot_paths = open(path_root+'p_bot_'+str(targetUser0)+'.txt').readlines()
-	p_sho_paths = open(path_root+'p_sho_'+str(targetUser0)+'.txt').readlines()
-	n_top_paths = open(path_root+'n_top_'+str(targetUser0)+'.txt').readlines()
-	n_bot_paths = open(path_root+'n_bot_'+str(targetUser0)+'.txt').readlines()
-	n_sho_paths = open(path_root+'n_sho_'+str(targetUser0)+'.txt').readlines()
-
-	initial_labels = large_figure_data[targetUser0*6+0].strip('\r\n').split(' ')
-	stage_one_labels = large_figure_data[targetUser0*6+2].strip('\r\n').split(' ')
-	stage_two_partial_labels = large_figure_data_partial[targetUser0*2+0].strip('\r\n').split(' ')
-	stage_two_whole_labels =  large_figure_data[targetUser0*6+4].strip('\r\n').split(' ')
-
-	initial_imgIdxs = large_figure_data[targetUser0*6+1].strip('\r\n').split(' ')
-	stage_one_imgIdxs = large_figure_data[targetUser0*6+3].strip('\r\n').split(' ')
-	stage_two_partial_imgIdxs = large_figure_data_partial[targetUser0*2+1].strip('\r\n').split(' ')
-	stage_two_whole_imgIdxs =  large_figure_data[targetUser0*6+5].strip('\r\n').split(' ')
-
-	blank_image = Image.new("RGB", (224*10, 224*12))
-
-	for i in range(0,10):
-
-		initial_label = int(float(initial_labels[i+1]))
-		stage_one_label = int(float(stage_one_labels[i+1]))
-		stage_two_partial_label = int(float(stage_two_partial_labels[i+1]))
-		stage_two_whole_label = int(float(stage_two_whole_labels[i+1]))
-
-		initial_imgIdx = int(float(initial_imgIdxs[i+1]))
-		stage_one_imgIdx = int(float(stage_one_imgIdxs[i+1]))
-		stage_two_partial_imgIdx = int(float(stage_two_partial_imgIdxs[i+1]))
-		stage_two_whole_imgIdx = int(float(stage_two_whole_imgIdxs[i+1]))
-
-		if (initial_label == 1):
-			top_path = p_top_paths[initial_imgIdx].strip('\r\n').split(' ')[0]
-			bot_path = p_bot_paths[initial_imgIdx].strip('\r\n').split(' ')[0]
-			sho_path = p_sho_paths[initial_imgIdx].strip('\r\n').split(' ')[0]
-		elif (initial_label == 0):	
-			top_path = n_top_paths[initial_imgIdx].strip('\r\n').split(' ')[0]
-			bot_path = n_bot_paths[initial_imgIdx].strip('\r\n').split(' ')[0]
-			sho_path = n_sho_paths[initial_imgIdx].strip('\r\n').split(' ')[0]
-
-		top_img = Image.open(top_path)
-		blank_image.paste(top_img,(i*224,224*0))
-		bot_img = Image.open(bot_path)
-		blank_image.paste(bot_img,(i*224,224*1))
-		sho_img = Image.open(sho_path)
-		blank_image.paste(sho_img,(i*224,224*2))
-
-		if (stage_one_label == 1):
-			top_path = p_top_paths[stage_one_imgIdx].strip('\r\n').split(' ')[0]
-			bot_path = p_bot_paths[stage_one_imgIdx].strip('\r\n').split(' ')[0]
-			sho_path = p_sho_paths[stage_one_imgIdx].strip('\r\n').split(' ')[0]
-		elif (stage_one_label == 0):	
-			top_path = n_top_paths[stage_one_imgIdx].strip('\r\n').split(' ')[0]
-			bot_path = n_bot_paths[stage_one_imgIdx].strip('\r\n').split(' ')[0]
-			sho_path = n_sho_paths[stage_one_imgIdx].strip('\r\n').split(' ')[0]
-
-		top_img = Image.open(top_path)
-		blank_image.paste(top_img,(i*224,224*3))
-		bot_img = Image.open(bot_path)
-		blank_image.paste(bot_img,(i*224,224*4))
-		sho_img = Image.open(sho_path)
-		blank_image.paste(sho_img,(i*224,224*5))
-
-		if (stage_two_partial_label == 1):
-			top_path = p_top_paths[stage_two_partial_imgIdx].strip('\r\n').split(' ')[0]
-			bot_path = p_bot_paths[stage_two_partial_imgIdx].strip('\r\n').split(' ')[0]
-			sho_path = p_sho_paths[stage_two_partial_imgIdx].strip('\r\n').split(' ')[0]
-		elif (stage_two_partial_label == 0):	
-			top_path = n_top_paths[stage_two_partial_imgIdx].strip('\r\n').split(' ')[0]
-			bot_path = n_bot_paths[stage_two_partial_imgIdx].strip('\r\n').split(' ')[0]
-			sho_path = n_sho_paths[stage_two_partial_imgIdx].strip('\r\n').split(' ')[0]
-
-		top_img = Image.open(top_path)
-		blank_image.paste(top_img,(i*224,224*6))
-		bot_img = Image.open(bot_path)
-		blank_image.paste(bot_img,(i*224,224*7))
-		sho_img = Image.open(sho_path)
-		blank_image.paste(sho_img,(i*224,224*8))
-
-		if (stage_two_whole_label == 1):
-			top_path = p_top_paths[stage_two_whole_imgIdx].strip('\r\n').split(' ')[0]
-			bot_path = p_bot_paths[stage_two_whole_imgIdx].strip('\r\n').split(' ')[0]
-			sho_path = p_sho_paths[stage_two_whole_imgIdx].strip('\r\n').split(' ')[0]
-		elif (stage_two_whole_label == 0):	
-			top_path = n_top_paths[stage_two_whole_imgIdx].strip('\r\n').split(' ')[0]
-			bot_path = n_bot_paths[stage_two_whole_imgIdx].strip('\r\n').split(' ')[0]
-			sho_path = n_sho_paths[stage_two_whole_imgIdx].strip('\r\n').split(' ')[0]
-
-		top_img = Image.open(top_path)
-		blank_image.paste(top_img,(i*224,224*9))
-		bot_img = Image.open(bot_path)
-		blank_image.paste(bot_img,(i*224,224*10))
-		sho_img = Image.open(sho_path)
-		blank_image.paste(sho_img,(i*224,224*11))
-
-	blank_image.save('./'+str(u)+'_U_'+str(targetUser0)+'.png')
